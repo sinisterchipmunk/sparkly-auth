@@ -1,0 +1,23 @@
+For a gem, this project has a strange file structure. It'll all make sense in about 30 seconds.
+
+The gem is designed to work within a Rails project. Therefore, the best way to test it is within
+a Rails project. I've been trying a lot of different approaches to this, and here's the best
+I've found so far: build the gem within a TEST Rails project's vendor/gems directory, and then
+use config.gem to activate it. This way, it's essentially treated by the Rails project as a
+frozen gem (that is, unpacked into the Rails project tree) -- which, actually, it is.
+
+This approach also circumvents the need to install the gem locally for integration testing,
+but is also not so brittle as my RTML approach (create a 'bootstrap' gem that required the
+files directly). In all, the result is a cleaner, faster test suite and, therefore, dev process.
+
+I've added a nifty ./run_all_tests script to run both the Auth gem's RSpec specs and, assuming
+they pass, it will then run the test project's Features (which comprise the integration portion
+of the test suite).
+
+Obviously, to do any real work on the gem you'll have to chdir into vendor/gems/sparkly-auth-0.
+There's nothing special about the Rails test app, so it should be the same as running the gem
+in any other default Rails app. It's safe to run i.e. Sparkly generators and such on it because
+Sparkly's RSpec suite will override anything those generators produce (or at least, it SHOULD).
+
+The Rakefile in the app's root directory is the same as any Rails rake file; to get to the
+gem-specific Rake tasks, chdir to the frozen gem directory first.

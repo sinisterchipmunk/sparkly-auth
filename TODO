@@ -1,0 +1,4 @@
+ * Rememberable behavior
+ * current_user helper delegated to Views
+ * Confirmation behavior
+ * A generic login form partial to be rendered anywhere

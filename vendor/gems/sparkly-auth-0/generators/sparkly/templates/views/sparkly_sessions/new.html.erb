@@ -1,0 +1,15 @@
+<%form_for model, :url => model_session_path do |f|%>
+  <p>
+    <%=f.label model_config.key%><br/>
+    <%=f.text_field model_config.key%>
+  </p>
+  
+  <p>
+    <%=f.label :password%><br/>
+    <%=f.password_field :password, :value => ''%>
+  </p>
+  
+  <p>
+    <%=f.submit "Sign in"%>
+  </p>
+<%end%>

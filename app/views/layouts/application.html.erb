@@ -1,0 +1,9 @@
+<%if flash[:notice]%>
+  <%=flash[:notice]%>
+<%end%>
+
+<%if flash[:error]%>
+  <%=flash[:error]%>
+<%end%>
+
+<%=yield%>

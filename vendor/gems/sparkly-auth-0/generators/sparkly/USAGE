@@ -1,0 +1,27 @@
+Description:
+    Generates the various aspects of Sparkly Authentication:
+    
+    1. After you've created the model or models on which you wish to
+       authenticate users, you should generate your configuration:
+       
+         script/generate sparkly config
+          
+    2. After editing the generated configuration file to match your
+       goals, you should generate the necessary database migrations:
+        
+         script/generate sparkly migrations
+       
+    3. Other interesting generators:
+        
+         script/generate sparkly controllers
+           Generates resource controllers for each authenticated
+           model, which you can modify independently. Also generates
+           the corresponding views, giving you maximum customization
+           of your app. Not required.
+           
+         script/generate sparkly views
+           Generates views for the authenticated models which you
+           can then modify independently. Not required.
+
+         script/generate sparkly help
+           For much more detailed instructions.
