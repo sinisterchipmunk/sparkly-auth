@@ -69,9 +69,9 @@ Auth.configure do |config|
     # When the controllers attempt to redirect, and they don't know where else to go, they'll
     # send the user here.
   
-  config.base_controller = ApplicationController
-    # The controller to be extended by SparklyController. Also, this is the controller
-    # that will be imbued with helpers such as #current_user.
+  config.base_controller_name = 'application'
+    # The NAME of the controller to be extended by SparklyController. Also, this is the
+    # controller that will be imbued with helpers such as #current_user.
   
   config.session_duration = 30.minutes
     # How long can the user be inactive before being signed out automatically? Set to nil
