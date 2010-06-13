@@ -3,6 +3,8 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path("../../../../../config/boot", __FILE__)
 require File.expand_path("../../../../../config/environment", __FILE__)
 
+require 'genspec'
+
 def add_load_path(path)
   path = File.expand_path(File.join("..", path), __FILE__)
   $LOAD_PATH << path

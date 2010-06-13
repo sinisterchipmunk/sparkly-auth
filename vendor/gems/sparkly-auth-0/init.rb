@@ -5,9 +5,6 @@ $LOAD_PATH << Auth.path
 ActiveSupport::Dependencies.load_paths << Auth.path
 ActiveSupport::Dependencies.load_once_paths.delete(Auth.path)
 
-# Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
-Auth.base_controller.send(:include, Auth::Extensions::Controller)
-
 Rails.configuration.after_initialize do
   Auth.kick!
 end

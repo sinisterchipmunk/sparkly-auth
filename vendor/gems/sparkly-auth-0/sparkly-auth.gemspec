@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-06-11}
+  s.date = %q{2010-06-12}
   s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
@@ -72,14 +72,22 @@ Gem::Specification.new do |s|
      "spec/lib/auth_spec.rb",
      "spec/mocks/models/user.rb",
      "spec/routes_spec.rb",
-     "spec/spec_helper.rb",
-     "spec/support/generator_example_groups.rb"
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/sinisterchipmunk/sparkly-auth}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{User authentication with Sparkles!}
+  s.test_files = [
+    "spec/generators/sparkly_spec.rb",
+     "spec/lib/auth/behavior/core_spec.rb",
+     "spec/lib/auth/model_spec.rb",
+     "spec/lib/auth_spec.rb",
+     "spec/mocks/models/user.rb",
+     "spec/routes_spec.rb",
+     "spec/spec_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

@@ -133,6 +133,8 @@ module Auth
       authenticated_models.each do |model|
         model.apply_options!
       end
+      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
+      Auth.base_controller.send(:include, Auth::Extensions::Controller)
     end
     
     # Accepts a list of model names (or the models themselves) and an optional set of options which
