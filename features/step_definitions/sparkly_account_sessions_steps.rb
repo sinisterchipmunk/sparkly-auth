@@ -12,6 +12,14 @@ When /^I enter invalid login credentials$/ do
   click_button "Sign in"
 end
 
+When /^I enter invalid login credentials (\d+) times$/ do |count|
+  count.to_i.times do
+    fill_in :email, :with => "generic@example.com"
+    fill_in :password, :with => "Generic1"
+    click_button "Sign in"
+  end
+end
+
 When /^I log out$/ do
   delete user_session_path
 end
