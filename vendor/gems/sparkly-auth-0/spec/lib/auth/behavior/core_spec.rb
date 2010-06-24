@@ -8,6 +8,8 @@ describe "Behavior: Core" do
                                          column("secret"),
                                          column("salt"),
                                          column("persistence_token"),
+                                         column("single_access_token"),
+                                         column("perishable_token"),
                                          column("authenticatable_type"),
                                          column("authenticatable_id")])
     subject.apply_options!

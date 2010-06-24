@@ -24,6 +24,7 @@ describe :sparkly do
   
   with_args :config do
     it "should generate the sparkly initializers" do
+      subject.should generate('lib/tasks/sparkly_migration.rb')
       subject.should generate('config/initializers/sparkly_authentication.rb')
     end
   end

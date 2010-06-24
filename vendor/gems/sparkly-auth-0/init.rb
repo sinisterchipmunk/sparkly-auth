@@ -3,7 +3,8 @@ require File.expand_path("../lib/auth", __FILE__)
 
 $LOAD_PATH << Auth.path
 ActiveSupport::Dependencies.load_paths << Auth.path
-ActiveSupport::Dependencies.load_once_paths.delete(Auth.path)
+ActiveSupport::Dependencies.load_once_paths << Auth.path
+#ActiveSupport::Dependencies.load_once_paths.delete(Auth.path)
 
 Rails.configuration.after_initialize do
   Auth.kick!

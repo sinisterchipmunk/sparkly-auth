@@ -35,12 +35,22 @@ module Auth::Behavior::Core::PasswordMethods
   def reset_persistence_token
     self.persistence_token = Auth::Token.new.to_s
   end
+
+  def reset_single_access_token
+    self.single_access_token = Auth::Token.new.to_s
+  end
+
+  def reset_perishable_token
+    self.perishable_token = Auth::Token.new.to_s
+  end
   
   def secret_with_encryption=(phrase)
     @unencrypted_secret = phrase
     encrypted_phrase = phrase.blank? ? phrase : encrypt(phrase)
     returning self.secret_without_encryption = encrypted_phrase do
       reset_persistence_token
+      reset_single_access_token unless single_access_token # don't reset after it has a value
+      reset_perishable_token
     end
   end
   

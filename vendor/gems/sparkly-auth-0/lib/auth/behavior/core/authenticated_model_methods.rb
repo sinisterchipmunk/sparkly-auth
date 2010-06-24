@@ -1,7 +1,7 @@
 module Auth::Behavior::Core::AuthenticatedModelMethods
   def self.included(base)
     base.instance_eval do
-      delegate :persistence_token, :to => :password_model
+      delegate :persistence_token, :single_access_token, :perishable_token, :to => :password_model
     end
   end
   

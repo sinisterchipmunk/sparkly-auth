@@ -7,7 +7,9 @@ class Auth::Generators::ConfigurationGenerator < Rails::Generator::Base
   
   def manifest
     record do |m|
+      m.directory "lib/tasks"
       m.directory "config/initializers"
+      m.file "tasks/migrations.rb", "lib/tasks/sparkly_migration.rb"
       m.file 'initializer.rb', 'config/initializers/sparkly_authentication.rb'
     end
   end

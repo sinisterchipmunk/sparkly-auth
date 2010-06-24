@@ -6,7 +6,7 @@ module Auth
              :logout_message, :session_timeout_message, :default_login_path, :account_deleted_message,
              :account_created_message, :account_updated_message, :account_locked_message, :max_login_failures,
              :generate_routes?, :disable_route_generation!, :password_uniqueness_message,
-             :password_history_length,
+             :password_history_length, :base_controller_name, :account_lock_duration,
              :to => :configuration
     
     def configuration

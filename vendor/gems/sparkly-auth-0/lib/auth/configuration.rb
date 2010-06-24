@@ -31,9 +31,9 @@ module Auth
     # The message to display when the user is not allowed to view a page because s/he must log out.
     attr_accessor :logout_required_message
     
-    # The controller to use as a base controller. All Sparkly controllers will subclass this, and
-    # methods such as current_user will be added to it. Defaults to ApplicationController.
-    attr_accessor :base_controller
+    # The NAME of the controller to use as a base controller. All Sparkly controllers will subclass
+    # this, and methods such as current_user will be added to it. Defaults to 'application'.
+    attr_accessor :base_controller_name
     
     # If an issue would prevent the user from viewing the current page, Auth will redirect the user
     # to the value stored in session[:destination]. If this value is not set, then Auth will default
@@ -88,6 +88,17 @@ module Auth
     # his/her previous passwords.
     attr_accessor :password_history_length
     
+    # Finds the controller with the same name as #base_controller_name and returns it.
+    def base_controller
+      "#{base_controller_name.to_s.camelize}Controller".constantize
+    rescue NameError => err
+      begin
+        base_controller_name.to_s.camelize.constantize
+      rescue NameError
+        raise err
+      end
+    end
+    
     # Causes Sparkly Auth to *not* generate routes by default. You'll have to map them yourself if you disable
     # route generation.
     def disable_route_generation!
@@ -115,7 +126,7 @@ module Auth
       @invalid_credentials_message = "Login credentials were not valid."
       @login_successful_message = "Signed in successfully."
       @default_destination = "/"
-      @base_controller = ApplicationController
+      @base_controller_name = 'application'
       @session_duration = 30.minutes
       @logout_message = "You have been signed out."
       @session_timeout_message = "You have been signed out due to inactivity. Please sign in again."
@@ -130,11 +141,13 @@ module Auth
     end
     
     def apply!
+      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
+      Auth.base_controller.send(:include, Auth::Extensions::Controller)
+
+      # Apply options to authenticated models
       authenticated_models.each do |model|
         model.apply_options!
       end
-      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
-      Auth.base_controller.send(:include, Auth::Extensions::Controller)
     end
     
     # Accepts a list of model names (or the models themselves) and an optional set of options which

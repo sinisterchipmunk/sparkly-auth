@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-06-12}
+  s.date = %q{2010-06-21}
   s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
@@ -39,6 +39,7 @@ Gem::Specification.new do |s|
      "generators/sparkly/templates/initializer.rb",
      "generators/sparkly/templates/sessions_controller.rb",
      "generators/sparkly/templates/sessions_helper.rb",
+     "generators/sparkly/templates/tasks/migrations.rb",
      "generators/sparkly/templates/views/sparkly_accounts/edit.html.erb",
      "generators/sparkly/templates/views/sparkly_accounts/new.html.erb",
      "generators/sparkly/templates/views/sparkly_accounts/show.html.erb",
@@ -59,6 +60,7 @@ Gem::Specification.new do |s|
      "lib/auth/generators/views_generator.rb",
      "lib/auth/model.rb",
      "lib/auth/target_list.rb",
+     "lib/auth/tasks/migrations.rb",
      "lib/auth/token.rb",
      "lib/sparkly-auth.rb",
      "pkg/sparkly-auth-0.0.0.gem",

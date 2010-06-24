@@ -1,7 +1,7 @@
 module Auth::Extensions::Controller
   def self.included(base)
     base.instance_eval do
-      helper_method :new_session_path
+      helper_method :new_session_path, :current_user
       hide_action :current_user, :find_current_session, :require_login, :require_logout, :login!, :logout!,
                   :redirect_back_or_default, :new_session_path, :store_location
       
@@ -13,6 +13,21 @@ module Auth::Extensions::Controller
         def require_logout_for(*actions)
           before_filter :require_logout, actions.extract_options!.merge(:only => actions)
         end
+
+        def require_login(*args)
+          before_filter :require_login, *args
+        end
+
+        def require_logout(*args)
+          before_filter :require_logout, *args
+        end
+
+        alias_method :requires_login,   :require_login
+        alias_method :require_user,     :require_login
+        alias_method :requires_user,    :require_login
+        alias_method :requires_logout,  :require_logout
+        alias_method :require_no_user,  :require_logout
+        alias_method :requires_no_user, :require_logout
       end
     end
   end
@@ -39,8 +54,14 @@ module Auth::Extensions::Controller
     if session[:session_token]
       if session[:active_at] > Auth.session_duration.ago
         @current_user = Password.find_by_persistence_token(session[:session_token], :include => :authenticatable)
-        @current_user = @current_user.authenticatable if @current_user
-        login! @current_user # to refresh session timeout
+        if @current_user
+          @current_user = @current_user.authenticatable if @current_user
+          login! @current_user # to refresh session timeout
+        else
+          # Something weird happened and the user's password data can no longer be found. Log him out to prevent
+          # anything else from going wrong.
+          logout!
+        end
       else
         logout!
         # We'll put the message in the notice, but if the current page requires a login, the flash will be over
