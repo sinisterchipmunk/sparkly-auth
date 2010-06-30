@@ -34,7 +34,7 @@ module Auth
           validates_uniqueness_of :persistence_token, :if => :persistence_token_changed?
           attr_protected :secret, :secret_confirmation
           
-          include PasswordMethods
+          include Auth::Behavior::Core::PasswordMethods
           
           validate do |password|
             password.errors.rename_attribute("unencrypted_secret", "secret")
@@ -51,7 +51,7 @@ module Auth
           validates_uniqueness_of sparkly_config.key
           validates_presence_of :password
   
-          include AuthenticatedModelMethods
+          include Auth::Behavior::Core::AuthenticatedModelMethods
   
           after_save do |record|
             # clear out old passwords so we're confirming to Auth.password_history_length

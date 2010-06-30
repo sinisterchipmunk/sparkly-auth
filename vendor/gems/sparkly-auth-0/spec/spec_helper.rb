@@ -3,7 +3,15 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path("../../../../../config/boot", __FILE__)
 require File.expand_path("../../../../../config/environment", __FILE__)
 
-require 'genspec'
+begin
+  require 'genspec'
+rescue LoadError
+  puts " >> Missing gem: 'genspec' <<"
+  puts 
+  puts "These specs rely on gemspec, which tests the project's generators."
+  puts
+  raise
+end
 
 def add_load_path(path)
   path = File.expand_path(File.join("..", path), __FILE__)
