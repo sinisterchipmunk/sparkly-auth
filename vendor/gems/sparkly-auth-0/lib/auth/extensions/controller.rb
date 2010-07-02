@@ -52,7 +52,7 @@ module Auth::Extensions::Controller
   def current_user
     @current_user = false unless @current_user
     if session[:session_token]
-      if session[:active_at] > Auth.session_duration.ago
+      if Auth.session_duration.nil? || session[:active_at] > Auth.session_duration.ago
         @current_user = Password.find_by_persistence_token(session[:session_token], :include => :authenticatable)
         if @current_user
           @current_user = @current_user.authenticatable if @current_user
