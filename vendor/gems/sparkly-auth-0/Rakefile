@@ -15,6 +15,7 @@ begin
     gem.add_development_dependency 'webrat', '>= 0.7.1'
     gem.add_development_dependency 'genspec', '>= 0.1.1'
     gem.files = FileList['**/*']
+    gem.test_files = FileList['spec/**/*']
     #gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

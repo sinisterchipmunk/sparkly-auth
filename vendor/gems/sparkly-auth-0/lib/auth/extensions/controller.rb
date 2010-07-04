@@ -51,11 +51,11 @@ module Auth::Extensions::Controller
   
   def current_user
     @current_user = false unless @current_user
-    if session[:session_token]
+    if session && session[:session_token]
       if Auth.session_duration.nil? || session[:active_at] > Auth.session_duration.ago
         @current_user = Password.find_by_persistence_token(session[:session_token], :include => :authenticatable)
         if @current_user
-          @current_user = @current_user.authenticatable if @current_user
+          @current_user = @current_user.authenticatable
           login! @current_user # to refresh session timeout
         else
           # Something weird happened and the user's password data can no longer be found. Log him out to prevent
@@ -67,6 +67,12 @@ module Auth::Extensions::Controller
         # We'll put the message in the notice, but if the current page requires a login, the flash will be over
         # written. That's where @session_timeout_message comes in.
         flash[:notice] = @session_timeout_message = Auth.session_timeout_message
+      end
+    elsif params && params[:single_access_token] # single access token, useful for WS APIs
+      # There is no session duration because this works per-request.
+      @current_user = Password.find_by_single_access_token(params[:single_access_token], :include => :authenticatable)
+      if @current_user
+        @current_user = @current_user.authenticatable
       end
     end
     @current_user

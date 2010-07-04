@@ -9,12 +9,11 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-06-24}
+  s.date = %q{2010-07-04}
   s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
-    "LICENSE",
-     "README.rdoc"
+    "README.rdoc"
   ]
   s.files = [
     "LICENSE",
@@ -70,6 +69,7 @@ Gem::Specification.new do |s|
      "sparkly-auth.gemspec",
      "spec/generators/sparkly_spec.rb",
      "spec/lib/auth/behavior/core_spec.rb",
+     "spec/lib/auth/extensions/controller_spec.rb",
      "spec/lib/auth/model_spec.rb",
      "spec/lib/auth_spec.rb",
      "spec/mocks/models/user.rb",
@@ -79,29 +79,47 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/sinisterchipmunk/sparkly-auth}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{User authentication with Sparkles!}
   s.test_files = [
-    "spec/generators/sparkly_spec.rb",
+    "spec/generators",
+     "spec/generators/sparkly_spec.rb",
+     "spec/lib",
+     "spec/lib/auth",
+     "spec/lib/auth/behavior",
      "spec/lib/auth/behavior/core_spec.rb",
+     "spec/lib/auth/extensions",
+     "spec/lib/auth/extensions/controller_spec.rb",
      "spec/lib/auth/model_spec.rb",
      "spec/lib/auth_spec.rb",
+     "spec/mocks",
+     "spec/mocks/models",
      "spec/mocks/models/user.rb",
      "spec/routes_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "spec/support"
   ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<sc-core-ext>, [">= 1.2.0"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 1.3.2"])
+      s.add_development_dependency(%q<webrat>, [">= 0.7.1"])
+      s.add_development_dependency(%q<genspec>, [">= 0.1.1"])
     else
       s.add_dependency(%q<sc-core-ext>, [">= 1.2.0"])
+      s.add_dependency(%q<rspec-rails>, [">= 1.3.2"])
+      s.add_dependency(%q<webrat>, [">= 0.7.1"])
+      s.add_dependency(%q<genspec>, [">= 0.1.1"])
     end
   else
     s.add_dependency(%q<sc-core-ext>, [">= 1.2.0"])
+    s.add_dependency(%q<rspec-rails>, [">= 1.3.2"])
+    s.add_dependency(%q<webrat>, [">= 0.7.1"])
+    s.add_dependency(%q<genspec>, [">= 0.1.1"])
   end
 end
 
