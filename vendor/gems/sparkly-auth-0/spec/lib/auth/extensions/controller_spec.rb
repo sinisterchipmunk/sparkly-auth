@@ -10,7 +10,7 @@
 
 require 'spec_helper'
 
-describe Auth::Extensions::Controller do
+describe Auth::Behavior::Core::ControllerExtensions do
   subject { ApplicationController.new }
   
   before(:each) do

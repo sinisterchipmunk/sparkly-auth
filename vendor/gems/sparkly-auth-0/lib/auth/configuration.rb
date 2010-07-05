@@ -155,9 +155,6 @@ module Auth
     end
     
     def apply!
-      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
-      Auth.base_controller.send(:include, Auth::Extensions::Controller)
-
       # Apply options to authenticated models
       authenticated_models.each do |model|
         model.apply_options!

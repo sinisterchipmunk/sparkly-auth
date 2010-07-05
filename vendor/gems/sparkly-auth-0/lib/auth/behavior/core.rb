@@ -16,8 +16,8 @@ module Auth
     #
     class Core < Auth::Behavior::Base
       #migration "create_sparkly_passwords"
-    
-      def apply_to_passwords!(password_model)
+      
+      def apply_to_passwords(password_model)
         password_model.instance_eval do
           belongs_to :authenticatable, :polymorphic => true
           
@@ -43,7 +43,7 @@ module Auth
         end
       end
       
-      def apply_to_accounts!(model_config)
+      def apply_to_accounts(model_config)
         model_config.target.instance_eval do
           has_many :passwords, :dependent => :destroy, :as => :authenticatable, :autosave => true
           

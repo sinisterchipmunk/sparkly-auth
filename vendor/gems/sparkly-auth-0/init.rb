@@ -14,7 +14,6 @@ ActionController::Dispatcher.instance_eval do
   class << self
     define_method :reload_application_with_sparkles do
       returning reload_application_without_sparkles do
-        Auth::Behavior::Base.reset_registrations!
         Auth.kick!
       end
     end
