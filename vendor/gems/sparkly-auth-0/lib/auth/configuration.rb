@@ -1,5 +1,16 @@
 module Auth
   class Configuration
+    # Regular expression which passwords must match. The default forces at least 1
+    # uppercase, lowercase and numeric character.
+    attr_accessor :password_format
+  
+    # When the password to be created does not conform to the above format, this error
+    # message will be shown.
+    attr_accessor :password_format_message
+  
+    # Minimum length for passwords.
+    attr_accessor :minimum_password_length
+    
     # The path to the Sparkly Auth libraries.
     attr_reader :path
     
@@ -112,6 +123,9 @@ module Auth
     end
     
     def initialize
+      @password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
+      @password_format_message = "must contain at least 1 uppercase, 1 lowercase and 1 number"
+      @minimum_password_length = 7
       @path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
       @authenticated_models = Auth::TargetList.new
       @behaviors = [ :core ]

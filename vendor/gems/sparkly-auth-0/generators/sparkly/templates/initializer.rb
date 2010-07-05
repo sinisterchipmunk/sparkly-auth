@@ -29,6 +29,17 @@ Auth.configure do |config|
     # (Don't forget you can also script/generate controllers or script/generate views to
     # remove the overhead of setting up your own.)
   
+  config.password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
+    # Regular expression which passwords must match. The default forces at least 1
+    # uppercase, lowercase and numeric character.
+  
+  config.password_format_message = "must contain at least 1 uppercase, 1 lowercase and 1 number"
+    # When the password to be created does not conform to the above format, this error
+    # message will be shown.
+  
+  config.minimum_password_length = 7
+    # Minimum length for passwords.
+  
   config.default_login_path = :new_user_session_path
     # This is the name of a method accessible to the controller, such as :new_user_session_path.
     #

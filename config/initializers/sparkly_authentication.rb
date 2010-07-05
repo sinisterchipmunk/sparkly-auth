@@ -48,6 +48,15 @@ Auth.configure do |config|
     # Used when you wish to extend Auth's base functionality with your own, or replace
     # it entirely (by removing :core).
   
+  config.password_history_length = 4
+    # The number of passwords to keep in the password change history for each user. Any given
+    # user may not use the same password twice for at least this duration. For instance, if
+    # set to 4, then a user must change his password 4 times before s/he can reuse one of
+    # his/her previous passwords.
+  
+  config.password_uniqueness_message = "must not be the same as any of your recent passwords"
+    # The message to show if the password matches one of the previous passwords
+  
   config.password_update_frequency = 30.days
     # How often should Sparkly Auth force the user to update his or her password? Set to
     # nil for "never".

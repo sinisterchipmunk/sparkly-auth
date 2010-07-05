@@ -21,10 +21,11 @@ module Auth
         password_model.instance_eval do
           belongs_to :authenticatable, :polymorphic => true
           
-          validates_length_of :unencrypted_secret, :minimum => 7, :message => "must be at least 7 characters",
+          validates_length_of :unencrypted_secret, :minimum => Auth.minimum_password_length,
+                              :message => "must be at least #{Auth.minimum_password_length} characters",
                               :if => :secret_changed?
-          validates_format_of :unencrypted_secret, :with => /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/, :allow_blank => true,
-                       :message => "must contain at least 1 uppercase, 1 lowercase and 1 number",
+          validates_format_of :unencrypted_secret, :with => Auth.password_format, :allow_blank => true,
+                       :message => Auth.password_format_message,
                        :if => :secret_changed?
                                           
           validates_presence_of :secret
