@@ -27,13 +27,21 @@ module Auth::Behavior::Core::ControllerExtensions
   end
   
   # Forcibly logs in the current client as the specified user.
-  def login!(user)
+  #
+  # The options hash is unused, and is reserved for other behaviors to make use of.
+  # For instance, the "remember me" behavior checks for a :remember option and, if true, sets a remembrance token
+  # cookie.
+  def login!(user, options = {})
     session[:session_token] = user.persistence_token
     session[:active_at] = Time.now
+    @current_user = user
   end
   
   # Forcibly logs out the current client.
-  def logout!
+  #
+  # The options hash is unused, and is reserved for other behaviors to make use of.
+  #
+  def logout!(options = {})
     session[:session_token] = session[:active_at] = nil
   end
   

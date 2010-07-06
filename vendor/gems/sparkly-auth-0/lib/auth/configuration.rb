@@ -1,5 +1,34 @@
 module Auth
   class Configuration
+    include Auth::BehaviorLookup
+    
+    class << self
+      include Auth::BehaviorLookup
+
+      def behavior_configs
+        @behavior_configs ||= []
+      end
+      
+      def register_behavior(name)
+        behavior_class = lookup_behavior(name)
+        # If the behavior has a configuration, add an instance of it to self.
+        accessor_name = name
+        name = "#{behavior_class.name}::Configuration"
+        behavior_configs << [ accessor_name, name.constantize ]
+        Auth.class.delegate accessor_name, :to => :configuration
+      rescue NameError
+        # Presumably, the behavior does not have a configuration.
+      end
+    end
+
+    # IS there a better way to do this?? I'm dying to find it...
+    Dir[File.join(File.dirname(__FILE__), "behavior/*.rb")].each do |fi|
+      unless fi[/\/base.rb$/]
+        const_name = fi.gsub(/^#{Regexp::escape File.dirname(__FILE__)}\/behavior\/(.*)\.rb$/, '\1')
+        register_behavior(const_name)
+      end
+    end
+
     # Regular expression which passwords must match. The default forces at least 1
     # uppercase, lowercase and numeric character.
     attr_accessor :password_format
@@ -110,6 +139,11 @@ module Auth
       end
     end
     
+    # Returns the classes which represent each behavior listed in #behaviors
+    def behavior_classes
+      behaviors.collect { |behavior| lookup_behavior(behavior) }
+    end
+    
     # Causes Sparkly Auth to *not* generate routes by default. You'll have to map them yourself if you disable
     # route generation.
     def disable_route_generation!
@@ -152,6 +186,12 @@ module Auth
       @account_lock_duration = 30.minutes
       @max_login_failures = 5
       @generate_routes = true
+      
+      self.class.behavior_configs.each do |accessor_name, config_klass|
+        instance_variable_set("@#{accessor_name}", config_klass.new(self))
+        singleton = (class << self; self; end)
+        singleton.send(:define_method, accessor_name) { instance_variable_get("@#{accessor_name}") }
+      end
     end
     
     def apply!

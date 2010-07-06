@@ -29,17 +29,6 @@ Auth.configure do |config|
     # (Don't forget you can also script/generate controllers or script/generate views to
     # remove the overhead of setting up your own.)
   
-  config.password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
-    # Regular expression which passwords must match. The default forces at least 1
-    # uppercase, lowercase and numeric character.
-  
-  config.password_format_message = "must contain at least 1 uppercase, 1 lowercase and 1 number"
-    # When the password to be created does not conform to the above format, this error
-    # message will be shown.
-  
-  config.minimum_password_length = 7
-    # Minimum length for passwords.
-  
   config.default_login_path = :new_user_session_path
     # This is the name of a method accessible to the controller, such as :new_user_session_path.
     #
@@ -55,9 +44,28 @@ Auth.configure do |config|
     # Sparkly Auth. If you wish to disable this so that you can map your own routes,
     # just uncomment the line above.
   
-  config.behaviors = [:core]
+  config.behaviors = :core
     # Used when you wish to extend Auth's base functionality with your own, or replace
     # it entirely (by removing :core).
+    #
+    # Other built-in behaviors you can add are:
+    #   :remember_me  - allows a user to check a "Remember Me" box so that they don't have to
+    #                   log in as frequently. Note: if you enable this, you should consider
+    #                   setting config.session_duration to nil.
+    #
+    # Examples:
+    #   config.behaviors = :core, :remember_me
+  
+  config.password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
+    # Regular expression which passwords must match. The default forces at least 1
+    # uppercase, lowercase and numeric character.
+  
+  config.password_format_message = "must contain at least 1 uppercase, 1 lowercase and 1 number"
+    # When the password to be created does not conform to the above format, this error
+    # message will be shown.
+  
+  config.minimum_password_length = 7
+    # Minimum length for passwords.
   
   config.password_history_length = 4
     # The number of passwords to keep in the password change history for each user. Any given
@@ -117,4 +125,11 @@ Auth.configure do |config|
   config.account_created_message = "Your account has been created."
   config.account_updated_message = "Your changes have been saved."
   config.account_locked_message = "Account is locked due to too many invalid attempts"
+  
+  # Finally, you can also configure the various behaviors (as long as they support configurations):
+  #  config.remember_me.token_theft_message =
+  #      "Your account may have been hijacked recently! Verify that all settings are correct."
+  #
+  #  config.remember_me.duration = 6.months
+  #
 end

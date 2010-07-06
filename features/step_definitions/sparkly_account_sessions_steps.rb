@@ -44,6 +44,18 @@ Given /^I am logged in$/ do
   response.should contain("Signed in successfully.")
 end
 
+Given /^I am logged in and remembered$/ do
+  verify_user_exists!("generic@example.com", "Generic12")
+  User.first.password_matches?("Generic12").should == true
+  
+  visit new_user_session_path
+  fill_in :email, :with => "generic@example.com"
+  fill_in :password, :with => "Generic12"
+  check "Remember me"
+  click_button "Sign in"
+  response.should contain("Signed in successfully.")
+end
+
 Then /^I should be logged in$/ do
   logged_in?.should == true
 end
@@ -54,4 +66,12 @@ end
 
 Then /^I should not be logged in$/ do
   logged_in?.should == false
+end
+
+Then /^I should have a remembrance token$/ do
+  response.template.controller.send(:cookies)[:remembrance_token].should_not be_blank
+end
+
+Then /^I should not have a remembrance token$/ do
+  response.template.controller.send(:cookies)[:remembrance_token].should be_blank
 end

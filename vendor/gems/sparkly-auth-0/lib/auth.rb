@@ -1,5 +1,6 @@
 module Auth
   class << self
+    public :delegate
     delegate :path, :encryptor, :default_accounts_controller_name, :default_sessions_controller_name,
              :password_update_frequency, :base_controller, :login_required_message, :logout_required_message,
              :default_destination, :session_duration, :invalid_credentials_message, :login_successful_message,
@@ -7,7 +8,7 @@ module Auth
              :account_created_message, :account_updated_message, :account_locked_message, :max_login_failures,
              :generate_routes?, :disable_route_generation!, :password_uniqueness_message,
              :password_history_length, :base_controller_name, :account_lock_duration,
-             :password_format, :password_format_message, :minimum_password_length,
+             :password_format, :password_format_message, :minimum_password_length, :behaviors, :behavior_classes,
              :to => :configuration
     
     def configuration

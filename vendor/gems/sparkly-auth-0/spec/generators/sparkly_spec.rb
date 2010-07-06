@@ -6,22 +6,25 @@ describe :sparkly do
       config.authenticate :user
     end
   end
+
+  context "with :remember_me behavior" do
+    before(:each) { Auth.configure { |c| c.behaviors << :remember_me } }
+    
+    with_args :migrations do
+      it "should generate a remembered_tokens migration" do
+        subject.should generate("db/migrate/002_create_sparkly_remembered_tokens.rb")
+      end
+    end
+  end
+  
   
   with_args :migrations do
     it "should generate db/migrate" do
       subject.should generate("db/migrate")
-      subject.should generate(:migration_template, "create_sparkly_passwords.rb", "db/migrate", :migration_file_name => "create_sparkly_passwords")
-      #subject.should generate(:migration_template, "migration.rb", "db/migrate", :migration_file_name => "add_sparkles_to_users")
+      subject.should generate("db/migrate/001_create_sparkly_passwords.rb")
     end
   end
 
-# Routes are added dynamically now.
-#  with_args :routes do
-#    it "should generate route resources" do
-#      subject.should generate(:route_resources, 'users')
-#    end
-#  end
-  
   with_args :config do
     it "should generate the sparkly initializers" do
       subject.should generate('lib/tasks/sparkly_migration.rb')

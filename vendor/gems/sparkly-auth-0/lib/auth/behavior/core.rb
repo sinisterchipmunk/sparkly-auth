@@ -15,7 +15,7 @@ module Auth
     #   #password_expired?
     #
     class Core < Auth::Behavior::Base
-      #migration "create_sparkly_passwords"
+      migration "create_sparkly_passwords"
       
       def apply_to_passwords(password_model)
         password_model.instance_eval do

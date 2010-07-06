@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20100609152058) do
     t.datetime "updated_at"
   end
 
+  create_table "remembrance_tokens", :force => true do |t|
+    t.string   "series_token"
+    t.string   "remembrance_token"
+    t.integer  "authenticatable_id"
+    t.string   "authenticatable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -41,7 +41,6 @@ class SparklyGenerator < Rails::Generator::NamedBase
   
   def migrations(m)
     spawn_model_generator(m, Auth::Generators::MigrationGenerator)
-    m.migration_template 'create_sparkly_passwords.rb', 'db/migrate', :migration_file_name => "create_sparkly_passwords"
   end
   
   def config(m)

@@ -1,4 +1,7 @@
 class Auth::Behavior::Base
+  class_inheritable_array :migrations
+  read_inheritable_attribute(:migrations) || write_inheritable_attribute(:migrations, [])
+  
   def apply_to(model)    
     if model.respond_to?(:ancestors) && model.ancestors && model.ancestors.include?(Password)
       track_behavior(model) { apply_to_passwords(model) }
@@ -18,11 +21,11 @@ class Auth::Behavior::Base
   end
 
   def apply_to_passwords(password_model)
-    raise NotImplementedError, "Be sure to override #apply_to_passwords!(passwords_model) in your Auth Behavior"
+    raise NotImplementedError, "Be sure to override #apply_to_passwords(passwords_model) in your Auth Behavior"
   end
   
   def apply_to_accounts(model_config)
-    raise NotImplementedError, "Be sure to override #apply_to_accounts!(model_config) in your Auth Behavior"
+    raise NotImplementedError, "Be sure to override #apply_to_accounts(model_config) in your Auth Behavior"
   end
   
   private
@@ -56,6 +59,12 @@ class Auth::Behavior::Base
       behavior.apply_to(Password)
       behavior.apply_to(model)
       behavior.apply_to_controllers(model)
+    end
+    
+    # Declares a migration template for a behavior. If sourcedir is given, it will be used as the location
+    # in which to find the template.
+    def migration(filename)
+      migrations << filename unless migrations.include?(filename)
     end
   end
 end

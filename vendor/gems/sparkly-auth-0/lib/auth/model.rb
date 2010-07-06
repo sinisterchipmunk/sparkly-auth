@@ -12,6 +12,7 @@ class Auth::Model
     end
   end
   
+  include Auth::BehaviorLookup
   attr_reader :options
   option :behaviors
   option :password_update_frequency
@@ -72,15 +73,6 @@ class Auth::Model
   def apply_behaviors!
     behaviors.each do |behavior|
       lookup_behavior(behavior).apply_to(self)
-    end
-  end
-  
-  def lookup_behavior(behavior)
-    name = behavior.to_s.underscore
-    if name[/^auth\/behavior\//]
-      behavior.to_s.camelize.constantize
-    else
-      "auth/behavior/#{name}".camelize.constantize
     end
   end
   

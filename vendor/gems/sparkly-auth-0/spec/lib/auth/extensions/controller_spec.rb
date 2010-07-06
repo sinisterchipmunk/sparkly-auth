@@ -11,7 +11,8 @@
 require 'spec_helper'
 
 describe Auth::Behavior::Core::ControllerExtensions do
-  subject { ApplicationController.new }
+  #subject { ApplicationController.new }
+  subject { ApplicationController.call(Rack::MockRequest.env_for("/").merge('REQUEST_URI' => '')).template.controller }
   
   before(:each) do
     Password.stub!(:columns).and_return([column("created_at"),
@@ -22,6 +23,12 @@ describe Auth::Behavior::Core::ControllerExtensions do
                                          column("perishable_token"),
                                          column("authenticatable_type"),
                                          column("authenticatable_id")])
+    RemembranceToken.stub!(:columns).and_return([column("created_at"),
+                                                column("updated_at"),
+                                                column("series_token"),
+                                                column("remembrance_token"),
+                                                column("authenticatable_type"),
+                                                column("authenticatable_id")])
     
     Auth.configure do |config|
       config.session_duration = nil

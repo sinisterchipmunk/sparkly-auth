@@ -9,9 +9,16 @@ class Auth::Generators::MigrationGenerator < Rails::Generator::NamedBase
   
   def manifest
     record do |m|
-      m.migration_template "create_sparkly_passwords.rb", "db/migrate", :migration_file_name => "create_sparkly_passwords"
-      
-      #m.migration_template 'migration.rb', 'db/migrate', :migration_file_name => "add_sparkles_to_#{table_name}"
+      m.directory "db/migrate"
+      mg_version = 0
+      Auth.behavior_classes.each do |behavior|
+        behavior.migrations.each do |file_name|
+          fn_with_ext = file_name[/\.([^\.]+)$/] ? file_name : "#{file_name}.rb"
+          mg_version += 1
+          mg_version_s = mg_version.to_s.rjust(3, '0')
+          m.template File.join("migrations", fn_with_ext), File.join("db/migrate/#{mg_version_s}_#{fn_with_ext}")
+        end
+      end
     end
   end
   
@@ -20,6 +27,6 @@ class Auth::Generators::MigrationGenerator < Rails::Generator::NamedBase
   end
   
   def spec
-    @spec ||= Rails::Generator::Spec.new("migration", File.join(Auth.path, "auth/generators"), nil)
+    @spec ||= Rails::Generator::Spec.new("sparkly_migration", File.join(Auth.path, "auth/generators"), nil)
   end
 end
