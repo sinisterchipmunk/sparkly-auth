@@ -22,11 +22,6 @@ module Auth::Behavior::RememberMe::ControllerExtensions
     if @current_user == false
       authenticate_with_remembrance_token
     end
-#    if session && session[:session_token]
-#      authenticate_with_session_cookie
-#    elsif params && params[:single_access_token] # single access token, useful for WS APIs
-#      authenticate_with_single_access_token
-#    end
   end
   
   def authenticate_with_remembrance_token
