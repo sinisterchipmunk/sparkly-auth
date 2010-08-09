@@ -1,0 +1,5 @@
+* 1.0.1 - 08-09-2010
+  * Added /[user]/login and /[user]/logout to routes ([user]_login_path and [user]_logout_path, respectively)
+
+* 1.0.0 - 08-09-2010
+  * Initial release

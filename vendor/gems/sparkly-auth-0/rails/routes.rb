@@ -9,9 +9,21 @@ if Auth.generate_routes?
           throw :missing
         end
 
-        map.resource model.name.underscore, :controller => model.accounts_controller,
-                                            :requirements => { :model => model.name } do |model_res|
+        map.resource model.name.underscore,
+                     :controller => model.accounts_controller,
+                     :requirements => { :model => model.name } do |model_res|
           model_res.resource :session, :controller => model.sessions_controller, :requirements => { :model => model.name }
+          
+          # map some shorthand routes
+          model_res.login "login",
+                          :controller => model.sessions_controller,
+                          :action => 'new',
+                          :requirements => { :model => model.name }
+
+          model_res.logout "logout",
+                          :controller => model.sessions_controller,
+                          :action => 'destroy',
+                          :requirements => { :model => model.name }
         end
       end
     end
