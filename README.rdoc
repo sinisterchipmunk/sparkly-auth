@@ -78,22 +78,22 @@ Unless you disable them, Sparkly Auth will automatically generate a set of route
 
 and you should see something like this:
 
- new_user_session GET    /user/session/new(.:format)        
-edit_user_session GET    /user/session/edit(.:format)       
-     user_session GET    /user/session(.:format)            
-                  PUT    /user/session(.:format)            
-                  DELETE /user/session(.:format)            
-                  POST   /user/session(.:format)           
-       user_login        /user/login                   
-      user_logout        /user/logout                  
-         new_user GET    /user/new(.:format)                
-        edit_user GET    /user/edit(.:format)               
-             user GET    /user(.:format)                    
-                  PUT    /user(.:format)                    
-                  DELETE /user(.:format)                    
-                  POST   /user(.:format)                    
-                         /:controller/:action/:id           
-                         /:controller/:action/:id(.:format) 
+   new_user_session GET    /user/session/new(.:format)        
+  edit_user_session GET    /user/session/edit(.:format)       
+       user_session GET    /user/session(.:format)            
+                    PUT    /user/session(.:format)            
+                    DELETE /user/session(.:format)            
+                    POST   /user/session(.:format)           
+         user_login        /user/login                   
+        user_logout        /user/logout                  
+           new_user GET    /user/new(.:format)                
+          edit_user GET    /user/edit(.:format)               
+               user GET    /user(.:format)                    
+                    PUT    /user(.:format)                    
+                    DELETE /user(.:format)                    
+                    POST   /user(.:format)                    
+                           /:controller/:action/:id           
+                           /:controller/:action/:id(.:format) 
 
 This assumes you're authenticating against a single User model. Obviously, if you're authenticating against
 a different model (or more than one), the routes will be changed to suit.
