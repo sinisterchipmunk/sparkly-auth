@@ -35,7 +35,14 @@ completely disable the password update policy.
 * Enforces a unique password (can't match any of the previous 4 passwords by default)
 * Automatically signs the user out after 30 minutes of inactivity
 * Provides secure single-access tokens for authentication without cookies (e.g. Web Service consumers)
-* Locks an account after 5 invalid login attempts
+* Locks an account for 30 minutes after 5 invalid login attempts
+* Provides generators for controllers and views, so that you can add (or remove) layers quickly and painlessly
+  -- even on a per-model or per-controller basis, if your application uses more than one
+* Allows you to change which parent controller has access to the logged-in user (defaults to ApplicationController)
+* Behaviors (including even the core behavior) are plug-and-play and can be easily swapped in/out, and custom
+  behaviors can be added
+* Encryption methods can be easily replaced
+
 
 Since my own personal use cases for Sparkly Auth vary widely, so do its capabilities. Not only can the above
 be disabled, but it also sports (for example) a "Remember Me" checkbox that would otherwise circumvent some
