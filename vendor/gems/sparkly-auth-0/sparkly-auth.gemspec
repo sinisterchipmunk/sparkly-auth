@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sparkly-auth}
-  s.version = "0.1.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-07-24}
+  s.date = %q{2010-08-09}
   s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
@@ -23,8 +23,6 @@ Gem::Specification.new do |s|
      "app/controllers/sparkly_accounts_controller.rb",
      "app/controllers/sparkly_controller.rb",
      "app/controllers/sparkly_sessions_controller.rb",
-     "app/models/authenticatable_mailer.rb",
-     "app/models/authenticatable_observer.rb",
      "app/models/password.rb",
      "app/models/remembrance_token.rb",
      "app/views/sparkly_accounts/edit.html.erb",
@@ -57,9 +55,6 @@ Gem::Specification.new do |s|
      "lib/auth/behavior/core/controller_extensions/class_methods.rb",
      "lib/auth/behavior/core/controller_extensions/current_user.rb",
      "lib/auth/behavior/core/password_methods.rb",
-     "lib/auth/behavior/email_confirmation.rb",
-     "lib/auth/behavior/email_confirmation/configuration.rb",
-     "lib/auth/behavior/email_confirmation/controller_extensions.rb",
      "lib/auth/behavior/remember_me.rb",
      "lib/auth/behavior/remember_me/configuration.rb",
      "lib/auth/behavior/remember_me/controller_extensions.rb",
@@ -77,15 +72,12 @@ Gem::Specification.new do |s|
      "lib/auth/tasks/migrations.rb",
      "lib/auth/token.rb",
      "lib/sparkly-auth.rb",
-     "pkg/sparkly-auth-0.0.0.gem",
-     "pkg/sparkly-auth-0.1.0.gem",
      "rails/init.rb",
      "rails/routes.rb",
      "sparkly-auth.gemspec",
      "spec/controllers/application_controller_spec.rb",
      "spec/generators/sparkly_spec.rb",
      "spec/lib/auth/behavior/core_spec.rb",
-     "spec/lib/auth/behavior/email_confirmation_spec.rb",
      "spec/lib/auth/behavior/remember_me_spec.rb",
      "spec/lib/auth/extensions/controller_spec.rb",
      "spec/lib/auth/model_spec.rb",
@@ -109,7 +101,6 @@ Gem::Specification.new do |s|
      "spec/lib/auth",
      "spec/lib/auth/behavior",
      "spec/lib/auth/behavior/core_spec.rb",
-     "spec/lib/auth/behavior/email_confirmation_spec.rb",
      "spec/lib/auth/behavior/remember_me_spec.rb",
      "spec/lib/auth/extensions",
      "spec/lib/auth/extensions/controller_spec.rb",

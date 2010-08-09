@@ -15,10 +15,8 @@ begin
     gem.add_development_dependency 'webrat', '>= 0.7.1'
     gem.add_development_dependency 'genspec', '>= 0.1.1'
     gem.add_development_dependency 'email_spec', '>= 0.6.2'
-    gem.files = FileList['**/*']
+    # WHY does jeweler insist on using test/* files? THEY DON'T EXIST!
     gem.test_files = FileList['spec/**/*']
-    #gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
