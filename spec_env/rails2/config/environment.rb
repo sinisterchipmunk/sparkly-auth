@@ -10,7 +10,8 @@ Rails::VendorGemSourceIndex.silence_spec_warnings = true
 
 Rails::Initializer.run do |config|
   #config.reload_plugins = true
-  config.gem "sparkly-auth", :lib => "auth"
+  config.gem "sparkly-auth-bootstrap", :version => '= 1.0.0'
+  #config.gem 'sparkly-auth'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

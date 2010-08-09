@@ -1,16 +1,3 @@
-require File.expand_path("../dependencies", __FILE__)
-require File.expand_path("../lib/auth", __FILE__)
-
-$LOAD_PATH << Auth.path
-ActiveSupport::Dependencies.load_paths << Auth.path
-ActiveSupport::Dependencies.load_once_paths << Auth.path
-#ActiveSupport::Dependencies.load_once_paths.delete(Auth.path)
-
-# Kick auth after initialize and do it again before every request in development
-Rails.configuration.to_prepare do
-  Auth.kick!
-end
-
 # FIXME HACK extension to ActiveRecord::Errors to allow error attributes to be renamed. This is
 # because otherwise we'll end up producing very confusing error messages complaining about :secret,
 # :encrypted_secret, and so forth when all the user really cares about is :password.
