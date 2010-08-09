@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20100609152058) do
     t.string   "authenticatable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confirmed"
   end
 
   create_table "remembrance_tokens", :force => true do |t|

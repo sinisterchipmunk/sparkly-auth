@@ -1,4 +1,5 @@
 class SparklyAccountsController < SparklyController
+  unloadable
   require_login_for :show, :edit, :update, :destroy
 
   # GET new_model_url

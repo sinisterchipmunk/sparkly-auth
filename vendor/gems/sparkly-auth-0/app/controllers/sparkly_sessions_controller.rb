@@ -1,4 +1,6 @@
 class SparklySessionsController < SparklyController
+  unloadable
+
   # GET new_model_session_url
   def new
   end

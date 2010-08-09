@@ -6,20 +6,9 @@ ActiveSupport::Dependencies.load_paths << Auth.path
 ActiveSupport::Dependencies.load_once_paths << Auth.path
 #ActiveSupport::Dependencies.load_once_paths.delete(Auth.path)
 
-Rails.configuration.after_initialize do
+# Kick auth after initialize and do it again before every request in development
+Rails.configuration.to_prepare do
   Auth.kick!
-end
-
-ActionController::Dispatcher.instance_eval do
-  class << self
-    define_method :reload_application_with_sparkles do
-      returning reload_application_without_sparkles do
-        Auth.kick!
-      end
-    end
-    
-    alias_method_chain :reload_application, :sparkles
-  end
 end
 
 # FIXME HACK extension to ActiveRecord::Errors to allow error attributes to be renamed. This is

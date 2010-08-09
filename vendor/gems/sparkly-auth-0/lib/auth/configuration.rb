@@ -11,10 +11,11 @@ module Auth
       
       def register_behavior(name)
         behavior_class = lookup_behavior(name)
-        # If the behavior has a configuration, add an instance of it to self.
+        # If the behavior has a configuration, add it to self.
         accessor_name = name
         name = "#{behavior_class.name}::Configuration"
         behavior_configs << [ accessor_name, name.constantize ]
+        # eg Auth.remember_me.something = 5
         Auth.class.delegate accessor_name, :to => :configuration
       rescue NameError
         # Presumably, the behavior does not have a configuration.
@@ -195,6 +196,12 @@ module Auth
     end
     
     def apply!
+      # Apply behaviors to controllers
+      behaviors.each do |behavior_name|
+        behavior = lookup_behavior(behavior_name)
+        behavior.apply_to_controllers
+      end
+
       # Apply options to authenticated models
       authenticated_models.each do |model|
         model.apply_options!
@@ -215,7 +222,7 @@ module Auth
     # entry. For instance, in the above example, the :user model will be authenticated with :password,
     # while the :admin model will be authenticated with :password on key :login.
     #
-    def authenticate(*model_names) 
+    def authenticate(*model_names)
       options = model_names.extract_options!
       model_names.flatten.each do |name|
         if model = authenticated_models.find(name)

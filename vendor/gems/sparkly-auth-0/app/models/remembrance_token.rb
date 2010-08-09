@@ -1,4 +1,5 @@
 class RemembranceToken < ActiveRecord::Base
+  unloadable
   belongs_to :authenticatable, :polymorphic => true
   validates_presence_of :series_token
   validates_presence_of :remembrance_token

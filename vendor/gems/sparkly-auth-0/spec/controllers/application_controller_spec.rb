@@ -5,4 +5,9 @@ describe ApplicationController do
   it "should have only 'not_found' action" do
     ApplicationController.action_methods.to_a.should == ["not_found"]
   end
+  
+#  it "should respond_to current_user" do
+#    Auth.kick!
+#    ApplicationController.new.should respond_to(:current_user)
+#  end
 end

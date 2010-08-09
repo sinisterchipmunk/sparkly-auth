@@ -55,7 +55,7 @@ module Auth
           include Auth::Behavior::Core::AuthenticatedModelMethods
   
           after_save do |record|
-            # clear out old passwords so we're confirming to Auth.password_history_length
+            # clear out old passwords so we're conforming to Auth.password_history_length
             while record.passwords.length > Auth.password_history_length
               record.passwords.shift.destroy
             end

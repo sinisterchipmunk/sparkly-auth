@@ -1,13 +1,3 @@
-# OK - before anyone gives me "you're a hypocrite" flak, let me just explain something.
-# I generally hate the idea of spec'ing controllers. I think that's a job best left
-# to Cucumber. To be clear, I am not spec'ing a controller in this case - I'm spec'ing
-# the extensions TO the controller. This makes perfect sense, because the extensions
-# add internal code to the controller that should *not* always be accessible merely by
-# changing the request, as an integration test would do.
-#
-# Eh, this should be a blog post, not a comment in a source file. But I had to get it
-# out there. I'll clarify through the blog, and save the space here for Ruby code.
-
 require 'spec_helper'
 
 describe Auth::Behavior::Core::ControllerExtensions do
@@ -15,21 +5,6 @@ describe Auth::Behavior::Core::ControllerExtensions do
   subject { ApplicationController.call(Rack::MockRequest.env_for("/").merge('REQUEST_URI' => '')).template.controller }
   
   before(:each) do
-    Password.stub!(:columns).and_return([column("created_at"),
-                                         column("secret"),
-                                         column("salt"),
-                                         column("persistence_token"),
-                                         column("single_access_token"),
-                                         column("perishable_token"),
-                                         column("authenticatable_type"),
-                                         column("authenticatable_id")])
-    RemembranceToken.stub!(:columns).and_return([column("created_at"),
-                                                column("updated_at"),
-                                                column("series_token"),
-                                                column("remembrance_token"),
-                                                column("authenticatable_type"),
-                                                column("authenticatable_id")])
-    
     Auth.configure do |config|
       config.session_duration = nil
       config.authenticate :user

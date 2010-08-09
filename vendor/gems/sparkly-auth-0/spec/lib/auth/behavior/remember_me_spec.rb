@@ -1,7 +1,9 @@
 require 'spec_helper' 
 require 'spec/rails'
 
-describe SparklySessionsController, :type => :controller do
+describe "Behavior: Remember Me", :type => :controller do
+  controller_name :sparkly_sessions
+  
   def cookies
     controller.send(:cookies)
   end
@@ -23,8 +25,6 @@ describe SparklySessionsController, :type => :controller do
     u.password = u.password_confirmation = "Generic12"
     u.save!
   end
-  
-  after(:each) { Auth.reset_configuration! }
   
   it "should set an auth token cookie upon successful login" do
     post :create, { :model => "User", :user => { :email => "generic12@example.com", :password => "Generic12", :remember_me => true } }

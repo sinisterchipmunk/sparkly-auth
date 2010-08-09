@@ -44,7 +44,7 @@ Auth.configure do |config|
     # Sparkly Auth. If you wish to disable this so that you can map your own routes,
     # just uncomment the line above.
   
-  config.behaviors = [:core, :remember_me]
+  config.behaviors = [:core, :remember_me, :email_confirmation]
     # Used when you wish to extend Auth's base functionality with your own, or replace
     # it entirely (by removing :core).
   

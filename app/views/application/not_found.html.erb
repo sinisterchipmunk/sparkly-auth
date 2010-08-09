@@ -1,1 +1,9 @@
 <h1>404'd!</h1>
+
+<%if current_user%>
+  <%=link_to "Sign out", user_session_path, :method => :delete%>
+  <%=link_to "Edit Profile", edit_user_path%>
+<%else%>
+  <%=link_to "Sign in", new_user_session_path%>
+  <%=link_to "Sign up", new_user_path%>
+<%end%>

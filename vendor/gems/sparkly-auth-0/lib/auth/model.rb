@@ -72,7 +72,8 @@ class Auth::Model
   private
   def apply_behaviors!
     behaviors.each do |behavior|
-      lookup_behavior(behavior).apply_to(self)
+      behavior = lookup_behavior(behavior)
+      behavior.new.apply_to(self)
     end
   end
   

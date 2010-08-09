@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe Auth::Model do
-  before(:each) do
-    Password.stub!(:columns).and_return([column("secret"), column("authenticatable_type"),
-                                         column("authenticatable_id")])
-  end
-  
   context "given nonexisting model name" do
     subject { Auth::Model.new(:nonexisting_user) }
     
@@ -18,7 +13,8 @@ describe Auth::Model do
     subject { Auth::Model.new(:user) }
     
     before(:each) do
-      User.stub!(:columns).and_return([column("email")])
+      Dispatcher.cleanup_application
+      Dispatcher.reload_application
       subject.apply_options!
     end
     
@@ -33,7 +29,11 @@ describe Auth::Model do
   
   context "with an empty :behaviors option" do
     subject { Auth::Model.new(:user, :behaviors => []) }
-    before(:each) { subject.apply_options! }
+    before(:each) do
+      Dispatcher.cleanup_application
+      Dispatcher.reload_application
+      subject.apply_options!
+    end
     it "should have no behaviors" do subject.behaviors.should be_empty end
   end
   
@@ -45,7 +45,8 @@ describe Auth::Model do
     })}
     
     before(:each) do
-      User.stub!(:columns).and_return([column("email")])
+      Dispatcher.cleanup_application
+      Dispatcher.reload_application
       subject.apply_options!
     end
     

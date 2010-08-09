@@ -1,1 +1,1 @@
-cd vendor/gems/sparkly-auth-0 && spec spec -c $* && cd ../../.. && cucumber $*
+cd vendor/gems/sparkly-auth-0 && spec spec -c $* && cd ../../.. && spec spec -c $* && cucumber $*

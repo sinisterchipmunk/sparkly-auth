@@ -2,22 +2,23 @@ class Auth::Behavior::Base
   class_inheritable_array :migrations
   read_inheritable_attribute(:migrations) || write_inheritable_attribute(:migrations, [])
   
-  def apply_to(model)    
-    if model.respond_to?(:ancestors) && model.ancestors && model.ancestors.include?(Password)
-      track_behavior(model) { apply_to_passwords(model) }
-    else
-      track_behavior(model.target) { apply_to_accounts(model) }
+  class << self
+    def apply_to_controllers
+      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
+      Auth.base_controller.send(:include, "#{name}::ControllerExtensions".constantize)
+      # why this doesn't work in cuke?
+  #    if (container = self.class).const_defined?(:ControllerExtensions)
+  #      Auth.base_controller.send(:include, container.const_get(:ControllerExtensions))
+  #    end
+    #rescue NameError
     end
   end
   
-  def apply_to_controllers(model_config)
-    # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
-    Auth.base_controller.send(:include, "#{self.class.name}::ControllerExtensions".constantize)
-    # why this doesn't work in cuke?
-#    if (container = self.class).const_defined?(:ControllerExtensions)
-#      Auth.base_controller.send(:include, container.const_get(:ControllerExtensions))
-#    end
-  rescue NameError
+  def apply_to(model)
+    track_behavior(model.target) do
+      apply_to_accounts(model)
+      apply_to_passwords(Password)
+    end
   end
 
   def apply_to_passwords(password_model)
@@ -54,13 +55,6 @@ class Auth::Behavior::Base
 
   public
   class << self
-    def apply_to(model)
-      behavior = new
-      behavior.apply_to(Password)
-      behavior.apply_to(model)
-      behavior.apply_to_controllers(model)
-    end
-    
     # Declares a migration template for a behavior. If sourcedir is given, it will be used as the location
     # in which to find the template.
     def migration(filename)

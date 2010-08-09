@@ -9,6 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::VendorGemSourceIndex.silence_spec_warnings = true
 
 Rails::Initializer.run do |config|
+  #config.reload_plugins = true
   config.gem "sparkly-auth", :lib => "auth"
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers

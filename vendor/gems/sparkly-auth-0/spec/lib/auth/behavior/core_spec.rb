@@ -4,14 +4,6 @@ describe "Behavior: Core" do
   subject { Auth::Model.new(:user, :behaviors => [:core], :password_update_frequency => 30.days) }
   
   before(:each) do
-    Password.stub!(:columns).and_return([column("created_at"),
-                                         column("secret"),
-                                         column("salt"),
-                                         column("persistence_token"),
-                                         column("single_access_token"),
-                                         column("perishable_token"),
-                                         column("authenticatable_type"),
-                                         column("authenticatable_id")])
     subject.apply_options!
   end
   

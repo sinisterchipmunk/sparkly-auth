@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-07-04}
+  s.date = %q{2010-07-24}
   s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
@@ -23,7 +23,10 @@ Gem::Specification.new do |s|
      "app/controllers/sparkly_accounts_controller.rb",
      "app/controllers/sparkly_controller.rb",
      "app/controllers/sparkly_sessions_controller.rb",
+     "app/models/authenticatable_mailer.rb",
+     "app/models/authenticatable_observer.rb",
      "app/models/password.rb",
+     "app/models/remembrance_token.rb",
      "app/views/sparkly_accounts/edit.html.erb",
      "app/views/sparkly_accounts/new.html.erb",
      "app/views/sparkly_accounts/show.html.erb",
@@ -33,9 +36,11 @@ Gem::Specification.new do |s|
      "generators/sparkly/sparkly_generator.rb",
      "generators/sparkly/templates/accounts_controller.rb",
      "generators/sparkly/templates/accounts_helper.rb",
-     "generators/sparkly/templates/create_sparkly_passwords.rb",
      "generators/sparkly/templates/help_file.txt",
      "generators/sparkly/templates/initializer.rb",
+     "generators/sparkly/templates/migrations/add_confirmed_to_sparkly_passwords.rb",
+     "generators/sparkly/templates/migrations/create_sparkly_passwords.rb",
+     "generators/sparkly/templates/migrations/create_sparkly_remembered_tokens.rb",
      "generators/sparkly/templates/sessions_controller.rb",
      "generators/sparkly/templates/sessions_helper.rb",
      "generators/sparkly/templates/tasks/migrations.rb",
@@ -48,16 +53,26 @@ Gem::Specification.new do |s|
      "lib/auth/behavior/base.rb",
      "lib/auth/behavior/core.rb",
      "lib/auth/behavior/core/authenticated_model_methods.rb",
+     "lib/auth/behavior/core/controller_extensions.rb",
+     "lib/auth/behavior/core/controller_extensions/class_methods.rb",
+     "lib/auth/behavior/core/controller_extensions/current_user.rb",
      "lib/auth/behavior/core/password_methods.rb",
+     "lib/auth/behavior/email_confirmation.rb",
+     "lib/auth/behavior/email_confirmation/configuration.rb",
+     "lib/auth/behavior/email_confirmation/controller_extensions.rb",
+     "lib/auth/behavior/remember_me.rb",
+     "lib/auth/behavior/remember_me/configuration.rb",
+     "lib/auth/behavior/remember_me/controller_extensions.rb",
+     "lib/auth/behavior_lookup.rb",
      "lib/auth/configuration.rb",
      "lib/auth/encryptors/sha512.rb",
-     "lib/auth/extensions/controller.rb",
      "lib/auth/generators/configuration_generator.rb",
      "lib/auth/generators/controllers_generator.rb",
      "lib/auth/generators/migration_generator.rb",
      "lib/auth/generators/route_generator.rb",
      "lib/auth/generators/views_generator.rb",
      "lib/auth/model.rb",
+     "lib/auth/observer.rb",
      "lib/auth/target_list.rb",
      "lib/auth/tasks/migrations.rb",
      "lib/auth/token.rb",
@@ -67,14 +82,18 @@ Gem::Specification.new do |s|
      "rails/init.rb",
      "rails/routes.rb",
      "sparkly-auth.gemspec",
+     "spec/controllers/application_controller_spec.rb",
      "spec/generators/sparkly_spec.rb",
      "spec/lib/auth/behavior/core_spec.rb",
+     "spec/lib/auth/behavior/email_confirmation_spec.rb",
+     "spec/lib/auth/behavior/remember_me_spec.rb",
      "spec/lib/auth/extensions/controller_spec.rb",
      "spec/lib/auth/model_spec.rb",
      "spec/lib/auth_spec.rb",
      "spec/mocks/models/user.rb",
      "spec/routes_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/spec_helper.rb",
+     "spec/views_spec.rb"
   ]
   s.homepage = %q{http://github.com/sinisterchipmunk/sparkly-auth}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -82,12 +101,16 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{User authentication with Sparkles!}
   s.test_files = [
-    "spec/generators",
+    "spec/controllers",
+     "spec/controllers/application_controller_spec.rb",
+     "spec/generators",
      "spec/generators/sparkly_spec.rb",
      "spec/lib",
      "spec/lib/auth",
      "spec/lib/auth/behavior",
      "spec/lib/auth/behavior/core_spec.rb",
+     "spec/lib/auth/behavior/email_confirmation_spec.rb",
+     "spec/lib/auth/behavior/remember_me_spec.rb",
      "spec/lib/auth/extensions",
      "spec/lib/auth/extensions/controller_spec.rb",
      "spec/lib/auth/model_spec.rb",
@@ -97,7 +120,8 @@ Gem::Specification.new do |s|
      "spec/mocks/models/user.rb",
      "spec/routes_spec.rb",
      "spec/spec_helper.rb",
-     "spec/support"
+     "spec/support",
+     "spec/views_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -109,17 +133,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec-rails>, [">= 1.3.2"])
       s.add_development_dependency(%q<webrat>, [">= 0.7.1"])
       s.add_development_dependency(%q<genspec>, [">= 0.1.1"])
+      s.add_development_dependency(%q<email_spec>, [">= 0.6.2"])
     else
       s.add_dependency(%q<sc-core-ext>, [">= 1.2.0"])
       s.add_dependency(%q<rspec-rails>, [">= 1.3.2"])
       s.add_dependency(%q<webrat>, [">= 0.7.1"])
       s.add_dependency(%q<genspec>, [">= 0.1.1"])
+      s.add_dependency(%q<email_spec>, [">= 0.6.2"])
     end
   else
     s.add_dependency(%q<sc-core-ext>, [">= 1.2.0"])
     s.add_dependency(%q<rspec-rails>, [">= 1.3.2"])
     s.add_dependency(%q<webrat>, [">= 0.7.1"])
     s.add_dependency(%q<genspec>, [">= 0.1.1"])
+    s.add_dependency(%q<email_spec>, [">= 0.6.2"])
   end
 end
 
