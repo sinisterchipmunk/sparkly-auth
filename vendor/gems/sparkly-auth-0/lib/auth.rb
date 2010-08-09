@@ -33,6 +33,12 @@ module Auth
         puts "is set up properly. It could be that you just haven't created the"
         puts "model yet. If so, this error will disappear when the model exists."
         puts
+        if ENV['AUTH_BACKTRACE']
+          puts $!.backtrace
+        else
+          puts "(Run with AUTH_BACKTRACE=true to see a full bactrace.)"
+        end
+        puts
       end
     end
     
