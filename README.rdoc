@@ -1,6 +1,95 @@
 = sparkly-auth
 
-Description goes here.
+Rails authentication -- with sparkles!
+
+== about the gem
+
+After playing with a bunch of other auth gems out there, in the end I decided I had to roll my own. Unlike the
+others (and the reason I undertook this task), Sparkly Auth errs on the side of security. By default, (that is,
+unless you go changing configuration options that water down its auth mechanisms), this gem produces a PCI/DSS-
+compliant authentication scheme which I'm now putting to work at my Real Job at Ingenico (www.ingenico.com). (We
+now have two Web-based payment applications depending on Sparkly Auth.)
+
+There is an ongoing battle between security and convenience. They say you can pick one, but not both. While
+I'm not going to claim that Sparkly singlehandedly settles this dispute, I will say that Sparkly lets you choose
+between varying shades of gray, rather than choosing between black and white. Sparkly Auth provides a plethora of
+configuration options to let you apply a more user-friendly authentication solution to your site, while making
+it crystal clear what the security tradeoff will be.
+
+Sparkly supports multiple user models, multiple controllers, and all that jazz -- but doesn't force it on you.
+A default value is provided for virtually every possible option, and the options are conveniently tucked away
+in the class documentation -- there for you when you need it, but not breathing down your neck when you don't.
+
+=== what does security mean?
+
+So that's the high level overview. If you've read this far then maybe you're wondering exactly what kind of
+authentication security Sparkly Auth brings to the table. Well, here's The List. Some other solutions out there
+cover portions of it; others cover other portions. But I've yet to find one (besides Sparkly) that does it all.
+
+One last disclaimer: all of this can be modified or disabled entirely. So don't think that because it's listed
+here, dependencies HAVE to use it. I've got a number of side apps written that use Sparkly but, for example,
+completely disable the password update policy.
+
+* Enforces a strong password policy by default (7-digit uppercase, lowercase and numeric)
+* Enforces a periodic password update (once every 30 days)
+* Enforces a unique password (can't match any of the previous 4 passwords by default)
+* Automatically signs the user out after 30 minutes of inactivity
+* Provides secure single-access tokens for authentication without cookies (e.g. Web Service consumers)
+* Locks an account after 5 invalid login attempts
+
+Since my own personal use cases for Sparkly Auth vary widely, so do its capabilities. Not only can the above
+be disabled, but it also sports (for example) a "Remember Me" checkbox that would otherwise circumvent some
+of the above precautions. Obviously, the checkbox is disabled by default.
+
+== installation
+
+In Rails 2, add "sparkly-auth" to your gem dependencies:
+  config.gem 'sparkly-auth'
+  
+In Rails 3, add "sparkly-auth" to your Gemfile:
+  gem 'sparkly-auth'
+  
+== setting up
+
+For a step-by-step guide, run
+
+  script/generate sparkly help
+
+Basically, the you have to run
+
+  script/generate sparkly config
+  script/generate sparkly migrations
+  
+and optionally (if you plan to override the controllers and/or views),
+
+  script/generate sparkly controllers
+  script/generate sparkly views
+  
+Assuming you have a User model (or that you've edited config/initializers/sparkly_authentication.rb to taste),
+you should be ready to go!
+
+You should take a quick gander at config/initializers/sparkly_authentication.rb just to see what's in there.
+
+== migration
+
+I'm working on rake tasks that help you migrate from other authentication solutions to Sparkly Auth, largely
+because I had to do so myself. So without further ado, here's how you can do that:
+
+=== Authlogic
+
+After running the various Sparkly migrations, simply run:
+
+  rake auth:migrate:authlogic
+  
+Done.
+
+If you've set up an Authlogic encryptor other than SHA512, you'll want to use that encryptor for Sparkly. In
+this case, don't disable Authlogic the dependency (but DO remove the various hooks from your code), and in your
+config/initializers/sparkly_authentication.rb file, add the following line:
+
+  config.encryptor = Authlogic::CryptoProviders::Wordpress # or whatever.
+
+That should be it (it was for me). If you have any troubles, drop me a line so I can update this documentation!
 
 == Note on Patches/Pull Requests
  

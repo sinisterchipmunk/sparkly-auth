@@ -9,6 +9,7 @@ class SparklyAccountsController < SparklyController
   # POST model_url
   def create
     if model.save
+      login!(model)
       redirect_back_or_default Auth.default_destination, Auth.account_created_message
     else
       render :action => 'new'

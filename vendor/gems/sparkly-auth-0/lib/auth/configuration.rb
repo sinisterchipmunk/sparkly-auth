@@ -30,104 +30,186 @@ module Auth
       end
     end
 
-    # Regular expression which passwords must match. The default forces at least 1
-    # uppercase, lowercase and numeric character.
-    attr_accessor :password_format
-  
-    # When the password to be created does not conform to the above format, this error
-    # message will be shown.
-    attr_accessor :password_format_message
-  
-    # Minimum length for passwords.
-    attr_accessor :minimum_password_length
+    # The message to display when the user creates an account.
+    #
+    # Default:
+    #  "Your account has been created."
+    attr_accessor :account_created_message
     
-    # The path to the Sparkly Auth libraries.
-    attr_reader :path
+    # The message to display when the user deletes his or her account.
+    #
+    # Default:
+    #  "Your account has been deleted."
+    attr_accessor :account_deleted_message
+    
+    # The message to display when user profile has been updated or the password has been changed.
+    #
+    # Default:
+    #  "Your changes have been saved."
+    attr_accessor :account_updated_message
+    
+    # The length of time an account is locked for, if it is locked.
+    #
+    # Default:
+    #  30.minutes
+    attr_accessor :account_lock_duration
+    
+    # The message to display if an account has been locked.
+    #
+    # Default:
+    #  "Account is locked due to too many invalid attempts."
+    attr_accessor :account_locked_message
     
     # The array of Auth::Model instances which represent the models which will be authenticated.
     # See also #authenticate
     attr_accessor :authenticated_models
     
+    # The NAME of the controller to use as a base controller. All Sparkly controllers will subclass
+    # this, and methods such as current_user will be added to it. Defaults to 'application'.
+    #
+    # Default:
+    #  'application'
+    attr_accessor :base_controller_name
+    
     # The array of behaviors which will be applied by default to every authenticated model. If
     # a behavior set is specified for a given model, it will be used instead of (not in addition to)
     # this array.
+    #
+    # Default:
+    #  [ :core ]
     attr_accessor :behaviors
     
-    # How frequently should passwords be forced to change? Nil for never.
-    attr_accessor :password_update_frequency
-    
-    # The class to use for encryption of passwords. This can be any class, as long as it responds
-    # to #encrypt and #matches?
-    attr_accessor :encryptor
-    
     # The name of the controller to route to for creating users, editing them, etc.
+    #
+    #  "sparkly_accounts"
     attr_accessor :default_accounts_controller_name
-    
-    # The name of the controller to route to for logging in, logging out, etc.
-    attr_accessor :default_sessions_controller_name
-    
-    # The message to display when the user is not allowed to view a page because s/he must log in.
-    attr_accessor :login_required_message
-    
-    # The message to display when the user is not allowed to view a page because s/he must log out.
-    attr_accessor :logout_required_message
-    
-    # The NAME of the controller to use as a base controller. All Sparkly controllers will subclass
-    # this, and methods such as current_user will be added to it. Defaults to 'application'.
-    attr_accessor :base_controller_name
     
     # If an issue would prevent the user from viewing the current page, Auth will redirect the user
     # to the value stored in session[:destination]. If this value is not set, then Auth will default
     # to this path.
+    #
+    # Default:
+    #  "/"
     attr_accessor :default_destination
     
-    # The maximum session duration. Users will be logged out automatically after this period expires.
-    attr_accessor :session_duration
+    # The method to call in order to determine which resource to use when implicitly logging in.
+    #
+    # If set to nil, the #default_destination will be used instead.
+    #
+    # Default:
+    #  :new_user_session_path
+    attr_accessor :default_login_path
+    
+    # The name of the controller to route to for logging in, logging out, etc.
+    #
+    # Default: 
+    #  "sparkly_sessions"
+    attr_accessor :default_sessions_controller_name
+    
+    # The class to use for encryption of passwords. This can be any class, as long as it responds
+    # to #encrypt and #matches?
+    #
+    # Default:
+    #  Auth::Encryptors::Sha512
+    attr_accessor :encryptor
     
     # Message to display if username and/or password were incorrect.
+    #
+    # Default:
+    #  "Credentials were not valid."
     attr_accessor :invalid_credentials_message
     
+    # If true, the user will be automatically logged in after registering a new account.
+    # Note that this can be modified by some behaviors.
+    #
+    # Default:
+    #  true
+    attr_accessor :login_after_signup
+  
+    # The message to display when the user is not allowed to view a page because s/he must log in.
+    #
+    # Default:
+    #  "You must be signed in to view this page."
+    attr_accessor :login_required_message
+    
     # Message to display if login was successful.
+    #
+    # Default:
+    #  "Signed in successfully."
     attr_accessor :login_successful_message
     
     # Message to display when user logs out.
+    #
+    # Default:
+    #  "You have been signed out."
     attr_accessor :logout_message
     
-    # Message to display when the user's session times out due to inactivity.
-    attr_accessor :session_timeout_message
-    
-    # The method to call in order to determine which resource to use when implicitly logging in.
-    #   Default:
-    #     :new_user_session_path
-    # If set to nil, the #default_destination will be used instead.
-    attr_accessor :default_login_path
-    
-    # The message to display when the user deletes his or her account.
-    attr_accessor :account_deleted_message
-    
-    # The message to display when the user creates an account.
-    attr_accessor :account_created_message
-    
-    # The message to display when user profile has been updated or the password has been changed.
-    attr_accessor :account_updated_message
-    
-    # The message to display if an account has been locked.
-    attr_accessor :account_locked_message
-    
-    # The length of time an account is locked for, if it is locked.
-    attr_accessor :account_lock_duration
+    # The message to display when the user is not allowed to view a page because s/he must log out.
+    #
+    #  "You must be signed out to view this page."
+    attr_accessor :logout_required_message
     
     # The maximum login attempts permitted before an account is locked. Set to nil to disable locking.
+    #
+    # Default:
+    #  5
     attr_accessor :max_login_failures
     
-    # The message to display when password change matches one of the previous passwords
-    attr_accessor :password_uniqueness_message
-
+    # Minimum length for passwords.
+    #
+    # Default:
+    #  7
+    attr_accessor :minimum_password_length
+    
+    # Regular expression which passwords must match. The default forces at least 1
+    # uppercase, lowercase and numeric character.
+    # 
+    # Default:
+    #  /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
+    attr_accessor :password_format
+  
+    # When the password to be created does not conform to the above format, this error
+    # message will be shown.
+    #
+    # Default:
+    #  "must contain at least 1 uppercase, 1 lowercase and 1 number"
+    attr_accessor :password_format_message
+  
     # The number of passwords to keep in the password change history for each user. Any given
     # user may not use the same password twice for at least this duration. For instance, if
     # set to 4, then a user must change his password 4 times before s/he can reuse one of
     # his/her previous passwords.
+    #
+    # Default:
+    #  4
     attr_accessor :password_history_length
+    
+    # The message to display when password change matches one of the previous passwords
+    #
+    # Default:
+    #  "must not be the same as any of your recent passwords"
+    attr_accessor :password_uniqueness_message
+
+    # How frequently should passwords be forced to change? Nil for never.
+    #
+    # Default:
+    #  30.days
+    attr_accessor :password_update_frequency
+    
+    # The path to the Sparkly Auth libraries.
+    attr_reader :path
+    
+    # The maximum session duration. Users will be logged out automatically after this period expires.
+    #
+    # Default:
+    #  30.minutes
+    attr_accessor :session_duration
+    
+    # Message to display when the user's session times out due to inactivity.
+    #
+    # Default:
+    #  "You have been signed out due to inactivity. Please sign in again."
+    attr_accessor :session_timeout_message
     
     # Finds the controller with the same name as #base_controller_name and returns it.
     def base_controller
@@ -170,9 +252,9 @@ module Auth
       @password_history_length = 4
       @default_accounts_controller_name = "sparkly_accounts"
       @default_sessions_controller_name = "sparkly_sessions"
-      @login_required_message = "You must be logged in to view this page."
-      @logout_required_message = "You must be logged out to view this page."
-      @invalid_credentials_message = "Login credentials were not valid."
+      @login_required_message = "You must be signed in to view this page."
+      @logout_required_message = "You must be signed out to view this page."
+      @invalid_credentials_message = "Credentials were not valid."
       @login_successful_message = "Signed in successfully."
       @default_destination = "/"
       @base_controller_name = 'application'
@@ -183,10 +265,11 @@ module Auth
       @account_deleted_message = "Your account has been deleted."
       @account_created_message = "Your account has been created."
       @account_updated_message = "Your changes have been saved."
-      @account_locked_message = "Account is locked due to too many invalid attempts"
+      @account_locked_message = "Account is locked due to too many invalid attempts."
       @account_lock_duration = 30.minutes
       @max_login_failures = 5
       @generate_routes = true
+      @login_after_signup = false
       
       self.class.behavior_configs.each do |accessor_name, config_klass|
         instance_variable_set("@#{accessor_name}", config_klass.new(self))

@@ -7,7 +7,8 @@ class <%=model.accounts_controller.camelize%>Controller < SparklyController
 
   # POST model_url
   def create
-    if model.save
+    if model.save       
+      login!(model)
       redirect_back_or_default Auth.default_destination, Auth.account_created_message
     else
       render :action => 'new'
