@@ -21,10 +21,14 @@ describe :sparkly do
   it "should verify that no files are generated that are missing from code base, or vice versa." # tbi
   
   context "sanity checks" do
-    with_args "configs", '-q' do
+    with_args "config", '-q' do
       # configs can vary widely but the test here is to verify that the default generated config matches
       # the one we're currently using. That way we can verify that it'll at least work out of the box.
-      it_should_generate_and_match("config/initializers/sparkly_authentication.rb", "spec_env/rails3/config/initializers/sparkly_authentication.rb")
+      if Rails::VERSION::MAJOR == 3
+        it_should_generate_and_match("config/initializers/sparkly_authentication.rb", "spec_env/rails3/config/initializers/sparkly_authentication.rb")
+      else
+        it_should_generate_and_match("config/initializers/sparkly_authentication.rb", "spec_env/rails2/config/initializers/sparkly_authentication.rb")
+      end
     end
     
     context "migrations", '-q' do

@@ -1,5 +1,8 @@
 class SparklyGenerator < Rails::Generator::NamedBase
-  # I'm still treating this as NamedBase because I'm not sure whether I'll need that in the future.
+  def source_root
+    File.join(File.dirname(__FILE__), 'templates')
+  end
+  
   def initialize(args, options = {}) #:nodoc:
     @options = options
     unless args.empty?

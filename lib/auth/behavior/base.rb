@@ -1,32 +1,34 @@
 class Auth::Behavior::Base
+  #unloadable
+  
   class_inheritable_array :migrations
   read_inheritable_attribute(:migrations) || write_inheritable_attribute(:migrations, [])
   
-  class << self
-    def apply_to_controllers
-      # Add additional methods to ApplicationController (or whatever controller Sparkly is told to use)
-      Auth.base_controller.send(:include, "#{name}::ControllerExtensions".constantize)
-      # why this doesn't work in cuke?
-  #    if (container = self.class).const_defined?(:ControllerExtensions)
-  #      Auth.base_controller.send(:include, container.const_get(:ControllerExtensions))
-  #    end
-    #rescue NameError
+  def apply(model = nil)
+    if model
+      track_behavior(model.target) do
+        apply_to_accounts(model)
+        apply_to_passwords(Password)
+      end
+    end
+    
+    track_behavior(base = Auth.base_controller) do
+      apply_to_controllers(base)
     end
   end
   
-  def apply_to(model)
-    track_behavior(model.target) do
-      apply_to_accounts(model)
-      apply_to_passwords(Password)
-    end
+  alias_method :apply_to, :apply
+  
+  def apply_to_controllers(base_controller)
+    be_sure_to_override("apply_to_controllers(base_controller)")
   end
 
   def apply_to_passwords(password_model)
-    raise NotImplementedError, "Be sure to override #apply_to_passwords(passwords_model) in your Auth Behavior"
+    be_sure_to_override("apply_to_passwords(password_model)")
   end
   
   def apply_to_accounts(model_config)
-    raise NotImplementedError, "Be sure to override #apply_to_accounts(model_config) in your Auth Behavior"
+    be_sure_to_override("apply_to_accounts(model_config)")
   end
   
   private
@@ -52,6 +54,11 @@ class Auth::Behavior::Base
   def behavior_name
     self.class.name
   end
+  
+  private
+  def be_sure_to_override(name)
+    raise NotImplementedError, "Be sure to override ##{name} in #{self.class.name}"
+  end
 
   public
   class << self
@@ -60,5 +67,9 @@ class Auth::Behavior::Base
     def migration(filename)
       migrations << filename unless migrations.include?(filename)
     end
+    
+#    def inherited(base)
+#      base.instance_eval { unloadable } # is this necessary?
+#    end
   end
 end

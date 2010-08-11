@@ -32,10 +32,29 @@ def reload!
 end
 
 Spec::Runner.configure do |config|
+  # If you're not using ActiveRecord you should remove these
+  # lines, delete config/database.yml and disable :active_record
+  # in your config/boot.rb
+  config.use_transactional_fixtures = true
+  config.use_instantiated_fixtures  = false
+  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+
   # Needed in order to reset configuration for each test. This should not happen in a real environment.
   config.before(:each) do
+    # Why do I have to do this?!
+    User.destroy_all
+    Password.destroy_all
+    RemembranceToken.destroy_all
+
     Auth.reset_configuration!
     reload!
+  end
+  
+  config.after(:each) do
+#    # Why do I have to do this?!
+#    User.destroy_all
+#    Password.destroy_all
+#    RemembranceToken.destroy_all
   end
   
   config.include(EmailSpec::Helpers)

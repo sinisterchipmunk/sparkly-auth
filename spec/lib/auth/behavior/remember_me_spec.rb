@@ -1,9 +1,7 @@
-require 'spec_helper' 
-require 'rspec/rails'
+require 'spec_helper'
 
 describe 'Behavior: Remember Me', :type => :controller do
   context SparklySessionsController do
-    #controller_name :sparkly_sessions
     if Rails::VERSION::MAJOR == 3
       include RSpec::Rails::ControllerExampleGroup
     end
@@ -25,6 +23,11 @@ describe 'Behavior: Remember Me', :type => :controller do
       end
       
       Auth.kick!
+      
+      User.destroy_all
+      Password.destroy_all
+      RemembranceToken.destroy_all
+      
       u = User.new(:email => "generic12@example.com")
       u.password = u.password_confirmation = "Generic12"
       u.save!

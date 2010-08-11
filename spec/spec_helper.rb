@@ -6,8 +6,10 @@ if defined?(RSpec)
   require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails3/config/environment"))
 else
   RSPEC_VERSION = 1
-  require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails2/config/boot"))
+  #require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails2/config/boot"))
   require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails2/config/environment"))
+  require 'spec/autorun'
+  require 'spec/rails'
 end
 
 require "email_spec"

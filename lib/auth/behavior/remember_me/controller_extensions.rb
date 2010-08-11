@@ -1,7 +1,6 @@
 module Auth::Behavior::RememberMe::ControllerExtensions
   # If a :remember option is given, a remembrance cookie will be set. If omitted, the cookie will be, too.
   def login_with_remembrance!(user, options = {})
-    puts 'login with remembrance'
     login_without_remembrance!(user)
     
     if options[:remember]
@@ -56,12 +55,6 @@ module Auth::Behavior::RememberMe::ControllerExtensions
                   :authenticate_current_user_with_remembrance, :authenticate_with_remembrance_token,
                   :set_remembrance_token_cookie, :handle_remembrance_token_theft, :logout_with_remembrance!,
                   :logout_without_remembrance!
-      
-      unless method_defined?(:login_without_remembrance!)
-        alias_method_chain :login!, :remembrance
-        alias_method_chain :logout!, :remembrance
-        alias_method_chain :authenticate_current_user, :remembrance
-      end
     end
   end
 end

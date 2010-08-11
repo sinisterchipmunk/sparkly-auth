@@ -14,7 +14,8 @@ module Auth
         # If the behavior has a configuration, add it to self.
         accessor_name = name
         name = "#{behavior_class.name}::Configuration"
-        behavior_configs << [ accessor_name, name.constantize ]
+        # we do this so that we can raise NameError now, not later.
+        behavior_configs << [ accessor_name, name.constantize.name ]
         # eg Auth.remember_me.something = 5
         Auth.class.delegate accessor_name, :to => :configuration
       rescue NameError
@@ -210,6 +211,8 @@ module Auth
       begin
         base_controller_name.to_s.camelize.constantize
       rescue NameError
+        # reraise the original error because '_controller' should have been omitted by convention. Also,
+        # the backtrace will be more useful.
         raise err
       end
     end
@@ -264,7 +267,7 @@ module Auth
       @login_after_signup = false
       
       self.class.behavior_configs.each do |accessor_name, config_klass|
-        instance_variable_set("@#{accessor_name}", config_klass.new(self))
+        instance_variable_set("@#{accessor_name}", config_klass.constantize.new(self))
         singleton = (class << self; self; end)
         singleton.send(:define_method, accessor_name) { instance_variable_get("@#{accessor_name}") }
       end
@@ -274,7 +277,7 @@ module Auth
       # Apply behaviors to controllers
       behaviors.each do |behavior_name|
         behavior = lookup_behavior(behavior_name)
-        behavior.apply_to_controllers
+        behavior.new.apply
       end
 
       # Apply options to authenticated models

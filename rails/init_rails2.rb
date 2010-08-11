@@ -2,13 +2,19 @@
 # for us by Rails if this were a Rails plugin.
 
 base_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-
-%w(lib app/controllers app/models).each do |path|
-  path = File.join(base_path, path)
+def add_to_load_path(path, load_once = false)
   $LOAD_PATH << path
   ActiveSupport::Dependencies.load_paths << path
-  ActiveSupport::Dependencies.load_once_paths << path
+  if load_once
+    ActiveSupport::Dependencies.load_once_paths << path
+  else
+    ActiveSupport::Dependencies.load_once_paths.delete path
+  end
 end
+
+add_to_load_path File.join(base_path, 'app/controllers'), false
+add_to_load_path File.join(base_path, 'app/models'), false
+add_to_load_path Auth.path, true
 
 ActionController::Base.view_paths << File.join(base_path, 'app/views')
 
@@ -18,11 +24,12 @@ ActionController::Routing::Routes.add_configuration_file(File.join(base_path, "r
 Rails.configuration.gem "sc-core-ext", :version => ">= 1.2.0"
 require File.expand_path(File.join(File.dirname(__FILE__), "../lib/auth"))
 
-unless ActiveSupport::Dependencies.load_paths.include?(Auth.path)
-  $LOAD_PATH << Auth.path
-  ActiveSupport::Dependencies.load_paths << Auth.path
-  ActiveSupport::Dependencies.load_once_paths << Auth.path
-end
+
+undef add_to_load_path
+
+# Register the built-in behaviors before the auth config initializer has run. In Rails3 this is in a before_initialize
+# block.
+require_dependency File.join(File.dirname(__FILE__), "../lib/auth/builtin_behaviors")
 
 # Kick auth after initialize and do it again before every request in development
 Rails.configuration.to_prepare do
