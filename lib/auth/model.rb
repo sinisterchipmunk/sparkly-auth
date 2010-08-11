@@ -42,12 +42,12 @@ class Auth::Model
   end
   
   def target
-    returning @target.constantize do |klass|
-      unless klass.include?(Auth::Model::Authenticated)
-        klass.send(:include, Auth::Model::Authenticated)
-        klass.sparkly_config = self
-      end
+    klass = @target.constantize
+    unless klass.include?(Auth::Model::Authenticated)
+      klass.send(:include, Auth::Model::Authenticated)
+      klass.sparkly_config = self
     end
+    klass
   end
   
   # Returns true if the specified String, Symbol or constant resolves to the same constant affected by this Model.

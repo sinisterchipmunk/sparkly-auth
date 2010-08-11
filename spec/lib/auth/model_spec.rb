@@ -13,8 +13,7 @@ describe Auth::Model do
     subject { Auth::Model.new(:user) }
     
     before(:each) do
-      Dispatcher.cleanup_application
-      Dispatcher.reload_application
+      reload!
       subject.apply_options!
     end
     
@@ -30,8 +29,7 @@ describe Auth::Model do
   context "with an empty :behaviors option" do
     subject { Auth::Model.new(:user, :behaviors => []) }
     before(:each) do
-      Dispatcher.cleanup_application
-      Dispatcher.reload_application
+      reload!
       subject.apply_options!
     end
     it "should have no behaviors" do subject.behaviors.should be_empty end
@@ -45,8 +43,7 @@ describe Auth::Model do
     })}
     
     before(:each) do
-      Dispatcher.cleanup_application
-      Dispatcher.reload_application
+      reload!
       subject.apply_options!
     end
     

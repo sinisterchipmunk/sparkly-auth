@@ -1,5 +1,4 @@
 class SparklyController < (Auth.base_controller)
-  unloadable
   helper_method :model_class, :model_instance, :model_name, :model, :model_path, :new_model_path, :edit_model_path,
                 :model_config, :model_session_path, :model_params
   before_filter :find_user_model

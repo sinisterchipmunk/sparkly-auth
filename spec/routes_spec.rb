@@ -1,5 +1,7 @@
 describe 'routes' do
-  include ActionController::UrlWriter
+  if Rails::VERSION::MAJOR == 2
+    include ActionController::UrlWriter
+  end
   
   before(:each) do
     Auth.configure do |config|
@@ -7,7 +9,11 @@ describe 'routes' do
     end
     
     Auth.kick!
-    ActionController::Routing::Routes.install_helpers([self.class])
+    if Rails::VERSION::MAJOR == 2
+      ActionController::Routing::Routes.install_helpers([self.class])
+    elsif Rails::VERSION::MAJOR == 3
+      Rails.application.routes.install_helpers([self.class])
+    end
   end
   
   it "should map new_user_path to /user/new" do

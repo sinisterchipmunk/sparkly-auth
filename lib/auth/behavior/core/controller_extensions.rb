@@ -1,6 +1,6 @@
 module Auth::Behavior::Core::ControllerExtensions
   def self.included(base)
-    base.instance_eval do
+    base.class_eval do
       include Auth::Behavior::Core::ControllerExtensions::CurrentUser
       extend Auth::Behavior::Core::ControllerExtensions::ClassMethods
       helper_method :new_session_path, :current_user

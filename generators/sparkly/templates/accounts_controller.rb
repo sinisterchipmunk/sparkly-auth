@@ -1,4 +1,4 @@
-class <%=model.accounts_controller.camelize%>Controller < SparklyController
+class <%=(@model || model).accounts_controller.camelize%>Controller < SparklyController
   require_login_for :show, :edit, :update, :destroy
 
   # GET new_model_url
@@ -7,7 +7,7 @@ class <%=model.accounts_controller.camelize%>Controller < SparklyController
 
   # POST model_url
   def create
-    if model.save       
+    if model.save
       login!(model)
       redirect_back_or_default Auth.default_destination, Auth.account_created_message
     else
@@ -60,6 +60,6 @@ class <%=model.accounts_controller.camelize%>Controller < SparklyController
   # disabled them.
   #
   #def model_name
-  #  <%=model.name.inspect%>
+  #  <%=(@model || model).name.inspect%>
   #end
 end

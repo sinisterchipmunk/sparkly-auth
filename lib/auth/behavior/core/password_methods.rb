@@ -47,11 +47,11 @@ module Auth::Behavior::Core::PasswordMethods
   def secret_with_encryption=(phrase)
     @unencrypted_secret = phrase
     encrypted_phrase = phrase.blank? ? phrase : encrypt(phrase)
-    returning self.secret_without_encryption = encrypted_phrase do
-      reset_persistence_token
-      reset_single_access_token unless single_access_token # don't reset after it has a value
-      reset_perishable_token
-    end
+    self.secret_without_encryption = encrypted_phrase
+    reset_persistence_token
+    reset_single_access_token unless single_access_token # don't reset after it has a value
+    reset_perishable_token
+    return encrypted_phrase
   end
   
   def secret_confirmation_with_encryption=(phrase)

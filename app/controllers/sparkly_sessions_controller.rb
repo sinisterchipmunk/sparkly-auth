@@ -1,6 +1,4 @@
 class SparklySessionsController < SparklyController
-  unloadable
-
   # GET new_model_session_url
   def new
   end
@@ -38,6 +36,13 @@ class SparklySessionsController < SparklyController
   end
   
   private
+  # Uncomment if you don't trust the params[:model] set up by Sparkly routing, or if you've
+  # disabled them.
+  #
+  #def model_name
+  #  "User"
+  #end
+
   def remember_me?
     remembrance = model_params[:remember_me]
     if remembrance.kind_of?(String)

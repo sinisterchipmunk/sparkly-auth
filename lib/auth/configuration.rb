@@ -7,10 +7,10 @@ module Auth
 
       def behavior_configs
         @behavior_configs ||= []
+        @behavior_configs
       end
       
-      def register_behavior(name)
-        behavior_class = lookup_behavior(name)
+      def register_behavior(name, behavior_class = lookup_behavior(name))
         # If the behavior has a configuration, add it to self.
         accessor_name = name
         name = "#{behavior_class.name}::Configuration"
@@ -21,15 +21,7 @@ module Auth
         # Presumably, the behavior does not have a configuration.
       end
     end
-
-    # IS there a better way to do this?? I'm dying to find it...
-    Dir[File.join(File.dirname(__FILE__), "behavior/*.rb")].each do |fi|
-      unless fi[/\/base.rb$/]
-        const_name = fi.gsub(/^#{Regexp::escape File.dirname(__FILE__)}\/behavior\/(.*)\.rb$/, '\1')
-        register_behavior(const_name)
-      end
-    end
-
+    
     # The message to display when the user creates an account.
     #
     # Default:

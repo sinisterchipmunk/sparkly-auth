@@ -34,11 +34,15 @@ module Auth
           validates_presence_of :persistence_token
           validates_uniqueness_of :persistence_token, :if => :persistence_token_changed?
           attr_protected :secret, :secret_confirmation
-          
           include Auth::Behavior::Core::PasswordMethods
           
           validate do |password|
             password.errors.rename_attribute("unencrypted_secret", "secret")
+          end
+          
+          if Rails::VERSION::MAJOR == 3
+            # The hooks have changed.
+            after_initialize :after_initialize
           end
         end
       end
@@ -54,11 +58,9 @@ module Auth
   
           include Auth::Behavior::Core::AuthenticatedModelMethods
   
-          after_save do |record|
-            # clear out old passwords so we're conforming to Auth.password_history_length
-            while record.passwords.length > Auth.password_history_length
-              record.passwords.shift.destroy
-            end
+          if Rails::VERSION::MAJOR == 3
+            # The hooks have changed.
+            after_save :after_save
           end
 
           validate do |account|

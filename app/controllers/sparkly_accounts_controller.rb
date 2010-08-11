@@ -1,5 +1,4 @@
 class SparklyAccountsController < SparklyController
-  unloadable
   require_login_for :show, :edit, :update, :destroy
 
   # GET new_model_url
@@ -48,12 +47,19 @@ class SparklyAccountsController < SparklyController
   end
 
   protected
-    def find_user_model
-      # password fields are protected attrs, so we need to exclude them then add them explicitly.
-      self.model_instance = current_user ||
-              returning(model_class.new(model_params.without(:password, :password_confirmation))) { |model|
-                model.password = model_params[:password]
-                model.password_confirmation = model_params[:password_confirmation]
-              }
-    end
+  def find_user_model
+    # password fields are protected attrs, so we need to exclude them then add them explicitly.
+    self.model_instance = current_user ||
+            returning(model_class.new(model_params.without(:password, :password_confirmation))) { |model|
+              model.password = model_params[:password]
+              model.password_confirmation = model_params[:password_confirmation]
+            }
+  end
+
+  # Uncomment if you don't trust the params[:model] set up by Sparkly routing, or if you've
+  # disabled them.
+  #
+  #def model_name
+  #  "User"
+  #end
 end

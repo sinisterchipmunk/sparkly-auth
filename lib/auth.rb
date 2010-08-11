@@ -1,7 +1,7 @@
 module Auth
   class << self
     public :delegate
-    delegate :path, :encryptor, :default_accounts_controller_name, :default_sessions_controller_name,
+    delegate :encryptor, :default_accounts_controller_name, :default_sessions_controller_name,
              :password_update_frequency, :base_controller, :login_required_message, :logout_required_message,
              :default_destination, :session_duration, :invalid_credentials_message, :login_successful_message,
              :logout_message, :session_timeout_message, :default_login_path, :account_deleted_message,
@@ -17,6 +17,14 @@ module Auth
     
     def configure
       yield configuration
+    end
+    
+    def path
+      if @configuration
+        @configuration.path
+      else
+        File.dirname(__FILE__)
+      end
     end
     
     # Applies all configuration settings. This is done by the Auth system after it has been configured but before

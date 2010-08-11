@@ -1,4 +1,4 @@
-class <%=model.sessions_controller.camelize%>Controller < SparklyController
+class <%=(@model || model).sessions_controller.camelize%>Controller < SparklyController
   # GET new_model_session_url
   def new
   end
@@ -15,7 +15,7 @@ class <%=model.sessions_controller.camelize%>Controller < SparklyController
                              :include => :passwords)
     
     if model && model.password_matches?(model_params[:password])
-      login! model
+      login! model, :remember => remember_me?
       redirect_back_or_default Auth.default_destination, Auth.login_successful_message
     else
       session[:login_failures] = session[:login_failures].to_i + 1
@@ -31,15 +31,27 @@ class <%=model.sessions_controller.camelize%>Controller < SparklyController
 
   # DELETE model_session_url
   def destroy
-    logout!
+    logout!(:forget => true)
     redirect_back_or_default Auth.default_destination, Auth.logout_message
   end
   
-  protected
+  private
   # Uncomment if you don't trust the params[:model] set up by Sparkly routing, or if you've
   # disabled them.
   #
   #def model_name
-  #  <%=model.name.inspect%>
+  #  <%=(@model || model).name.inspect%>
   #end
+
+  def remember_me?
+    remembrance = model_params[:remember_me]
+    if remembrance.kind_of?(String)
+      return false if remembrance.blank?
+      return remembrance.to_i != 0
+    elsif remembrance.kind_of?(Numeric)
+      return remembrance != 0
+    else
+      return remembrance
+    end
+  end
 end

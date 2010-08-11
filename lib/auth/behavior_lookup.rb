@@ -1,10 +1,10 @@
 module Auth::BehaviorLookup
   def lookup_behavior(behavior)
-    name = behavior.to_s.underscore
-    if name[/^auth\/behavior\//]
-      behavior.to_s.camelize.constantize
+    name = behavior.to_s.camelize
+    if name[/^Auth::Behavior::/]
+      name.constantize
     else
-      "auth/behavior/#{name}".camelize.constantize
+      "Auth::Behavior::#{name}".constantize
     end
   end
 end

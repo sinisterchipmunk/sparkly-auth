@@ -50,11 +50,10 @@ describe "Behavior: Core" do
       password = "Ab12345"
       
       User.destroy_all
-      returning(User.new(:email => email)) { |user|
-        user.password = password
-        user.password_confirmation = password
-        user.save!
-      }
+      user = User.new(:email => email)
+      user.password = password
+      user.password_confirmation = password
+      user.save!
 
       User.find_by_email(email).password_matches?(password).should == true
     end
@@ -135,7 +134,11 @@ describe "Behavior: Core" do
     
     pw.secret_confirmation = "Hello1"
     pw.valid?
-    pw.errors.on(:secret).should == "doesn't match confirmation"
+    if Rails::VERSION::MAJOR == 2
+      pw.errors.on(:secret).should == "doesn't match confirmation"
+    else
+      pw.errors[:secret].should == ["doesn't match confirmation"]
+    end
     
     pw.secret_confirmation = "Hello12"
     pw.should be_valid
@@ -150,7 +153,7 @@ describe "Behavior: Core" do
   end
 
   it 'should validate password complexity' do
-    error_on(Password, :secret, "Ab12345").should == nil
+    error_on(Password, :secret, "Ab12345").should be_nil
     error_on(Password, :secret, "1234567").should ==
              "must contain at least 1 uppercase, 1 lowercase and 1 number"
     error_on(Password, :secret, "abcdefg").should ==

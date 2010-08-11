@@ -1,2 +1,2 @@
-module <%=model.accounts_controller.camelize%>Helper
+module <%=(@model || model).accounts_controller.camelize%>Helper
 end

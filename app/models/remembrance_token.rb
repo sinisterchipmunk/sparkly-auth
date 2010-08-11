@@ -9,7 +9,9 @@ class RemembranceToken < ActiveRecord::Base
     "#{authenticatable_type}|#{authenticatable_id}|#{series_token}|#{remembrance_token}"
   end
   
-  def before_validation
+  before_validation :regenerate_remembrance_token
+  
+  def regenerate_remembrance_token
     regenerate if new_record?
   end
   

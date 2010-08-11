@@ -1,0 +1,2 @@
+module SparklySessionsHelper
+end
