@@ -1,7 +1,12 @@
 module Auth
   class Configuration
     include Auth::BehaviorLookup
+    delegate :configuration_keys, :to => 'self.class'
     
+    # The array of Auth::Model instances which represent the models which will be authenticated.
+    # See also #authenticate
+    attr_accessor :authenticated_models
+
     class << self
       include Auth::BehaviorLookup
 
@@ -20,6 +25,42 @@ module Auth
         Auth.class.delegate accessor_name, :to => :configuration
       rescue NameError
         # Presumably, the behavior does not have a configuration.
+      end
+      
+      def configuration_keys
+        @configuration_keys ||= []
+      end
+      
+      def add_option_delegator_for(key)
+        define_method :"#{key}_with_option_delegation=" do |value|
+          res = send("#{key}_without_option_delegation=", value)
+          authenticated_models.each { |model| model.set_default_option(key, value) }
+          res
+        end
+
+        alias_method_chain :"#{key}=", :option_delegation
+      end
+      
+      def add_configuration_key(has_writer, *keys)
+        keys = keys.flatten
+        configuration_keys.concat keys
+        result = block_given? ? yield : nil
+        if has_writer
+          keys.each { |key| add_option_delegator_for(key) }
+        end
+        result
+      end
+      
+      def attr_reader(*args) #:nodoc:
+        add_configuration_key(false, args) { super }
+      end
+      
+      def attr_writer(*args) #:nodoc:
+        add_configuration_key(true, args) { super }
+      end
+      
+      def attr_accessor(*args) #:nodoc:
+        add_configuration_key(true, args) { super }
       end
     end
     
@@ -52,10 +93,6 @@ module Auth
     # Default:
     #  "Account is locked due to too many invalid attempts."
     attr_accessor :account_locked_message
-    
-    # The array of Auth::Model instances which represent the models which will be authenticated.
-    # See also #authenticate
-    attr_accessor :authenticated_models
     
     # The NAME of the controller to use as a base controller. All Sparkly controllers will subclass
     # this, and methods such as current_user will be added to it. Defaults to 'application'.
@@ -204,6 +241,10 @@ module Auth
     #  "You have been signed out due to inactivity. Please sign in again."
     attr_accessor :session_timeout_message
     
+    def behavior=(*args, &block) #:nodoc:
+      send(:behaviors=, *args, &block)
+    end
+    
     # Finds the controller with the same name as #base_controller_name and returns it.
     def base_controller
       "#{base_controller_name.to_s.camelize}Controller".constantize
@@ -233,6 +274,12 @@ module Auth
     def generate_routes?
       @generate_routes
     end
+    
+    # this was documented as an accessor, but is expected to always be an Array.
+    def behaviors_with_conversion_to_array=(*args) #:nodoc:
+      self.behaviors_without_conversion_to_array = args.flatten
+    end
+    alias_method_chain :behaviors=, :conversion_to_array
     
     def initialize
       @password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
@@ -274,15 +321,20 @@ module Auth
     end
     
     def apply!
-      # Apply behaviors to controllers
-      behaviors.each do |behavior_name|
-        behavior = lookup_behavior(behavior_name)
-        behavior.new.apply
-      end
-
+      # all configurations are now applied through Auth::Model. If no models are being authenticated,
+      # then no authentication should be possible -- so what is there to apply?
+      
       # Apply options to authenticated models
       authenticated_models.each do |model|
         model.apply_options!
+      end
+    end
+    
+    # Returns this configuration as a Hash
+    def to_hash
+      self.class.configuration_keys.inject({}) do |hash, key|
+        hash[key] = send(key)
+        hash
       end
     end
     
@@ -306,7 +358,7 @@ module Auth
         if model = authenticated_models.find(name)
           model.merge_options! options
         else
-          authenticated_models << Auth::Model.new(name, options)
+          authenticated_models << Auth::Model.new(name, options, to_hash)
         end
       end
     end

@@ -3,25 +3,16 @@ module Auth
     class RememberMe < Auth::Behavior::Base
       migration "create_sparkly_remembered_tokens"
       
-      def apply_to_controllers(base_controller)
-        require_dependency File.join(File.dirname(__FILE__), 'remember_me/controller_extensions')
-        base_controller.send(:include, Auth::Behavior::RememberMe::ControllerExtensions)
-        
-        base_controller.class_eval do
-          unless method_defined?(:login_without_remembrance!)
-            alias_method_chain :login!, :remembrance
-            alias_method_chain :logout!, :remembrance
-            alias_method_chain :authenticate_current_user, :remembrance
-          end
-        end
+      def apply_to_controller(base_controller, user_model)
+        ApplicationController.send(:include, Auth::Behavior::RememberMe::ControllerExtensions)
       end
 
-      def apply_to_passwords(password)
+      def apply_to_password(password_model, user_model)
         # no effect
       end
       
-      def apply_to_accounts(model_config)
-        model_config.target.instance_eval do
+      def apply_to_user(user_model)
+        user_model.auth_config.target.instance_eval do
           has_many :remembrance_tokens, :dependent => :destroy, :as => :authenticatable
         end
       end

@@ -45,7 +45,7 @@ class RemembranceToken < ActiveRecord::Base
                 :authenticatable_id => authenticatable_id,
                 :series_token => series_token
               })
-      token.should_equal(remembrance_token)
+      token.should_equal(remembrance_token) if token
       token
     end
   end

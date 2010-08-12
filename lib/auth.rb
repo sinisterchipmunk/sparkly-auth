@@ -19,6 +19,14 @@ module Auth
       yield configuration
     end
     
+    def defer_kickstart?
+      @defer_kickstart ||= !!ENV['DEFER_SPARKLY']
+    end
+    
+    def defer_kickstart=(a)
+      @defer_kickstart = !!a
+    end
+    
     def path
       if @configuration
         @configuration.path

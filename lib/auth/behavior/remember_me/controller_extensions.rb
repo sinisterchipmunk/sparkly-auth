@@ -55,6 +55,12 @@ module Auth::Behavior::RememberMe::ControllerExtensions
                   :authenticate_current_user_with_remembrance, :authenticate_with_remembrance_token,
                   :set_remembrance_token_cookie, :handle_remembrance_token_theft, :logout_with_remembrance!,
                   :logout_without_remembrance!
+
+      unless method_defined?(:login_without_remembrance!)
+        alias_method_chain :login!, :remembrance
+        alias_method_chain :logout!, :remembrance
+        alias_method_chain :authenticate_current_user, :remembrance
+      end
     end
   end
 end

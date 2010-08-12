@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Auth::Model do
   context "given nonexisting model name" do
-    subject { Auth::Model.new(:nonexisting_user) }
+    subject { Auth::Model.new(:nonexisting_user, :behaviors => [:core]) }
     
     it "should fail silently during initialization because it might not have been generated yet" do
       proc { subject }.should_not raise_error
@@ -10,7 +10,7 @@ describe Auth::Model do
   end
   
   context "with default options" do
-    subject { Auth::Model.new(:user) }
+    subject { Auth::Model.new(:user, :behaviors => [:core]) }
     
     before(:each) do
       reload!
@@ -36,7 +36,7 @@ describe Auth::Model do
   end
   
   context "with a hash for :with option" do
-    subject { Auth::Model.new(:user, :with => {
+    subject { Auth::Model.new(:user, :behaviors => [:core], :with => {
             :secret => :passwd,
             :format => /^.{8}$/,
             :message => "must be exactly 8 characters"

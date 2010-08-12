@@ -34,29 +34,34 @@ end
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |fi| require fi }
 #gem 'genspec', '0.2.0.prerails3.2'
 
-def reload!
-  if Rails.configuration.cache_classes
-    raise "Cannot reload: set Rails.configuration.cache_classes to false first"
-  end
-  ActiveSupport::Dependencies.clear
-  ActionDispatch::Callbacks.new(Proc.new {}, false).call({})
-end
-
 RSpec.configure do |config|
   # Needed in order to reset configuration for each test. This should not happen in a real environment.
   config.before(:each) do
-    # Why do I have to do this?!
+    Auth.reset_double_prevention!
+    apply_sparkly_configuration!
+
     User.destroy_all
     Password.destroy_all
     RemembranceToken.destroy_all
-    
-    Auth.reset_configuration!
-    reload!
   end
   
-  config.include(EmailSpec::Helpers)
-  config.include(EmailSpec::Matchers)
-  #config.include(ActionController::UrlFor)
+  config.extend(ClassHelpers)
+  config.include(InstanceHelpers)
+
+#  # Needed in order to reset configuration for each test. This should not happen in a real environment.
+#  config.before(:each) do
+#    # Why do I have to do this?!
+#    User.destroy_all
+#    Password.destroy_all
+#    RemembranceToken.destroy_all
+#    
+#    Auth.reset_configuration!
+#    reload!
+#  end
+#  
+#  config.include(EmailSpec::Helpers)
+#  config.include(EmailSpec::Matchers)
+#  #config.include(ActionController::UrlFor)
   config.include(Rails.application.routes.url_helpers)
 end
 

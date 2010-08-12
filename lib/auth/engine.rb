@@ -27,7 +27,7 @@ module Auth
     end
     
     config.to_prepare do
-      Auth.kick!
+      Auth.kick! unless Auth.defer_kickstart?
     end
   end
 end

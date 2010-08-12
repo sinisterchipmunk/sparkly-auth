@@ -33,7 +33,7 @@ require_dependency File.join(File.dirname(__FILE__), "../lib/auth/builtin_behavi
 
 # Kick auth after initialize and do it again before every request in development
 Rails.configuration.to_prepare do
-  Auth.kick!
+  Auth.kick! unless Auth.defer_kickstart?
 end
 
 require File.join(File.dirname(__FILE__), "hacks/rails2")

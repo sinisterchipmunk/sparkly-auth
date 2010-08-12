@@ -128,3 +128,190 @@ Completed in 11ms (View: 7, DB: 0) | 200 OK [http://localhost/user/session/new]
   [4;36;1mSQL (3.8ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('2')[0m
   [4;35;1mSQL (3.6ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('3')[0m
   [4;36;1mSQL (3.9ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100607103543')[0m
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:08) [GET]
+  Parameters: {"model"=>"User", "mo"=>"Admin"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 28ms (View: 25, DB: 0) | 200 OK [http://localhost/user/login?mo=Admin]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:11) [GET]
+  Parameters: {"model"=>"User", "mo"=>"Admin"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 8ms (View: 4, DB: 0) | 200 OK [http://localhost/user/login?mo=Admin]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:14) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://localhost/user/login]
+
+
+Processing SparklySessionsController#create (for 127.0.0.1 at 2010-08-11 20:46:16) [POST]
+  Parameters: {"model"=>"User", "commit"=>"Sign in", "authenticity_token"=>"74TNoagHooK7JnD58/EdJVfJnP5dN7QLTzQcwUlO1RM=", "user"=>{"password"=>"Admin01", "email"=>"admin2@ingenico.com"}}
+  [4;36;1mUser Load (67.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."email" = 'admin2@ingenico.com') LIMIT 1[0m
+  [4;35;1mPassword Load (1.2ms)[0m   [0mSELECT "passwords".* FROM "passwords" WHERE ("passwords"."authenticatable_id" = 9 and "passwords"."authenticatable_type" = 'User') [0m
+Redirected to http://localhost:3000/
+Completed in 100ms (DB: 69) | 302 Found [http://localhost/user/session]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:46:16) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+  [4;36;1mPassword Load (0.3ms)[0m   [0;1mSELECT * FROM "passwords" WHERE ("passwords"."persistence_token" = 'en60GwB_Q9y9PKZnGuwo') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') [0m
+  [4;35;1mPassword Load (0.3ms)[0m   [0mSELECT * FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') ORDER BY passwords.id DESC LIMIT 1[0m
+Completed in 62ms (View: 60, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SparklySessionsController#destroy (for 127.0.0.1 at 2010-08-11 20:46:18) [DELETE]
+  Parameters: {"model"=>"User", "authenticity_token"=>"74TNoagHooK7JnD58/EdJVfJnP5dN7QLTzQcwUlO1RM="}
+  [4;36;1mPassword Load (0.3ms)[0m   [0;1mSELECT * FROM "passwords" WHERE ("passwords"."persistence_token" = 'en60GwB_Q9y9PKZnGuwo') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') [0m
+  [4;35;1mPassword Load (0.3ms)[0m   [0mSELECT * FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') ORDER BY passwords.id DESC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed in 11ms (DB: 1) | 302 Found [http://localhost/user/session]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:46:18) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:20) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:22) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 8ms (View: 5, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:23) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:46:58) [GET]
+  Parameters: {"model"=>"User"}
+  [4;36;1mRemembranceToken Load (0.5ms)[0m   [0;1mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'tjgUdwx2Mf4HH_mYncIW' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '1') LIMIT 1[0m
+
+NoMethodError (undefined method `should_equal' for nil:NilClass):
+  /Users/colin/projects/gems/rails3/sparkly-auth/app/models/remembrance_token.rb:48:in `find_by_value'
+  /Users/colin/projects/gems/rails3/sparkly-auth/lib/auth/behavior/remember_me/controller_extensions.rb:29:in `authenticate_with_remembrance_token'
+  /Users/colin/projects/gems/rails3/sparkly-auth/lib/auth/behavior/remember_me/controller_extensions.rb:23:in `authenticate_current_user'
+  /Users/colin/projects/gems/rails3/sparkly-auth/lib/auth/behavior/core/controller_extensions/current_user.rb:10:in `current_user'
+  /Users/colin/projects/gems/rails3/sparkly-auth/app/controllers/sparkly_controller.rb:10:in `find_user_model'
+
+Rendered rescues/_trace (111.4ms)
+Rendered rescues/_request_and_response (79.5ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:47:23) [GET]
+  Parameters: {"model"=>"User"}
+  [4;35;1mRemembranceToken Load (0.4ms)[0m   [0mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'tjgUdwx2Mf4HH_mYncIW' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '1') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 99ms (View: 72, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#create (for 127.0.0.1 at 2010-08-11 20:47:28) [POST]
+  Parameters: {"model"=>"User", "commit"=>"Sign in", "authenticity_token"=>"74TNoagHooK7JnD58/EdJVfJnP5dN7QLTzQcwUlO1RM=", "user"=>{"remember_me"=>"1", "password"=>"Admin01", "email"=>"admin2@ingenico.com"}}
+  [4;36;1mRemembranceToken Load (0.4ms)[0m   [0;1mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'tjgUdwx2Mf4HH_mYncIW' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '1') LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."email" = 'admin2@ingenico.com') LIMIT 1[0m
+  [4;36;1mPassword Load (0.4ms)[0m   [0;1mSELECT "passwords".* FROM "passwords" WHERE ("passwords"."authenticatable_id" = 9 and "passwords"."authenticatable_type" = 'User') [0m
+  [4;35;1mRemembranceToken Create (0.4ms)[0m   [0mINSERT INTO "remembrance_tokens" ("created_at", "authenticatable_type", "updated_at", "remembrance_token", "authenticatable_id", "series_token") VALUES('2010-08-12 00:47:28', 'User', '2010-08-12 00:47:28', 'zQwQPj3SGfIjnr_LB1gl', 9, 'kmnHjgEiHnpXsVhRV_cR')[0m
+Redirected to http://localhost:3000/
+Completed in 356ms (DB: 2) | 302 Found [http://localhost/user/session]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:47:29) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+  [4;36;1mPassword Load (0.3ms)[0m   [0;1mSELECT * FROM "passwords" WHERE ("passwords"."persistence_token" = 'en60GwB_Q9y9PKZnGuwo') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT count(*) AS count_all FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') [0m
+  [4;35;1mPassword Load (0.3ms)[0m   [0mSELECT * FROM "passwords" WHERE ("passwords".authenticatable_id = 9 AND "passwords".authenticatable_type = 'User') ORDER BY passwords.id DESC LIMIT 1[0m
+Completed in 40ms (View: 37, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:47:41) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+  [4;36;1mRemembranceToken Load (0.5ms)[0m   [0;1mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'kmnHjgEiHnpXsVhRV_cR' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '9') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;36;1mRemembranceToken Update (0.4ms)[0m   [0;1mUPDATE "remembrance_tokens" SET "remembrance_token" = 'I6sD2N4KIsbtxmGEZqem', "updated_at" = '2010-08-12 00:47:41' WHERE "id" = 3[0m
+Completed in 140ms (View: 137, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:47:46) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+  [4;35;1mRemembranceToken Load (1.0ms)[0m   [0mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'kmnHjgEiHnpXsVhRV_cR' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '9') LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;35;1mRemembranceToken Update (1.4ms)[0m   [0mUPDATE "remembrance_tokens" SET "remembrance_token" = '0UYKbmh1-B84Om9wmNxG', "updated_at" = '2010-08-12 00:47:46' WHERE "id" = 3[0m
+Completed in 25ms (View: 21, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:47:47) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+  [4;36;1mRemembranceToken Load (0.6ms)[0m   [0;1mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'kmnHjgEiHnpXsVhRV_cR' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '9') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;36;1mRemembranceToken Update (0.5ms)[0m   [0;1mUPDATE "remembrance_tokens" SET "remembrance_token" = 'WYfWAIN-Zsd5zKoEqMgT', "updated_at" = '2010-08-12 00:47:47' WHERE "id" = 3[0m
+Completed in 23ms (View: 20, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing SparklySessionsController#destroy (for 127.0.0.1 at 2010-08-11 20:47:47) [DELETE]
+  Parameters: {"model"=>"User", "authenticity_token"=>"/UwChpv0aM9xigWrMRUmJ7HAlFGBL7Gz953viFxlXaE="}
+  [4;35;1mRemembranceToken Load (0.5ms)[0m   [0mSELECT * FROM "remembrance_tokens" WHERE ("remembrance_tokens"."series_token" = 'kmnHjgEiHnpXsVhRV_cR' AND "remembrance_tokens"."authenticatable_type" = 'User' AND "remembrance_tokens"."authenticatable_id" = '9') LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 9) [0m
+  [4;35;1mRemembranceToken Update (0.3ms)[0m   [0mUPDATE "remembrance_tokens" SET "remembrance_token" = 'ZSDMjAp1JY5pSLzpnvJg', "updated_at" = '2010-08-12 00:47:47' WHERE "id" = 3[0m
+Redirected to http://localhost:3000/
+Completed in 64ms (DB: 1) | 302 Found [http://localhost/user/session]
+
+
+Processing ApplicationController#not_found (for 127.0.0.1 at 2010-08-11 20:47:47) [GET]
+Rendering template within layouts/application
+Rendering application/not_found
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:47:48) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 8ms (View: 5, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:47:49) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 11ms (View: 7, DB: 0) | 200 OK [http://localhost/user/session/new]
+
+
+Processing SparklySessionsController#new (for 127.0.0.1 at 2010-08-11 20:47:49) [GET]
+  Parameters: {"model"=>"User"}
+Rendering template within layouts/application
+Rendering sparkly_sessions/new
+Completed in 9ms (View: 5, DB: 0) | 200 OK [http://localhost/user/session/new]
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m

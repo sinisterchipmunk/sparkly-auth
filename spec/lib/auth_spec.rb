@@ -24,9 +24,9 @@ describe Auth do
       config.authenticate :user, :with => :password
     end
     
-    Auth.configuration.authenticated_models.find(:user).options.without(:behaviors).should == {
+    Auth.configuration.authenticated_models.find(:user).options.without(:behaviors).should include({
       :key => :login,
       :with => :password
-    }
+    })
   end
 end

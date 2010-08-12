@@ -1,24 +1,45 @@
 class Auth::Model
   module Authenticated
     def self.included(base)
-      base.send(:cattr_accessor, :sparkly_config)
+      base.instance_eval do
+        cattr_accessor :sparkly_config
+        alias auth_config sparkly_config
+      end
     end
   end
   
-  
   def self.option(name, default = name)
     define_method(name) do
-      self.options[name] ||= Auth.configuration.send(default)
+      self.options[name] ||= send(default)
+    end
+  end
+  
+  # check missing methods to see if they're looking for configuration options
+  def method_missing(name, *args, &block) #:nodoc:
+    option_name, assignment = (name.to_s.gsub(/\=$/, '')), $~ # lose the equals sign, and remember if it existed
+
+    if options.keys.select { |key| key.to_s == option_name }.empty?
+      super
+    else
+      if assignment
+        options[option_name.to_sym] = args.flatten
+      else
+        options[option_name.to_sym]
+      end
     end
   end
   
   include Auth::BehaviorLookup
-  attr_reader :options
-  option :behaviors
-  option :password_update_frequency
+#  attr_reader :options
+#  option :behaviors
+#  option :password_update_frequency
   option :accounts_controller, :default_accounts_controller_name
   option :sessions_controller, :default_sessions_controller_name
   delegate :name, :table_name, :to => :target
+  
+  def options
+    @options.reverse_merge(default_options)
+  end
   
   # Options include:
   #   :behaviors                 => an array of behaviors to override Auth.configuration.behaviors
@@ -29,7 +50,10 @@ class Auth::Model
   #   :accounts_controller       => the name of the controller to route to for creating accounts, deleting them, etc.
   #   :sessions_controller       => the name of the controller to route to for logging in, logging out, etc.
   #
-  def initialize(name_or_constant, options = {})
+  def initialize(name_or_constant, options = {}, default_options = {})
+    @options = (options || {}).dup
+    send(:default_options).merge! default_options
+
     begin
       @target = resolve(name_or_constant).name
     rescue NameError
@@ -37,8 +61,6 @@ class Auth::Model
       # to do it now.
       @target = name_or_constant.to_s.camelize
     end
-    
-    @options = options.reverse_merge(default_options)
   end
   
   def target
@@ -62,13 +84,28 @@ class Auth::Model
   
   # Merges the specified hash of options with this Model's hash of options. Same as model.options.merge!(options)
   def merge_options!(options)
-    self.options.merge! options
+    @options.merge! options
   end
   
   def apply_options!
     apply_behaviors!
   end
   
+  def default_options
+    @default_options ||= {
+      :key => :email,
+      :with => :password
+    }
+  end
+  
+  def default_options=(hash)
+    default_options.merge!(hash)
+  end
+  
+  def set_default_option(key, value)
+    default_options[key] = value
+  end
+
   private
   def apply_behaviors!
     behaviors.each do |behavior|
@@ -83,12 +120,5 @@ class Auth::Model
       when String then name_or_constant.camelize.constantize
       else name_or_constant
     end
-  end
-  
-  def default_options
-  {
-    :key => :email,
-    :with => :password
-  }
   end
 end

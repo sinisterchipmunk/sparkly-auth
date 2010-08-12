@@ -1,34 +1,30 @@
 class Auth::Behavior::Base
   #unloadable
   
+  attr_reader :options
   class_inheritable_array :migrations
   read_inheritable_attribute(:migrations) || write_inheritable_attribute(:migrations, [])
   
-  def apply(model = nil)
-    if model
-      track_behavior(model.target) do
-        apply_to_accounts(model)
-        apply_to_passwords(Password)
-      end
-    end
-    
-    track_behavior(base = Auth.base_controller) do
-      apply_to_controllers(base)
+  def apply(model_config)
+    track_behavior(model = model_config.target) do
+      apply_to_user(model)
+      apply_to_password(Password, model)
+      apply_to_controller(Auth.base_controller, model)
     end
   end
   
   alias_method :apply_to, :apply
   
-  def apply_to_controllers(base_controller)
-    be_sure_to_override("apply_to_controllers(base_controller)")
+  def apply_to_controller(base_controller, user_model)
+    be_sure_to_override("apply_to_controller(base_controller, user_model)")
   end
 
-  def apply_to_passwords(password_model)
-    be_sure_to_override("apply_to_passwords(password_model)")
+  def apply_to_password(password_model, user_model)
+    be_sure_to_override("apply_to_password(password_model, user_model)")
   end
   
-  def apply_to_accounts(model_config)
-    be_sure_to_override("apply_to_accounts(model_config)")
+  def apply_to_user(user_model)
+    be_sure_to_override("apply_to_user(user_model)")
   end
   
   private
