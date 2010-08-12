@@ -47,21 +47,6 @@ RSpec.configure do |config|
   
   config.extend(ClassHelpers)
   config.include(InstanceHelpers)
-
-#  # Needed in order to reset configuration for each test. This should not happen in a real environment.
-#  config.before(:each) do
-#    # Why do I have to do this?!
-#    User.destroy_all
-#    Password.destroy_all
-#    RemembranceToken.destroy_all
-#    
-#    Auth.reset_configuration!
-#    reload!
-#  end
-#  
-#  config.include(EmailSpec::Helpers)
-#  config.include(EmailSpec::Matchers)
-#  #config.include(ActionController::UrlFor)
   config.include(Rails.application.routes.url_helpers)
 end
 
@@ -73,7 +58,10 @@ def error_on(model, key, value = nil, options = {})
   instance.valid?
   e = instance.errors[key.to_s]
   
-  # For rails 2 compat
+  # The specs were written to test for Rails 2 errors, and this more or less converts the Rails 3 ones for Rails 2
+  # compatibility.
+  #
+  # TODO: Update the specs for Rails 3, and let the R2 spec helper deal with compatibility.
   if e.size < 2
     return e.shift
   else

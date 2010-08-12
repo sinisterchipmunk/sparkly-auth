@@ -21,6 +21,12 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
+# Add all builtin behaviors. Since we can't reload in cucumber, we have to test other configs using rspec and only test
+# overall function in Cuke. We use #to_prepare because Auth doesn't exist yet.
+config.to_prepare do
+  Auth.configuration.behaviors = :core, :remember_me
+end
+
 config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
 config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/database_cleaner'))
 config.gem 'webrat',           :lib => false, :version => '>=0.7.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))

@@ -49,11 +49,12 @@ class SparklyAccountsController < SparklyController
   protected
   def find_user_model
     # password fields are protected attrs, so we need to exclude them then add them explicitly.
-    self.model_instance = current_user ||
-            returning(model_class.new(model_params.without(:password, :password_confirmation))) { |model|
-              model.password = model_params[:password]
-              model.password_confirmation = model_params[:password_confirmation]
-            }
+    self.model_instance = current_user || begin
+            model = model_class.new(model_params.without(:password, :password_confirmation))
+            model.password = model_params[:password]
+            model.password_confirmation = model_params[:password_confirmation]
+            model
+    end
   end
 
   # Uncomment if you don't trust the params[:model] set up by Sparkly routing, or if you've

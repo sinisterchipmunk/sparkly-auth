@@ -1,7 +1,15 @@
-<%form_for model, :url => model_path do |f|%>
-  <p>
-    <%=f.error_messages%>
-  </p>
+<%=form_for model, :url => model_path do |f|%>
+  <%if Rails::VERSION::MAJOR == 2%>
+    <p>
+      <%=f.error_messages%>
+    </p>
+  <%else%>
+    <p>
+      <%model.errors.each do |error, message|%>
+        <%=error.to_s.titleize%> <%=message%>
+      <%end%>
+    </p>
+  <%end%>
   
   <p>
     <%=f.label model_config.key%><br/>

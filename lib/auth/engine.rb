@@ -27,6 +27,7 @@ module Auth
     end
     
     config.to_prepare do
+      puts 'preparing'
       Auth.kick! unless Auth.defer_kickstart?
     end
   end

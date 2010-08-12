@@ -39,10 +39,6 @@ describe 'Behavior: Remember Me', :type => :controller do
   end
   
   before(:each) do
-#    User.destroy_all
-#    Password.destroy_all
-#    RemembranceToken.destroy_all
-#    
     u = User.new(:email => "generic12@example.com")
     u.password = u.password_confirmation = "Generic12"
     u.save!

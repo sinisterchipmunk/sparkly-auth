@@ -18,7 +18,7 @@ module Auth::Behavior::Core::ControllerExtensions
     end
   end
   
-  def store_location(url = request.request_uri)
+  def store_location(url = request.respond_to?(:fullpath) ? request.fullpath : request.request_uri)
     session[:destination] = url
   end
   
