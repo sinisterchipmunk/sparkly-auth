@@ -165,6 +165,10 @@ describe "Behavior: Core" do
              "must contain at least 1 uppercase, 1 lowercase and 1 number"
     error_on(Password, :secret, "ABCDEFG").should ==
              "must contain at least 1 uppercase, 1 lowercase and 1 number"
+    error_on(Password, :secret, "a2dfgha").should ==
+             "must contain at least 1 uppercase, 1 lowercase and 1 number"
+    error_on(Password, :secret, "A2BASDF").should ==
+             "must contain at least 1 uppercase, 1 lowercase and 1 number"
   end
   
   it 'should add has_many :passwords to User' do

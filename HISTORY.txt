@@ -1,3 +1,10 @@
+* 1.1.0 - 08-13-2010
+  * Official support for Rails 3 (tested against rails-3.0.0.rc)
+  * Better internal design
+  * Minor bugfixes
+  * Better support for per-model configuration
+  * Improved API for custom behaviors
+
 * 1.0.1 - 08-09-2010
   * Added /[user]/login and /[user]/logout to routes ([user]_login_path and [user]_logout_path, respectively)
 

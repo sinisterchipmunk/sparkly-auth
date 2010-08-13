@@ -281,7 +281,7 @@ module Auth
     alias_method_chain :behaviors=, :conversion_to_array
     
     def initialize
-      @password_format = /(^(?=.*\d)(?=.*[a-zA-Z]).{7,}$)/
+      @password_format = /(?=[-_a-zA-Z0-9]*?[A-Z])(?=[-_a-zA-Z0-9]*?[a-z])(?=[-_a-zA-Z0-9]*?[0-9])[-_a-zA-Z0-9]{7,}/
       @password_format_message = "must contain at least 1 uppercase, 1 lowercase and 1 number"
       @minimum_password_length = 7
       @path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
