@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "sparkly-auth"
     gem.summary = %Q{User authentication with Sparkles!}
-    gem.description = %Q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
+    gem.description = %Q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own, totally supporting Rails 2 AND 3.}
     gem.email = "sinisterchipmunk@gmail.com"
     gem.homepage = "http://www.thoughtsincomputation.com"
     gem.authors = ["Colin MacKenzie IV"]

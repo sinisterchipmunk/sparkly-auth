@@ -66,3 +66,8 @@ module Auth
     alias_method :kick!, :configure!
   end
 end
+
+if defined?(Rails) && Rails::VERSION::MAJOR == 3
+  # Rails 3 doesn't load rails/init.rb first, so we need to do that ourselves.
+  require File.join(File.dirname(__FILE__), "../rails/init")
+end

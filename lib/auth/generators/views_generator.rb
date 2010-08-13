@@ -12,11 +12,20 @@ class Auth::Generators::ViewsGenerator < Rails::Generator::NamedBase
       m.directory resource_directory = File.join("app/views", model.accounts_controller.underscore)
       m.directory sessions_directory = File.join("app/views", model.sessions_controller.underscore)
       
-      %w(edit new show).each do |f|
-        m.file "views/sparkly_accounts/#{f}.html.erb", File.join(resource_directory, "#{f}.html.erb")
-      end
+      resource_directory = File.join("app/views", model.accounts_controller.underscore)
+      sessions_directory = File.join("app/views", model.sessions_controller.underscore)
       
-      m.file "views/sparkly_sessions/new.html.erb", File.join(sessions_directory, "new.html.erb")
+      base = File.join(source_root, "views/sparkly_accounts")
+      Dir[File.join(base, "**/*")].each do |fi|
+        fi.gsub!(/^#{Regexp::escape base}/, '')
+        m.file(File.join("views/sparkly_accounts", fi), File.join(resource_directory, fi))
+      end
+
+      base = File.join(source_root, "views/sparkly_sessions")
+      Dir[File.join(base, "**/*")].each do |fi|
+        fi.gsub!(/^#{Regexp::escape base}/, '')
+        m.file(File.join("views/sparkly_sessions", fi), File.join(sessions_directory, fi))
+      end
     end
   end
   

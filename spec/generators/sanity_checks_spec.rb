@@ -35,11 +35,17 @@ describe :sparkly do
     end
     
     with_args 'views', '-q' do
-      it_should_generate_and_match('app/views/sparkly_accounts/edit.html.erb')
-      it_should_generate_and_match('app/views/sparkly_accounts/new.html.erb')
-      it_should_generate_and_match('app/views/sparkly_accounts/show.html.erb')
-      
-      it_should_generate_and_match('app/views/sparkly_sessions/new.html.erb')
+      base = File.join(Auth.path, "../")
+      Dir[File.join(base, "app/views/**/*")].each do |fi|
+        if File.file?(fi)
+          it_should_generate_and_match(fi.gsub(/^#{Regexp::escape base}/, ''))
+        end
+      end
+#      it_should_generate_and_match('app/views/sparkly_accounts/edit.html.erb')
+#      it_should_generate_and_match('app/views/sparkly_accounts/new.html.erb')
+#      it_should_generate_and_match('app/views/sparkly_accounts/show.html.erb')
+#      
+#      it_should_generate_and_match('app/views/sparkly_sessions/new.html.erb')
     end
 
     with_args 'controllers', '-q' do

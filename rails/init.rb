@@ -1,4 +1,4 @@
-if Rails::VERSION::MAJOR < 2
+if Rails::VERSION::STRING < "2.3.5"
   raise "Sparkly auth requires Rails version 2.3.5 or higher"
 elsif Rails::VERSION::MAJOR == 2
   require File.join(File.dirname(__FILE__), "init_rails2")

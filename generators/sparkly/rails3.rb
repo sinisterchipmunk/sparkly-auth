@@ -64,12 +64,18 @@ class SparklyGenerator < Rails::Generators::NamedBase
       @model = model
       resource_directory = File.join("app/views", model.accounts_controller.underscore)
       sessions_directory = File.join("app/views", model.sessions_controller.underscore)
-        
-      %w(edit new show).each do |f|
-        copy_file "views/sparkly_accounts/#{f}.html.erb", File.join(resource_directory, "#{f}.html.erb")
+      
+      base = File.join(self.class.source_root, "views/sparkly_accounts")
+      Dir[File.join(base, "**/*")].each do |fi|
+        fi.gsub!(/^#{Regexp::escape base}/, '')
+        copy_file(File.join("views/sparkly_accounts", fi), File.join(resource_directory, fi))
       end
-        
-      copy_file "views/sparkly_sessions/new.html.erb", File.join(sessions_directory, "new.html.erb")
+
+      base = File.join(self.class.source_root, "views/sparkly_sessions")
+      Dir[File.join(base, "**/*")].each do |fi|
+        fi.gsub!(/^#{Regexp::escape base}/, '')
+        copy_file(File.join("views/sparkly_sessions", fi), File.join(sessions_directory, fi))
+      end
     end
   end
   
@@ -80,52 +86,4 @@ class SparklyGenerator < Rails::Generators::NamedBase
   def each_model(&block)
     models.each &block
   end
-  
-=begin
-  def controllers(m)
-    spawn_model_generator(m, Auth::Generators::ControllersGenerator)
-  end
-  
-  def routes(m)
-    spawn_model_generator(m, Auth::Generators::RouteGenerator)
-  end
-  
-  def views(m)
-    spawn_model_generator(m, Auth::Generators::ViewsGenerator)
-  end
-  
-  def migrations(m)
-  end
-  
-  def config(m)
-    spawn_generator(m, Auth::Generators::ConfigurationGenerator, [])
-  end
-  
-  def spawn_model_generator(manifest, type)
-    each_model do |model|
-      spawn_generator(manifest, type, model)
-    end
-  end
-  
-  def spawn_generator(manifest, type, args)
-    generator = type.new(args, spawned_generator_options)
-    generator.manifest.replay(manifest)
-  end
-  
-  def each_model(&block)
-    Auth.configuration.authenticated_models.each &block
-  end
-  
-  def nameless_type?
-    nameless_types.include? @type
-  end
-  
-  def nameless_types
-    %w(migrations config help views controllers)
-  end
-  
-  def spawned_generator_options
-    options.merge(:source => File.join(source_root), :destination => destination_root)
-  end
-=end
 end

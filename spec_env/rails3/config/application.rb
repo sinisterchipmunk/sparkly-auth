@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 # set up the Sparkly pseudo-gem environment
-require File.expand_path(File.join(File.dirname(__FILE__), '../../../rails/init'))
+require File.expand_path(File.join(File.dirname(__FILE__), '../../../lib/auth'))
 
 module Rails3
   class Application < Rails::Application

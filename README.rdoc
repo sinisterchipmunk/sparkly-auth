@@ -58,6 +58,8 @@ In Rails 3, add "sparkly-auth" to your Gemfile:
   
 == setting up
 
+(In the examples below, replace 'script/generate' with 'rails generate' if you're using Rails 3.)
+
 For a step-by-step guide, run
 
   script/generate sparkly help

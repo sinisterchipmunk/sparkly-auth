@@ -21,7 +21,7 @@ ActionController::Base.view_paths << File.join(base_path, 'app/views')
 # Routes
 ActionController::Routing::Routes.add_configuration_file(File.join(base_path, "rails/routes.rb"))
 
-Rails.configuration.gem "sc-core-ext", :version => ">= 1.2.0"
+Rails.configuration.gem "sc-core-ext", :version => ">= 1.2.1"
 require File.expand_path(File.join(File.dirname(__FILE__), "../lib/auth"))
 
 

@@ -1,1 +1,1 @@
-require File.join(File.dirname(__FILE__), '../../../../../../../generators/sparkly/sparkly_generator')
+require File.expand_path(File.join(File.dirname(__FILE__), '../../../../../../../generators/sparkly/sparkly_generator'))
