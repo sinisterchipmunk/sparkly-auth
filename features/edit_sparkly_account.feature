@@ -40,7 +40,7 @@ Feature: Edit sparkly account
       And I fill in "password confirmation" with "Generic14"
       And I press "Update Profile"
     Then I should not see "Your changes have been saved."
-      And I should see "prohibited this user from being saved"
+      And I should see "Password doesn't match confirmation"
       # can't remember the exact error message but whatever - if other tests pass, then this should be fine.
 
   Scenario: Change email and password

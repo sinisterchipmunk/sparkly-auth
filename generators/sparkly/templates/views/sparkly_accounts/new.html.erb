@@ -1,24 +1,5 @@
-<%form_for model, :url => model_path do |f|%>
-  <p>
-    <%=f.error_messages%>
-  </p>
-  
-  <p>
-    <%=f.label model_config.key%><br/>
-    <%=f.text_field model_config.key%>
-  </p>
-  
-  <p>
-    <%=f.label :password%><br/>
-    <%=f.password_field :password, :value => ''%>
-  </p>
-  
-  <p>
-    <%=f.label :password_confirmation%><br/>
-    <%=f.password_field :password_confirmation, :value => ''%>
-  </p>
-  
-  <p>
-    <%=f.submit "Sign up"%>
-  </p>
+<%if Rails::VERSION::MAJOR == 2%>
+  <%=render :partial => 'rails2_form'%>
+<%else%>
+  <%=render :partial => 'rails3_form'%>
 <%end%>

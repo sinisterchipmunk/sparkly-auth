@@ -18,8 +18,6 @@ describe :sparkly do
     Auth.kick!
   end
   
-  it "should verify that no files are generated that are missing from code base, or vice versa." # tbi
-  
   context "sanity checks" do
     with_args "config", '-q' do
       # configs can vary widely but the test here is to verify that the default generated config matches

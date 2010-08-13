@@ -5,7 +5,7 @@ Rails3::Application.configure do
   # test suite.  You never need to work with it otherwise.  Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs.  Don't rely on the data there!
-  config.cache_classes = false
+  config.cache_classes = true
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -35,7 +35,9 @@ Rails3::Application.configure do
 
   # Add all builtin behaviors. Since we can't reload in cucumber, we have to test other configs using rspec and only test
   # overall function in Cuke. We use #to_prepare because Auth doesn't exist yet.
-  config.to_prepare do
+  config.after_initialize do
     Auth.configuration.behaviors = :core, :remember_me
+    # this is because Auth kicks itself before this block can fire. It is safe to kick twice thanks to behavior tracking.
+    Auth.kick!
   end
 end

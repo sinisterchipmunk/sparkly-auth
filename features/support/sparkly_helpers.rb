@@ -9,10 +9,10 @@
 #end
 
 def logged_in?
-  if (respond_to?(:response) && response rescue false) # Rails3/RSpec2 raises 'No response yet. Request a page first.'
-    (!!response.template.controller.current_user)
-  elsif respond_to?(:controller) && controller
+  if respond_to?(:controller) && controller
     (!!controller.current_user)
+#  elsif (respond_to?(:response) && response rescue false) # Rails3/RSpec2 raises 'No response yet. Request a page first.'
+#    (!!response.template.controller.current_user)
   else
     !!(session[:session_token] && session[:active_at] rescue false) # can raise NoMethodError if there's no request
   end
@@ -22,10 +22,18 @@ def current_user
   controller.send(:current_user)
 end
 
+def cookie(name)
+  cookies[name]
+#  if response && response.respond_to?(:template)
+#    response.template.controller.send(:cookies)[:remembrance_token].should_not be_blank
+#  else
+#    
+end
+
 # no idea why I need this
 module RedirectWTF
   def handle_redirect!
-    while response.body =~ /You are being .*?redirected/
+    while redirect? || response.body =~ /You are being .*?redirected/
       follow_redirect!
     end
   end  

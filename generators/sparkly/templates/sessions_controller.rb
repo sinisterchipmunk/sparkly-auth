@@ -1,4 +1,6 @@
 class <%=(@model || model).sessions_controller.camelize%>Controller < SparklyController
+  require_logout_for :new, :create
+  
   # GET new_model_session_url
   def new
   end

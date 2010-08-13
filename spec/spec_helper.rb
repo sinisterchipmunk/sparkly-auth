@@ -1,12 +1,13 @@
-ENV['RAILS_ENV'] = 'test'
 ENV['DEFER_SPARKLY'] = 'true'  # Sparkly will infer Auth.defer_kickstart from env
 ENV['AUTH_BACKTRACE'] = 'true' # Sparkly will dump backtrace if NameError encountered during init
 
 if defined?(RSpec)
+  ENV['RAILS_ENV'] = 'spec'
   RSPEC_VERSION = 2
   require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails3/config/boot"))
   require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails3/config/environment"))
 else
+  ENV['RAILS_ENV'] = 'test'
   RSPEC_VERSION = 1
   #require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails2/config/boot"))
   require File.expand_path(File.join(File.dirname(__FILE__), "../spec_env/rails2/config/environment"))

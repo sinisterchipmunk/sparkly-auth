@@ -6,7 +6,7 @@ end
 
 describe 'Behavior: Remember Me', :type => :controller do
   if Rails::VERSION::MAJOR == 2
-    controller_name 'sparkly_sessions' # just to shut rspec up about the missing ctrlr name
+    # nothing, because we overrode self.controller_class
   elsif Rails::VERSION::MAJOR == 3
     include RSpec::Rails::ControllerExampleGroup
   end
@@ -44,24 +44,41 @@ describe 'Behavior: Remember Me', :type => :controller do
     u.save!
   end
   
-  it "should log in successfully..." do
-    post :create, { :model => "User", :user => { :email => "generic12@example.com", :password => "Generic12", :remember_me => true } }
-    subject.current_user.should_not be_nil
-  end
-  
-  it "should set an auth token cookie upon successful login" do
-    post :create, { :model => "User", :user => { :email => "generic12@example.com", :password => "Generic12", :remember_me => true } }
+  context "login" do
+    context "with remember_me disabled" do
+      before(:each) do
+        post :create, { :model => "User", :user => { :email => "generic12@example.com", :password => "Generic12", :remember_me => false } }
+      end
+
+      it("should log in successfully") { subject.current_user.should_not be_nil }
+
+      it "should not set a remembrance token cookie" do
+        session[:session_token].should_not be_blank
+        RemembranceToken.count.should == 0
+        cookies[:remembrance_token].should be_blank
+      end
+    end
     
-    session[:session_token].should_not be_blank
+    context "with remember_me enabled" do
+      before(:each) do
+        post :create, { :model => "User", :user => { :email => "generic12@example.com", :password => "Generic12", :remember_me => true } }
+      end
+
+      it("should log in successfully") { subject.current_user.should_not be_nil }
+
+      it "should set a remembrance token cookie" do
+        session[:session_token].should_not be_blank
     
-    # There should be a token in the remebered_tokens table. We can use that data to decide
-    # what should be in the cookie.
-    RemembranceToken.count.should == 1
+        # There should be a token in the remebered_tokens table. We can use that data to decide
+        # what should be in the cookie.
+        RemembranceToken.count.should == 1
     
-    # We're looking for a string containing password model ID, series token, and auth token.
-    token = RemembranceToken.first
+        # We're looking for a string containing password model ID, series token, and auth token.
+        token = RemembranceToken.first
     
-    cookies[:remembrance_token].should == token.value
+        cookies[:remembrance_token].should == token.value
+      end
+    end
   end
   
   context "a user with a remember token" do

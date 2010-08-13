@@ -1,5 +1,5 @@
 require 'rails'
-gem "sc-core-ext", :require_as => ["sc-core-ext", "sc-core-ext"]
+require 'sc-core-ext'
 require File.expand_path(File.join(File.dirname(__FILE__), '../auth'))
 
 module Auth
@@ -27,7 +27,6 @@ module Auth
     end
     
     config.to_prepare do
-      puts 'preparing'
       Auth.kick! unless Auth.defer_kickstart?
     end
   end

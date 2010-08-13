@@ -13,22 +13,27 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
+  handle_redirect!
 end
 
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
+  handle_redirect!
 end
 
 When /^(?:|I )press "([^\"]*)"$/ do |button|
   click_button(button)
+  handle_redirect!
 end
 
 When /^(?:|I )follow "([^\"]*)"$/ do |link|
   click_link(link)
+  handle_redirect!
 end
 
 When /^(?:|I )follow "([^\"]*)" within "([^\"]*)"$/ do |link, parent|
   click_link_within(parent, link)
+  handle_redirect!
 end
 
 When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
@@ -140,7 +145,7 @@ When /^(?:|I )attach the file "([^\"]*)" to "([^\"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^\"]*)"$/ do |text|
-  follow_redirect! if redirect?
+  handle_redirect!
   if defined?(Spec::Rails::Matchers)
     response.should contain(text)
   else
@@ -149,7 +154,7 @@ Then /^(?:|I )should see "([^\"]*)"$/ do |text|
 end
 
 Then /^(?:|I )should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
-  follow_redirect! if redirect?
+  handle_redirect!
   within(selector) do |content|
     if defined?(Spec::Rails::Matchers)
       content.should contain(text)
@@ -161,7 +166,7 @@ Then /^(?:|I )should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
-  follow_redirect! if redirect?
+  handle_redirect!
   regexp = Regexp.new(regexp)
   if defined?(Spec::Rails::Matchers)
     response.should contain(regexp)
@@ -171,7 +176,7 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
-  follow_redirect! if redirect?
+  handle_redirect!
   within(selector) do |content|
     regexp = Regexp.new(regexp)
     if defined?(Spec::Rails::Matchers)
@@ -183,7 +188,7 @@ Then /^(?:|I )should see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
 end
 
 Then /^(?:|I )should not see "([^\"]*)"$/ do |text|
-  follow_redirect! if redirect?
+  handle_redirect!
   if defined?(Spec::Rails::Matchers)
     response.should_not contain(text)
   else
@@ -192,7 +197,7 @@ Then /^(?:|I )should not see "([^\"]*)"$/ do |text|
 end
 
 Then /^(?:|I )should not see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
-  follow_redirect! if redirect?
+  handle_redirect!
   within(selector) do |content|
     if defined?(Spec::Rails::Matchers)
       content.should_not contain(text)
@@ -204,7 +209,7 @@ Then /^(?:|I )should not see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
 end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
-  follow_redirect! if redirect?
+  handle_redirect!
   regexp = Regexp.new(regexp)
   if defined?(Spec::Rails::Matchers)
     response.should_not contain(regexp)
@@ -214,7 +219,7 @@ Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
 end
 
 Then /^(?:|I )should not see \/([^\/]*)\/ within "([^\"]*)"$/ do |regexp, selector|
-  follow_redirect! if redirect?
+  handle_redirect!
   within(selector) do |content|
     regexp = Regexp.new(regexp)
     if defined?(Spec::Rails::Matchers)
@@ -258,6 +263,7 @@ Then /^the "([^\"]*)" checkbox should not be checked$/ do |label|
 end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
+  handle_redirect!
   if defined?(Spec::Rails::Matchers)
     URI.parse(current_url).path.should == path_to(page_name)
   else
