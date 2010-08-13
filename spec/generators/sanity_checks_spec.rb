@@ -7,7 +7,7 @@ describe :sparkly do
   def self.it_should_generate_and_match(to_gen, existing = to_gen)
     it "should generate #{to_gen} which matches #{existing}" do
       existing = File.join(File.dirname(__FILE__), '../../', existing)
-      subject.should generate(to_gen) { |content| content.strip.should == File.read(existing).strip }
+      subject.should generate(to_gen) { |content| File.read(existing).strip.should == content.strip }
     end
   end
   

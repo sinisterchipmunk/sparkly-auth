@@ -7,8 +7,8 @@ class SparklySessionsController < SparklyController
 
   # POST model_session_url
   def create
-    if session[:locked_out_at] && session[:locked_out_at] > Auth.account_lock_duration.ago
-      flash[:error] = Auth.account_locked_message
+    if session[:locked_out_at] && session[:locked_out_at] > sparkly_config.account_lock_duration.ago
+      flash[:error] = sparkly_config.account_locked_message
       render :action => 'new'
       return
     end
@@ -18,14 +18,14 @@ class SparklySessionsController < SparklyController
     
     if model && model.password_matches?(model_params[:password])
       login! model, :remember => remember_me?
-      redirect_back_or_default Auth.default_destination, Auth.login_successful_message
+      redirect_back_or_default sparkly_config.default_destination, sparkly_config.login_successful_message
     else
       session[:login_failures] = session[:login_failures].to_i + 1
-      if Auth.max_login_failures && session[:login_failures] >= Auth.max_login_failures
+      if sparkly_config.max_login_failures && session[:login_failures] >= sparkly_config.max_login_failures
         session[:locked_out_at] = Time.now
-        flash[:error] = Auth.account_locked_message
+        flash[:error] = sparkly_config.account_locked_message
       else
-        flash[:error] = Auth.invalid_credentials_message
+        flash[:error] = sparkly_config.invalid_credentials_message
       end
       render :action => "new"
     end
@@ -34,7 +34,7 @@ class SparklySessionsController < SparklyController
   # DELETE model_session_url
   def destroy
     logout!(:forget => true)
-    redirect_back_or_default Auth.default_destination, Auth.logout_message
+    redirect_back_or_default sparkly_config.default_destination, sparkly_config.logout_message
   end
   
   private

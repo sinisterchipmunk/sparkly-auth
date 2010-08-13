@@ -43,8 +43,8 @@ module Auth::Behavior::Core::AuthenticatedModelMethods
   
   def after_save
     @new_password = nil
-    # clear out old passwords so we're conforming to Auth.password_history_length
-    while passwords.length > Auth.password_history_length
+    # clear out old passwords so we're conforming to sparkly_config.password_history_length
+    while passwords.length > sparkly_config.password_history_length
       passwords.shift.destroy
     end
   end

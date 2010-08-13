@@ -8,8 +8,8 @@ class <%=(@model || model).accounts_controller.camelize%>Controller < SparklyCon
   # POST model_url
   def create
     if model.save
-      login!(model) if Auth.login_after_signup
-      redirect_back_or_default Auth.default_destination, Auth.account_created_message
+      login!(model) if sparkly_config.login_after_signup
+      redirect_back_or_default sparkly_config.default_destination, sparkly_config.account_created_message
     else
       render :action => 'new'
     end
@@ -31,7 +31,7 @@ class <%=(@model || model).accounts_controller.camelize%>Controller < SparklyCon
     end
     
     if model.save
-      redirect_back_or_default user_path, Auth.account_updated_message
+      redirect_back_or_default user_path, sparkly_config.account_updated_message
     else
       render :action => 'edit'
     end
@@ -42,8 +42,8 @@ class <%=(@model || model).accounts_controller.camelize%>Controller < SparklyCon
     current_user && current_user.destroy
     logout!
     @current_user = nil
-    flash[:notice] = Auth.account_deleted_message
-    redirect_back_or_default Auth.default_destination
+    flash[:notice] = sparkly_config.account_deleted_message
+    redirect_back_or_default sparkly_config.default_destination
   end
 
   protected

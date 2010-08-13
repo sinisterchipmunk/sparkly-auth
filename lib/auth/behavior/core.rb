@@ -22,14 +22,15 @@ module Auth
       end
       
       def apply_to_password(password_model, user_model)
+        config = user_model.sparkly_config
         password_model.instance_eval do
           belongs_to :authenticatable, :polymorphic => true
           
-          validates_length_of :unencrypted_secret, :minimum => Auth.minimum_password_length,
-                              :message => "must be at least #{Auth.minimum_password_length} characters",
+          validates_length_of :unencrypted_secret, :minimum => config.minimum_password_length,
+                              :message => "must be at least #{config.minimum_password_length} characters",
                               :if => :secret_changed?
-          validates_format_of :unencrypted_secret, :with => Auth.password_format, :allow_blank => true,
-                       :message => Auth.password_format_message,
+          validates_format_of :unencrypted_secret, :with => config.password_format, :allow_blank => true,
+                       :message => config.password_format_message,
                        :if => :secret_changed?
                                           
           validates_presence_of :secret
@@ -74,14 +75,14 @@ module Auth
 
             # the various salts make it impossible to do this:
             #   validates_uniqueness_of :secret, :scope => [ :authenticatable_type, :authenticatable_id ],
-            #                           :message => Auth.password_uniqueness_message
+            #                           :message => config.password_uniqueness_message
             # so we have to do it programmatically.
             if account.password_changed?
               secret = account.password_model.unencrypted_secret
               account.passwords.each do |password|
                 unless password.new_record? # unless it's the one we're creating
                   if password.matches?(secret)
-                    account.errors.add(:password, Auth.password_uniqueness_message)
+                    account.errors.add(:password, sparkly_config.password_uniqueness_message)
                   end
                 end
               end

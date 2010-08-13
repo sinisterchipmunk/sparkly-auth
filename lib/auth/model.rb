@@ -18,13 +18,13 @@ class Auth::Model
   def method_missing(name, *args, &block) #:nodoc:
     option_name, assignment = (name.to_s.gsub(/\=$/, '')), $~ # lose the equals sign, and remember if it existed
 
-    if options.keys.select { |key| key.to_s == option_name }.empty?
+    if (_options = options).keys.select { |key| key.to_s == option_name }.empty?
       super
     else
       if assignment
-        options[option_name.to_sym] = args.flatten
+        _options[option_name.to_sym] = args.flatten
       else
-        options[option_name.to_sym]
+        _options[option_name.to_sym]
       end
     end
   end
@@ -95,7 +95,7 @@ class Auth::Model
     @default_options ||= {
       :key => :email,
       :with => :password
-    }
+    }.merge(Auth.configuration.to_hash)
   end
   
   def default_options=(hash)

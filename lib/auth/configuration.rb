@@ -6,9 +6,44 @@ module Auth
     # The array of Auth::Model instances which represent the models which will be authenticated.
     # See also #authenticate
     attr_accessor :authenticated_models
+    
+    include Auth::Configuration::Keys
 
     class << self
       include Auth::BehaviorLookup
+
+      def add_option_delegator_for(key)
+        define_method :"#{key}_with_option_delegation=" do |value|
+          res = send("#{key}_without_option_delegation=", value)
+          authenticated_models.each { |model| model.set_default_option(key, value) }
+          res
+        end
+
+        alias_method_chain :"#{key}=", :option_delegation
+      end
+      
+      def add_configuration_key_with_delegation(*keys)
+        keys = keys.flatten
+        eig = class << Auth; self; end
+        eig.instance_eval { delegate *[keys, {:to => :configuration}].flatten }
+        add_configuration_key_without_delegation(*keys)
+      end
+      
+      def attr_accessor_with_delegator(*keys)
+        result = attr_accessor_without_delegator(*keys)
+        keys.flatten.each { |key| add_option_delegator_for(key) }
+        result
+      end
+
+      def attr_writer_with_delegator(*keys)
+        result = attr_writer_without_delegator(*keys)
+        keys.flatten.each { |key| add_option_delegator_for(key) }
+        result
+      end
+      
+      alias_method_chain :add_configuration_key, :delegation
+      alias_method_chain :attr_writer,   :delegator
+      alias_method_chain :attr_accessor, :delegator
 
       def behavior_configs
         @behavior_configs ||= []
@@ -25,44 +60,6 @@ module Auth
         Auth.class.delegate accessor_name, :to => :configuration
       rescue NameError
         # Presumably, the behavior does not have a configuration.
-      end
-      
-      def configuration_keys
-        @configuration_keys ||= []
-      end
-      
-      def add_option_delegator_for(key)
-        define_method :"#{key}_with_option_delegation=" do |value|
-          res = send("#{key}_without_option_delegation=", value)
-          authenticated_models.each { |model| model.set_default_option(key, value) }
-          res
-        end
-
-        alias_method_chain :"#{key}=", :option_delegation
-      end
-      
-      def add_configuration_key(has_writer, *keys)
-        keys = keys.flatten
-        eig = class << Auth; self; end
-        eig.instance_eval { delegate *[keys, {:to => :configuration}].flatten }
-        configuration_keys.concat keys
-        result = block_given? ? yield : nil
-        if has_writer
-          keys.each { |key| add_option_delegator_for(key) }
-        end
-        result
-      end
-      
-      def attr_reader(*args) #:nodoc:
-        add_configuration_key(false, args) { super }
-      end
-      
-      def attr_writer(*args) #:nodoc:
-        add_configuration_key(true, args) { super }
-      end
-      
-      def attr_accessor(*args) #:nodoc:
-        add_configuration_key(true, args) { super }
       end
     end
     
@@ -332,13 +329,13 @@ module Auth
       end
     end
     
-    # Returns this configuration as a Hash
-    def to_hash
-      self.class.configuration_keys.inject({}) do |hash, key|
-        hash[key] = send(key)
+    def to_hash_with_subconfigs #:nodoc:
+      self.class.behavior_configs.inject(to_hash_without_subconfigs) do |hash, (accessor_name, constant_name)|
+        hash[accessor_name.to_sym] = send(accessor_name)
         hash
       end
     end
+    alias_method_chain :to_hash, :subconfigs
     
     # Accepts a list of model names (or the models themselves) and an optional set of options which
     # govern how the models will be authenticated.

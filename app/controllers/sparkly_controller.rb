@@ -1,6 +1,6 @@
 class SparklyController < (Auth.base_controller)
   helper_method :model_class, :model_instance, :model_name, :model, :model_path, :new_model_path, :edit_model_path,
-                :model_config, :model_session_path, :model_params
+                :model_config, :model_session_path, :model_params, :sparkly_config, :auth_config
   before_filter :find_user_model
 
   protected
@@ -35,12 +35,14 @@ class SparklyController < (Auth.base_controller)
     end
     
     def model_config
-      Auth.configuration.for_model(model_name)
+      model_class.sparkly_config
     end
   
     def model_params
       params[model_name.underscore] || {}
     end
   
-    alias_method :model, :model_instance  
+    alias_method :model, :model_instance
+    alias_method :auth_config, :model_config
+    alias_method :sparkly_config, :model_config
 end
