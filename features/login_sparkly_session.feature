@@ -1,4 +1,7 @@
 Feature: Login sparkly session
+  Background:
+    Given I create an account
+  
   Scenario: Valid credentials
     Given I am on the new user session page
     When I enter valid login credentials
@@ -21,7 +24,6 @@ Feature: Login sparkly session
     Then I should see "Account is locked due to too many invalid attempts"
     
   Scenario: Log in with remember box checked
-#    Given these behaviors: core, remember_me
     Given I am on the new user session page
     When I check "Remember me"
       And I enter valid login credentials
@@ -29,7 +31,6 @@ Feature: Login sparkly session
       And I should have a remembrance token
 
   Scenario: Log in with remember box unchecked
-#    Given these behaviors: core, remember_me
     Given I am on the new user session page
     When I uncheck "Remember me"
       And I enter valid login credentials

@@ -1,4 +1,6 @@
 class SparklySessionsController < SparklyController
+  require_logout_for :new, :create
+  
   # GET new_model_session_url
   def new
   end

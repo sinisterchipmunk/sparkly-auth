@@ -49,3 +49,194 @@ REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
 REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
 REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
 REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@asdf.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Ad12345", "password_confirmation"=>"Ad12345"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/edit with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/session/new with {} and HTTP headers {"HTTP_REFERER"=>"/user/session"}
+REQUESTING PAGE: POST /user/session with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic1"}, "commit"=>"Sign in"} and HTTP headers {"HTTP_REFERER"=>"/user/session/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user with {} and HTTP headers {}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}
+REQUESTING PAGE: GET /user/new with {} and HTTP headers {}
+REQUESTING PAGE: POST /user with {"_snowman"=>"\xE2\x98\x83", "user"=>{"email"=>"generic@example.com", "password"=>"Generic12", "password_confirmation"=>"Generic12"}, "commit"=>"Sign up"} and HTTP headers {"HTTP_REFERER"=>"/user/new"}

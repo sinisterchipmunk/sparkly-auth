@@ -1,0 +1,26 @@
+<%=form_for model, :url => model_path do |f|%>
+  <p>
+    <%model.errors.each do |error, message|%>
+      <%=error.to_s.titleize%> <%=message%>
+    <%end%>
+  </p>
+  
+  <p>
+    <%=f.label model_config.key%><br/>
+    <%=f.text_field model_config.key%>
+  </p>
+  
+  <p>
+    <%=f.label :password%><br/>
+    <%=f.password_field :password, :value => ''%>
+  </p>
+  
+  <p>
+    <%=f.label :password_confirmation%><br/>
+    <%=f.password_field :password_confirmation, :value => ''%>
+  </p>
+  
+  <p>
+    <%=f.submit(model.new_record? ? "Sign up" : "Update Profile")%>
+  </p>
+<%end%>

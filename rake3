@@ -1,0 +1,1 @@
+cd spec_env/rails3 && rake $*; cd ../..

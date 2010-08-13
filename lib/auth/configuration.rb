@@ -43,6 +43,8 @@ module Auth
       
       def add_configuration_key(has_writer, *keys)
         keys = keys.flatten
+        eig = class << Auth; self; end
+        eig.instance_eval { delegate *[keys, {:to => :configuration}].flatten }
         configuration_keys.concat keys
         result = block_given? ? yield : nil
         if has_writer
