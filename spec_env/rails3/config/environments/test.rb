@@ -32,4 +32,10 @@ Rails3::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Add all builtin behaviors. Since we can't reload in cucumber, we have to test other configs using rspec and only test
+  # overall function in Cuke. We use #to_prepare because Auth doesn't exist yet.
+  config.to_prepare do
+    Auth.configuration.behaviors = :core, :remember_me
+  end
 end
