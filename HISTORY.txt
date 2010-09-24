@@ -1,3 +1,7 @@
+* 1.1.1 - 09-24-2010
+  * Some minor refactoring
+  * Upgraded test environment from Rails 3.0.0.rc to Rails 3.0.0 and resolved some complications from that
+
 * 1.1.0 - 08-13-2010
   * Official support for Rails 3 (tested against rails-3.0.0.rc)
   * Better internal design

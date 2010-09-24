@@ -10,6 +10,28 @@ module Auth
              :password_history_length, :base_controller_name, :account_lock_duration,
              :password_format, :password_format_message, :minimum_password_length, :behaviors, :behavior_classes,
              :to => :configuration
+
+    def routing_proc
+      proc do
+        Auth.configuration.authenticated_models.each do |model|
+          catch :missing do
+            begin
+              model.name # if an error is going to occur due to missing model, it'll happen here.
+            rescue NameError
+              # we rescue silently because the user's already been warned (during startup).
+              throw :missing
+            end
+
+            resource model.name.underscore, :model => model.name,
+                     :controller => model.accounts_controller do
+              resource :session, :controller => model.sessions_controller, :model => model.name
+              match '/login', :to => "#{model.sessions_controller}#new", :as => "login"
+              match '/logout', :to => "#{model.sessions_controller}#destroy", :as => "logout"
+            end
+          end
+        end
+      end
+    end
     
     def configuration
       @configuration ||= Auth::Configuration.new

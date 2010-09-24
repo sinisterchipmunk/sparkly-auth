@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sparkly-auth}
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin MacKenzie IV"]
-  s.date = %q{2010-08-13}
-  s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own.}
+  s.date = %q{2010-09-24}
+  s.description = %q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own, totally supporting Rails 2 AND 3.}
   s.email = %q{sinisterchipmunk@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -182,7 +182,6 @@ Gem::Specification.new do |s|
      "spec_env/rails2/lib/tasks/cucumber.rake",
      "spec_env/rails2/lib/tasks/rspec.rake",
      "spec_env/rails2/lib/tasks/sparkly_migration.rb",
-     "spec_env/rails2/log/development.log",
      "spec_env/rails2/public/404.html",
      "spec_env/rails2/public/422.html",
      "spec_env/rails2/public/500.html",
@@ -256,7 +255,6 @@ Gem::Specification.new do |s|
      "spec_env/rails3/db/seeds.rb",
      "spec_env/rails3/doc/README_FOR_APP",
      "spec_env/rails3/doc/sparkly_authentication.txt",
-     "spec_env/rails3/features/support/env.rb",
      "spec_env/rails3/lib/sparkly/bootstrap.rb",
      "spec_env/rails3/lib/tasks/.gitkeep",
      "spec_env/rails3/lib/tasks/cucumber.rake",
@@ -373,7 +371,6 @@ Gem::Specification.new do |s|
      "spec_env/rails2/lib/tasks/sparkly_migration.rb",
      "spec_env/rails2/log",
      "spec_env/rails2/log/cucumber.log",
-     "spec_env/rails2/log/development.log",
      "spec_env/rails2/log/test.log",
      "spec_env/rails2/public",
      "spec_env/rails2/public/404.html",
@@ -452,6 +449,8 @@ Gem::Specification.new do |s|
      "spec_env/rails3/app/views/application/not_found.html.erb",
      "spec_env/rails3/app/views/layouts",
      "spec_env/rails3/app/views/layouts/application.html.erb",
+     "spec_env/rails3/autotest",
+     "spec_env/rails3/autotest/discover.rb",
      "spec_env/rails3/config",
      "spec_env/rails3/config/application.rb",
      "spec_env/rails3/config/boot.rb",
@@ -487,8 +486,11 @@ Gem::Specification.new do |s|
      "spec_env/rails3/doc/README_FOR_APP",
      "spec_env/rails3/doc/sparkly_authentication.txt",
      "spec_env/rails3/features",
+     "spec_env/rails3/features/step_definitions",
+     "spec_env/rails3/features/step_definitions/web_steps.rb",
      "spec_env/rails3/features/support",
      "spec_env/rails3/features/support/env.rb",
+     "spec_env/rails3/features/support/paths.rb",
      "spec_env/rails3/Gemfile",
      "spec_env/rails3/Gemfile.lock",
      "spec_env/rails3/lib",
@@ -523,8 +525,7 @@ Gem::Specification.new do |s|
      "spec_env/rails3/script/cucumber",
      "spec_env/rails3/script/rails",
      "spec_env/rails3/spec",
-     "spec_env/rails3/spec/controllers",
-     "spec_env/rails3/spec/helpers",
+     "spec_env/rails3/spec/spec_helper.rb",
      "spec_env/rails3/test",
      "spec_env/rails3/test/fixtures",
      "spec_env/rails3/test/fixtures/users.yml",

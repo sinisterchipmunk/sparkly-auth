@@ -1,19 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.0'
+gem 'sc-core-ext'
 
-group :test, :cucumber do
-#  gem 'capybara'
-  gem 'webrat'
-  gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'spork'
-  gem 'launchy'
-  gem 'genspec', '0.2.0.prerails3.2'
-  gem 'email_spec'
-  gem 'rspec-rails', '>= 2.0.0.beta.19'
-end
+gem "rspec-rails", ">= 2.0.0.beta.22"
+gem "webrat", ">= 0.7.2.beta.1"
+gem "database_cleaner"
+gem "cucumber-rails"
+gem "cucumber"
+gem "spork"
+gem "launchy"
+
+gem 'genspec', '0.2.0.prerails3.2'
+gem 'email_spec'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
