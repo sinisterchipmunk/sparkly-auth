@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Wed Dec 15 09:10:01 -0500 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>sparkly-auth</h1>
+<p>
+Rails authentication &#8212; with sparkles!
+</p>
+<h2>about the gem</h2>
+<p>
+After playing with a bunch of other auth gems out there, in the end I
+decided I had to roll my own. Unlike the others (and the reason I undertook
+this task), Sparkly <a href="../classes/Auth.html">Auth</a> errs on the
+side of security. By default, (that is, unless you go changing
+configuration options that water down its auth mechanisms), this gem
+produces a PCI/DSS- compliant authentication scheme which I&#8216;m now
+putting to work at my Real Job at Ingenico (<a
+href="http://www.ingenico.com">www.ingenico.com</a>). (We now have two
+Web-based payment applications depending on Sparkly <a
+href="../classes/Auth.html">Auth</a>.)
+</p>
+<p>
+There is an ongoing battle between security and convenience. They say you
+can pick one, but not both. While I&#8216;m not going to claim that Sparkly
+singlehandedly settles this dispute, I will say that Sparkly lets you
+choose between varying shades of gray, rather than choosing between black
+and white. Sparkly <a href="../classes/Auth.html">Auth</a> provides a
+plethora of configuration options to let you apply a more user-friendly
+authentication solution to your site, while making it crystal clear what
+the security tradeoff will be.
+</p>
+<p>
+Sparkly supports multiple user models, multiple controllers, and all that
+jazz &#8212; but doesn&#8216;t force it on you. A default value is provided
+for virtually every possible option, and the options are conveniently
+tucked away in the class documentation &#8212; there for you when you need
+it, but not breathing down your neck when you don&#8216;t.
+</p>
+<h3>what does security mean?</h3>
+<p>
+So that&#8216;s the high level overview. If you&#8216;ve read this far then
+maybe you&#8216;re wondering exactly what kind of authentication security
+Sparkly <a href="../classes/Auth.html">Auth</a> brings to the table. Well,
+here&#8216;s The List. Some other solutions out there cover portions of it;
+others cover other portions. But I&#8216;ve yet to find one (besides
+Sparkly) that does it all.
+</p>
+<p>
+One last disclaimer: all of this can be modified or disabled entirely. So
+don&#8216;t think that because it&#8216;s listed here, dependencies HAVE to
+use it. I&#8216;ve got a number of side apps written that use Sparkly but,
+for example, completely disable the password update policy.
+</p>
+<ul>
+<li>Enforces a strong password policy by default (7-digit uppercase, lowercase
+and numeric)
+
+</li>
+<li>Enforces a periodic password update (once every 30 days)
+
+</li>
+<li>Enforces a unique password (can&#8216;t match any of the previous 4
+passwords by default)
+
+</li>
+<li>Automatically signs the user out after 30 minutes of inactivity
+
+</li>
+<li>Provides secure single-access tokens for authentication without cookies
+(e.g. Web Service consumers)
+
+</li>
+<li>Locks an account for 30 minutes after 5 invalid login attempts
+
+</li>
+<li>Provides generators for controllers and views, so that you can add (or
+remove) layers quickly and painlessly &#8212; even on a per-model or
+per-controller basis, if your application uses more than one
+
+</li>
+<li>Allows you to change which parent controller has access to the logged-in
+user (defaults to ApplicationController)
+
+</li>
+<li>Behaviors (including even the core behavior) are plug-and-play and can be
+easily swapped in/out, and custom behaviors can be added
+
+</li>
+<li>Encryption methods can be easily replaced
+
+</li>
+</ul>
+<p>
+Since my own personal use cases for Sparkly <a
+href="../classes/Auth.html">Auth</a> vary widely, so do its capabilities.
+Not only can the above be disabled, but it also sports (for example) a
+&quot;Remember Me&quot; checkbox that would otherwise circumvent some of
+the above precautions. Obviously, the checkbox is disabled by default.
+</p>
+<h2>installation</h2>
+<p>
+In Rails 2, add &quot;sparkly-auth&quot; to your gem dependencies:
+</p>
+<pre>
+  config.gem 'sparkly-auth'
+</pre>
+<p>
+In Rails 3, add &quot;sparkly-auth&quot; to your Gemfile:
+</p>
+<pre>
+  gem 'sparkly-auth'
+</pre>
+<h2>setting up</h2>
+<p>
+For a step-by-step guide, run
+</p>
+<pre>
+  script/generate sparkly help
+</pre>
+<p>
+Basically, the you have to run
+</p>
+<pre>
+  script/generate sparkly config
+  script/generate sparkly migrations
+</pre>
+<p>
+and optionally (if you plan to override the controllers and/or views),
+</p>
+<pre>
+  script/generate sparkly controllers
+  script/generate sparkly views
+</pre>
+<p>
+Assuming you have a User model (or that you&#8216;ve edited
+config/initializers/sparkly_authentication.rb to taste), you should be
+ready to go!
+</p>
+<p>
+You should take a quick gander at
+config/initializers/sparkly_authentication.rb just to see what&#8216;s in
+there.
+</p>
+<h2>routes</h2>
+<p>
+Unless you disable them, Sparkly <a href="../classes/Auth.html">Auth</a>
+will automatically generate a set of routes for its controllers. Run
+</p>
+<pre>
+  rake routes
+</pre>
+<p>
+and you should see something like this:
+</p>
+<pre>
+   new_user_session GET    /user/session/new(.:format)
+  edit_user_session GET    /user/session/edit(.:format)
+       user_session GET    /user/session(.:format)
+                    PUT    /user/session(.:format)
+                    DELETE /user/session(.:format)
+                    POST   /user/session(.:format)
+         user_login        /user/login
+        user_logout        /user/logout
+           new_user GET    /user/new(.:format)
+          edit_user GET    /user/edit(.:format)
+               user GET    /user(.:format)
+                    PUT    /user(.:format)
+                    DELETE /user(.:format)
+                    POST   /user(.:format)
+                           /:controller/:action/:id
+                           /:controller/:action/:id(.:format)
+</pre>
+<p>
+This assumes you&#8216;re authenticating against a single User model.
+Obviously, if you&#8216;re authenticating against a different model (or
+more than one), the routes will be changed to suit.
+</p>
+<h2>migration</h2>
+<p>
+I&#8216;m working on rake tasks that help you migrate from other
+authentication solutions to Sparkly <a
+href="../classes/Auth.html">Auth</a>, largely because I had to do so
+myself. So without further ado, here&#8216;s how you can do that:
+</p>
+<h3>Authlogic</h3>
+<p>
+After running the various Sparkly migrations, simply run:
+</p>
+<pre>
+  rake auth:migrate:authlogic
+</pre>
+<p>
+Done.
+</p>
+<p>
+If you&#8216;ve set up an Authlogic encryptor other than SHA512,
+you&#8216;ll want to use that encryptor for Sparkly. In this case,
+don&#8216;t disable Authlogic the dependency (but DO remove the various
+hooks from your code), and in your
+config/initializers/sparkly_authentication.rb file, add the following line:
+</p>
+<pre>
+  config.encryptor = Authlogic::CryptoProviders::Wordpress # or whatever.
+</pre>
+<p>
+That should be it (it was for me). If you have any troubles, drop me a line
+so I can update this documentation!
+</p>
+<h2>Note on Patches/Pull Requests</h2>
+<ul>
+<li>Fork the project.
+
+</li>
+<li>Make your feature addition or bug fix.
+
+</li>
+<li>Add tests for it. This is important so I don&#8216;t break it in a future
+version unintentionally.
+
+</li>
+<li>Commit, do not mess with rakefile, version, or history. (if you want to
+have your own version, that is fine but bump version in a commit by itself
+I can ignore when I pull)
+
+</li>
+<li>Send me a pull request. Bonus points for topic branches.
+
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+Copyright (c) 2010 Colin MacKenzie IV. See LICENSE for details.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

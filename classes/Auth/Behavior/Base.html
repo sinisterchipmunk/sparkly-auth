@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Auth::Behavior::Base</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Auth::Behavior::Base</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/auth/behavior/base_rb.html">
+                lib/auth/behavior/base.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000068">apply</a>&nbsp;&nbsp;
+      <a href="#M000069">apply_to</a>&nbsp;&nbsp;
+      <a href="#M000070">apply_to_controller</a>&nbsp;&nbsp;
+      <a href="#M000071">apply_to_password</a>&nbsp;&nbsp;
+      <a href="#M000072">apply_to_user</a>&nbsp;&nbsp;
+      <a href="#M000073">migration</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Base/Configuration.html" class="link">Auth::Behavior::Base::Configuration</a><br />
+
+    </div>
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">options</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+unloadable
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="#M000073" class="method-signature">
+          <span class="method-name">migration</span><span class="method-args">(filename)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Declares a <a href="Base.html#M000073">migration</a> template for a
+behavior. If sourcedir is given, it will be used as the location in which
+to find the template.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000073-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/auth/behavior/base.rb, line 63</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">migration</span>(<span class="ruby-identifier">filename</span>)
+      <span class="ruby-identifier">migrations</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filename</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">migrations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="#M000068" class="method-signature">
+          <span class="method-name">apply</span><span class="method-args">(model_config)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000068-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/auth/behavior/base.rb, line 8</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply</span>(<span class="ruby-identifier">model_config</span>)
+    <span class="ruby-identifier">track_behavior</span>(<span class="ruby-identifier">model</span> = <span class="ruby-identifier">model_config</span>.<span class="ruby-identifier">target</span>) <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">apply_to_user</span>(<span class="ruby-identifier">model</span>)
+      <span class="ruby-identifier">apply_to_password</span>(<span class="ruby-constant">Password</span>, <span class="ruby-identifier">model</span>)
+      <span class="ruby-identifier">apply_to_controller</span>(<span class="ruby-constant">Auth</span>.<span class="ruby-identifier">base_controller</span>, <span class="ruby-identifier">model</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <span class="method-name">apply_to</span><span class="method-args">(model_config)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Base.html#M000068">apply</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="#M000070" class="method-signature">
+          <span class="method-name">apply_to_controller</span><span class="method-args">(base_controller, user_model)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000070-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/auth/behavior/base.rb, line 18</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply_to_controller</span>(<span class="ruby-identifier">base_controller</span>, <span class="ruby-identifier">user_model</span>)
+    <span class="ruby-identifier">be_sure_to_override</span>(<span class="ruby-value str">&quot;apply_to_controller(base_controller, user_model)&quot;</span>)
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
+
+        <div class="method-heading">
+          <a href="#M000071" class="method-signature">
+          <span class="method-name">apply_to_password</span><span class="method-args">(password_model, user_model)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000071-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/auth/behavior/base.rb, line 22</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply_to_password</span>(<span class="ruby-identifier">password_model</span>, <span class="ruby-identifier">user_model</span>)
+    <span class="ruby-identifier">be_sure_to_override</span>(<span class="ruby-value str">&quot;apply_to_password(password_model, user_model)&quot;</span>)
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
+
+        <div class="method-heading">
+          <a href="#M000072" class="method-signature">
+          <span class="method-name">apply_to_user</span><span class="method-args">(user_model)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000072-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/auth/behavior/base.rb, line 26</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply_to_user</span>(<span class="ruby-identifier">user_model</span>)
+    <span class="ruby-identifier">be_sure_to_override</span>(<span class="ruby-value str">&quot;apply_to_user(user_model)&quot;</span>)
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
