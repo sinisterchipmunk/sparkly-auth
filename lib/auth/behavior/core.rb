@@ -38,7 +38,6 @@ module Auth
           validates_presence_of :secret_confirmation, :if => :secret_changed?
           validates_presence_of :persistence_token
           validates_uniqueness_of :persistence_token, :if => :persistence_token_changed?
-          attr_protected :secret, :secret_confirmation
           include Auth::Behavior::Core::PasswordMethods
           
           validate do |password|
@@ -57,10 +56,10 @@ module Auth
         model_config.target.instance_eval do
           has_many :passwords, :dependent => :destroy, :as => :authenticatable, :autosave => true
           
-          attr_protected :password, :password_confirmation
           validates_presence_of sparkly_config.key
           validates_uniqueness_of sparkly_config.key
           validates_presence_of :password
+          attr_accessible sparkly_config.key, :password, :password_confirmation
   
           include Auth::Behavior::Core::AuthenticatedModelMethods
   

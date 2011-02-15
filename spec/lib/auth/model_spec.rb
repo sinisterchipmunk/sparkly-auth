@@ -8,7 +8,7 @@ describe Auth::Model do
       proc { subject }.should_not raise_error
     end
   end
-  
+
   context "with default options" do
     subject { Auth::Model.new(:user, :behaviors => [:core]) }
     
@@ -16,7 +16,7 @@ describe Auth::Model do
       reload!
       subject.apply_options!
     end
-    
+
     it "should validate presence of :email on User" do
       error_on(User, :email).should == "can't be blank"
     end

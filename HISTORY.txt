@@ -1,3 +1,8 @@
+* 1.2.0 - 02-15-2011
+  * Made the login key, password and password confirmation attr_accessible for mass assignment.
+    This has the side effect of making all other attributes attr_protected, which is more secure, but may
+    require you to explicitly declare some attributes as attr_accessible if you want to mass assign them.
+
 * 1.1.1 - 09-24-2010
   * Some minor refactoring
   * Upgraded test environment from Rails 3.0.0.rc to Rails 3.0.0 and resolved some complications from that

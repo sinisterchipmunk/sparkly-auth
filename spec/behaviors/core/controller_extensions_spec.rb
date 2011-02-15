@@ -23,27 +23,34 @@ describe Auth::Behavior::Core::ControllerExtensions do
     config.authenticate :user
     config.session_duration = nil
   end
-  
-  before(:each) do
-    unless User.count == 1
-      u = User.new(:email => "generic4@example.com")
-      u.password = u.password_confirmation = "Generic12"
-      u.save!
-    end
+
+  it "should not reject mass assignments" do
+    u = User.new(:email => "generic4@example.com", :password => "Admin01", :password_confirmation => "Admin01")
+    u.should be_valid
   end
-  
-  it "should let users authenticate with single access token" do
-    subject.params = { :single_access_token => User.first.single_access_token }
-    subject.current_user.should be_kind_of(User)
-  end
-  
-  it "should not raise nil errors when Auth.session_duration is nil" do
-    if subject.respond_to?(:session=) # Rails2
-      subject.session = { :session_token => User.first.persistence_token }
-    else                              # Rails3
-      request.session = { :session_token => User.first.persistence_token }
+
+  context "with a default generic user" do
+    before(:each) do
+      unless User.count == 1
+        u = User.new(:email => "generic4@example.com")
+        u.password = u.password_confirmation = "Generic12"
+        u.save!
+      end
     end
-    
-    subject.current_user.should be_kind_of(User)
+
+    it "should let users authenticate with single access token" do
+      subject.params = { :single_access_token => User.first.single_access_token }
+      subject.current_user.should be_kind_of(User)
+    end
+
+    it "should not raise nil errors when Auth.session_duration is nil" do
+      if subject.respond_to?(:session=) # Rails2
+        subject.session = { :session_token => User.first.persistence_token }
+      else                              # Rails3
+        request.session = { :session_token => User.first.persistence_token }
+      end
+
+      subject.current_user.should be_kind_of(User)
+    end
   end
 end

@@ -79,6 +79,15 @@ you should be ready to go!
 
 You should take a quick gander at config/initializers/sparkly_authentication.rb just to see what's in there.
 
+== mass assignments
+
+For added security, part of Sparkly's core behavior is to declare the login key (usually :email or :login),
+the :password and the :password_confirmation attributes on the authenticated model as +attr_accessible+. This
+allows you to mass assign those attributes, but disables mass assignment on any others. That means you'll have
+to explicitly call +attr_accessible+ on any additional attributes you wish to mass assign. For more information
+(and the reason Sparkly is doing this), see the excellent Railscast on the subject by Ryan Bates at
+http://media.railscasts.com/videos/026_hackers_love_mass_assignment.mov .
+
 == routes
 
 Unless you disable them, Sparkly Auth will automatically generate a set of routes for its controllers. Run
