@@ -3,8 +3,13 @@ ENV['RAILS_ENV'] = 'test'
 def add_load_path(path)
   path = File.expand_path(File.join("..", path), __FILE__)
   $LOAD_PATH.unshift path
-  ActiveSupport::Dependencies.load_paths.unshift path
-  ActiveSupport::Dependencies.load_once_paths.delete path
+  if ActiveSupport::Dependencies.respond_to?(:autoload_paths)
+    ActiveSupport::Dependencies.autoload_paths.unshift path
+    ActiveSupport::Dependencies.autoload_once_paths.delete path
+  else
+    ActiveSupport::Dependencies.load_paths.unshift path
+    ActiveSupport::Dependencies.load_once_paths.delete path
+  end
 end
 
 # Add mock paths to load paths
@@ -14,8 +19,13 @@ add_load_path "../app/models"
 add_load_path "../app/controllers"
 
 $LOAD_PATH.uniq!
-ActiveSupport::Dependencies.load_paths.uniq!
-ActiveSupport::Dependencies.load_once_paths.uniq!
+if ActiveSupport::Dependencies.respond_to?(:autoload_paths)
+  ActiveSupport::Dependencies.autoload_paths.uniq!
+  ActiveSupport::Dependencies.autoload_once_paths.uniq!
+else
+  ActiveSupport::Dependencies.load_paths.uniq!
+  ActiveSupport::Dependencies.load_once_paths.uniq!
+end
 
 undef add_load_path
 

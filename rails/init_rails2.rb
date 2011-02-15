@@ -3,12 +3,15 @@
 
 base_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 def add_to_load_path(path, load_once = false)
+  load_paths = ActiveSupport::Dependencies.respond_to?(:autoload_paths) ? ActiveSupport::Dependencies.autoload_paths : ActiveSupport::Dependencies.load_paths
+  load_once_paths = ActiveSupport::Dependencies.respond_to?(:autoload_once_paths) ? ActiveSupport::Dependencies.autoload_once_paths : ActiveSupport::Dependencies.load_once_paths
+
   $LOAD_PATH << path
-  ActiveSupport::Dependencies.load_paths << path
+  load_paths << path
   if load_once
-    ActiveSupport::Dependencies.load_once_paths << path
+    load_once_paths << path
   else
-    ActiveSupport::Dependencies.load_once_paths.delete path
+    load_once_paths.delete path
   end
 end
 
