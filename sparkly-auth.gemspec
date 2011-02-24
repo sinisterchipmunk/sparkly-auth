@@ -166,7 +166,6 @@ Gem::Specification.new do |s|
     "spec_env/rails2/config/initializers/sparkly_authentication.rb",
     "spec_env/rails2/config/locales/en.yml",
     "spec_env/rails2/config/routes.rb",
-    "spec_env/rails2/db/development.sqlite3",
     "spec_env/rails2/db/migrate/001_create_sparkly_passwords.rb",
     "spec_env/rails2/db/migrate/002_create_sparkly_remembered_tokens.rb",
     "spec_env/rails2/db/migrate/003_add_confirmed_to_sparkly_passwords.rb",
@@ -174,14 +173,12 @@ Gem::Specification.new do |s|
     "spec_env/rails2/db/migrate/20100609152058_add_email_to_users.rb",
     "spec_env/rails2/db/schema.rb",
     "spec_env/rails2/db/seeds.rb",
-    "spec_env/rails2/db/test.sqlite3",
     "spec_env/rails2/doc/README_FOR_APP",
     "spec_env/rails2/doc/sparkly_authentication.txt",
     "spec_env/rails2/features/support/env.rb",
     "spec_env/rails2/lib/tasks/cucumber.rake",
     "spec_env/rails2/lib/tasks/rspec.rake",
     "spec_env/rails2/lib/tasks/sparkly_migration.rb",
-    "spec_env/rails2/log/test.log",
     "spec_env/rails2/public/404.html",
     "spec_env/rails2/public/422.html",
     "spec_env/rails2/public/500.html",
@@ -279,8 +276,7 @@ Gem::Specification.new do |s|
     "spec_env/rails3/test/performance/browsing_test.rb",
     "spec_env/rails3/test/test_helper.rb",
     "spec_env/rails3/test/unit/user_test.rb",
-    "spec_env/rails3/vendor/plugins/.gitkeep",
-    "spec_env/rails3/webrat.log"
+    "spec_env/rails3/vendor/plugins/.gitkeep"
   ]
   s.homepage = %q{http://www.thoughtsincomputation.com}
   s.require_paths = ["lib"]
@@ -350,7 +346,6 @@ Gem::Specification.new do |s|
     "spec_env/rails2/config/initializers/sparkly_authentication.rb",
     "spec_env/rails2/config/locales/en.yml",
     "spec_env/rails2/config/routes.rb",
-    "spec_env/rails2/db/development.sqlite3",
     "spec_env/rails2/db/migrate/001_create_sparkly_passwords.rb",
     "spec_env/rails2/db/migrate/002_create_sparkly_remembered_tokens.rb",
     "spec_env/rails2/db/migrate/003_add_confirmed_to_sparkly_passwords.rb",
@@ -358,14 +353,12 @@ Gem::Specification.new do |s|
     "spec_env/rails2/db/migrate/20100609152058_add_email_to_users.rb",
     "spec_env/rails2/db/schema.rb",
     "spec_env/rails2/db/seeds.rb",
-    "spec_env/rails2/db/test.sqlite3",
     "spec_env/rails2/doc/README_FOR_APP",
     "spec_env/rails2/doc/sparkly_authentication.txt",
     "spec_env/rails2/features/support/env.rb",
     "spec_env/rails2/lib/tasks/cucumber.rake",
     "spec_env/rails2/lib/tasks/rspec.rake",
     "spec_env/rails2/lib/tasks/sparkly_migration.rb",
-    "spec_env/rails2/log/test.log",
     "spec_env/rails2/public/404.html",
     "spec_env/rails2/public/422.html",
     "spec_env/rails2/public/500.html",
@@ -430,21 +423,17 @@ Gem::Specification.new do |s|
     "spec_env/rails3/config/initializers/sparkly_authentication.rb",
     "spec_env/rails3/config/locales/en.yml",
     "spec_env/rails3/config/routes.rb",
-    "spec_env/rails3/db/development.sqlite3",
     "spec_env/rails3/db/migrate/001_create_sparkly_passwords.rb",
     "spec_env/rails3/db/migrate/002_create_sparkly_remembered_tokens.rb",
     "spec_env/rails3/db/migrate/20100810132843_create_users.rb",
     "spec_env/rails3/db/schema.rb",
     "spec_env/rails3/db/seeds.rb",
-    "spec_env/rails3/db/test.sqlite3",
     "spec_env/rails3/doc/README_FOR_APP",
     "spec_env/rails3/doc/sparkly_authentication.txt",
     "spec_env/rails3/features/support/env.rb",
     "spec_env/rails3/lib/sparkly/bootstrap.rb",
     "spec_env/rails3/lib/tasks/cucumber.rake",
     "spec_env/rails3/lib/tasks/sparkly_migration.rb",
-    "spec_env/rails3/log/development.log",
-    "spec_env/rails3/log/spec.log",
     "spec_env/rails3/public/404.html",
     "spec_env/rails3/public/422.html",
     "spec_env/rails3/public/500.html",
@@ -462,8 +451,7 @@ Gem::Specification.new do |s|
     "spec_env/rails3/test/fixtures/users.yml",
     "spec_env/rails3/test/performance/browsing_test.rb",
     "spec_env/rails3/test/test_helper.rb",
-    "spec_env/rails3/test/unit/user_test.rb",
-    "spec_env/rails3/webrat.log"
+    "spec_env/rails3/test/unit/user_test.rb"
   ]
 
   if s.respond_to? :specification_version then

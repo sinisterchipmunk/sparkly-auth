@@ -17,6 +17,8 @@ begin
     gem.add_development_dependency 'email_spec', '>= 0.6.2'
     # WHY does jeweler insist on using test/* files? THEY DON'T EXIST!
     gem.test_files = FileList['spec/**/*'] + FileList['spec_env/**/*'] + FileList['features/**/*']
+    gem.files -= (FileList['**/*.log'] + FileList['**/*.sqlite3'])
+    gem.test_files -= (FileList['**/*.log'] + FileList['**/*.sqlite3'])
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
