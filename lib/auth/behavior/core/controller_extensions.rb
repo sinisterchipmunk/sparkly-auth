@@ -6,6 +6,10 @@ module Auth::Behavior::Core::ControllerExtensions
       helper_method :new_session_path, :current_user
       hide_action :current_user, :find_current_session, :require_login, :require_logout, :login!, :logout!,
                   :redirect_back_or_default, :new_session_path, :store_location
+
+      # we'll still check, but only if single_access_token is omitted
+      # TODO see if this is safe, and if there's a smarter approach
+      skip_before_filter :verify_authenticity_token
     end
   end
   
@@ -15,6 +19,8 @@ module Auth::Behavior::Core::ControllerExtensions
       flash[:notice] = @session_timeout_message || Auth.login_required_message
       login_path = Auth.default_login_path ? send(Auth.default_login_path) : Auth.default_destination
       redirect_to login_path
+    else
+      verify_authenticity_token unless current_user && params[:single_access_token]
     end
   end
   
@@ -23,6 +29,7 @@ module Auth::Behavior::Core::ControllerExtensions
   end
   
   def require_logout
+    verify_authenticity_token
     redirect_back_or_default Auth.default_destination, Auth.logout_required_message if current_user
   end
   
