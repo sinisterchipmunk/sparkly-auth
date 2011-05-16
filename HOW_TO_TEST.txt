@@ -1,0 +1,19 @@
+RAILS 2
+1. Create a new RVM gemset for Rails2.
+2. gem install rails -v=2.3.9 && gem install sc-core-ext sqlite3
+3. gem install jeweler
+4. cd spec_env/rails2 && rake db:migrate && rake db:tes:prepare && cd ../..
+5. gem install rspec -v=1.3.2
+   gem install rspec-rails --version "= 1.3.2"
+   gem install webrat --version "= 0.7.1"
+   gem install genspec --version "= 0.1.1"
+   gem install email_spec --version "= 0.6.2"
+6. rake && cucumber
+
+RAILS 3
+
+1. Create a new RVM gemset for Rails3.
+2. cd spec_env/rails3 && bundle install && cd ../..
+3. gem install jeweler
+4. ./rake3 db:migrate && ./rake3 db:test:prepare
+5. rake && cucumber

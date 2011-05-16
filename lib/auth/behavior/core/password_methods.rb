@@ -18,6 +18,21 @@ module Auth::Behavior::Core::PasswordMethods
       alias_method_chain :secret_confirmation=, :encryption
     end
   end
+
+  def single_access_token
+    current = super
+    return current if current
+    if authenticatable
+      # authenticatable.passwords.last == self
+      if (previous = authenticatable.passwords[-1]) != self
+        if previous && previous.single_access_token
+          return self.single_access_token = previous.single_access_token
+        end
+      end
+    end
+    
+    nil
+  end
   
   def expired?
     authenticatable.password_expired?
