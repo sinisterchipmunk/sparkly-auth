@@ -1,34 +1,18 @@
-require 'rubygems'
-require 'rake'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "sparkly-auth"
-    gem.summary = %Q{User authentication with Sparkles!}
-    gem.description = %Q{As fate would have it, I found other authentication solutions unable to suit my needs. So I rolled my own, totally supporting Rails 2 AND 3.}
-    gem.email = "sinisterchipmunk@gmail.com"
-    gem.homepage = "http://www.thoughtsincomputation.com"
-    gem.authors = ["Colin MacKenzie IV"]
-    gem.add_dependency "sc-core-ext", ">= 1.2.1"
-    gem.add_development_dependency 'rspec-rails', '>= 1.3.2'
-    gem.add_development_dependency 'webrat', '>= 0.7.1'
-    gem.add_development_dependency 'genspec', '>= 0.1.1'
-    gem.add_development_dependency 'email_spec', '>= 0.6.2'
-    # WHY does jeweler insist on using test/* files? THEY DON'T EXIST!
-#    gem.test_files = FileList['spec/**/*'] + FileList['spec_env/**/*'] + FileList['features/**/*']
-    gem.files = `git ls-files`.split(/\n/)
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+if !ENV['BUNDLE_GEMFILE']
+  ENV['BUNDLE_GEMFILE'] = File.expand_path("Gemfile.rails3", File.dirname(__FILE__))
 end
+
+require 'rubygems'
+require 'bundler'
+require 'bundler/gem_tasks'
+Bundler.setup
 
 begin
   require 'spec/rake/spectask'
   Spec::Rake::SpecTask.new(:spec) do |spec|
     spec.libs << 'lib' << 'spec'
     spec.spec_files = FileList['spec/**/*_spec.rb']
+    spec.spec_opts << '--color'
   end
   
   Spec::Rake::SpecTask.new(:rcov) do |spec|
@@ -49,8 +33,6 @@ rescue LoadError
     spec.rcov_opts = %w{--rails --exclude osx\/objc,gems\/,spec\/,features\/}
   end
 end
-
-task :spec => :check_dependencies
 
 task :default => :spec
 

@@ -1,19 +1,29 @@
-RAILS 2
-1. Create a new RVM gemset for Rails2.
-2. gem install rails -v=2.3.9 && gem install sc-core-ext sqlite3
-3. gem install jeweler
-4. cd spec_env/rails2 && rake db:migrate && rake db:tes:prepare && cd ../..
-5. gem install rspec -v=1.3.2
-   gem install rspec-rails --version "= 1.3.2"
-   gem install webrat --version "= 0.7.1"
-   gem install genspec --version "= 0.1.1"
-   gem install email_spec --version "= 0.6.2"
-6. rake && cucumber
+There are 2 Gemfiles associated with this project:
 
-RAILS 3
+  Gemfile.rails2
+    pulls in all the gems needed to test in a Rails 2.x environment.
+    
+  Gemfile.rails3 
+    pulls in all the gems needed to test in a Rails 3.x environment.
+    
+You can switch between them with the BUNDLE_GEMFILE environment
+setting:
 
-1. Create a new RVM gemset for Rails3.
-2. cd spec_env/rails3 && bundle install && cd ../..
-3. gem install jeweler
-4. ./rake3 db:migrate && ./rake3 db:test:prepare
-5. rake && cucumber
+  export BUNDLE_GEMFILE=Gemfile.rails2
+  
+By default, if BUNDLE_GEMFILE isn't set when `rake` is invoked,
+the Rails 3 gemfile will be used. So you only need to set the
+BUNDLE_GEMFILE when you want to test Rails 2.
+
+NOTE that `bundle exec rake` only works if the environment variable
+is set, otherwise Bundler won't know which Gemfile to load.
+
+Note also that both Rails 2 and 3 will be tested in Travis:CI.
+
+Once you're testing against the proper Rails, just invoke the 
+Rakefile like so:
+
+  rake          # runs the specs and, if they're green, runs cucumber
+  rake spec     # runs the specs only
+  rake cucumber # runs cucumber only
+  

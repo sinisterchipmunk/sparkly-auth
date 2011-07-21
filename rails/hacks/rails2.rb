@@ -6,7 +6,9 @@ class ActiveRecord::Errors
     original_name, new_name = original_name.to_s, new_name.to_s
     return if original_name == new_name
     
-    @errors.each do |attribute, old_errors|
+    hash = @errors.to_hash.dup
+    
+    hash.each do |attribute, old_errors|
       if attribute.to_s == original_name
         original_name = attribute # because some are strings, some are symbols.
         

@@ -1,6 +1,8 @@
 # This file sets up the various include paths and whatnot that would have been set up
 # for us by Rails if this were a Rails plugin.
 
+require File.expand_path("../lib/auth", File.dirname(__FILE__))
+
 base_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 def add_to_load_path(path, load_once = false)
   load_paths = ActiveSupport::Dependencies.respond_to?(:autoload_paths) ? ActiveSupport::Dependencies.autoload_paths : ActiveSupport::Dependencies.load_paths
