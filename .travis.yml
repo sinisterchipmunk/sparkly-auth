@@ -10,9 +10,9 @@ rvm:
 script: rake
 
 # Define tasks to be completed before and after tests run. Will allow folding of content on frontend
-# before_script:
-# - command_1
-# - command_2
+before_script:
+- BUNDLE_GEMFILE=gemfiles/Gemfile.rails2 bundle install
+- BUNDLE_GEMFILE=gemfiles/Gemfile.rails3 bundle install
 
 # after_script:
 # - command_1
