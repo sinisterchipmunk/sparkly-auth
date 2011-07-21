@@ -5,10 +5,21 @@ require 'bundler/gem_tasks'
 # gemfiles, then we need to override the gemfile variable and run specs in a subprocess.
 BUNDLED = ENV['BUNDLE_GEMFILE'] && ENV['BUNDLE_GEMFILE'] =~ /\.rails([23])$/ && $1
 
-def rerun_in_each_environment!
+def run_in_each_environment(*args)
   %w(rails2 rails3).each do |env|
     ENV['BUNDLE_GEMFILE'] = File.expand_path("gemfiles/Gemfile.#{env}", File.dirname(__FILE__))
-    exit unless system('rake', *ARGV)
+    exit unless system(*args)
+  end
+end
+
+def rerun_in_each_environment!
+  run_in_each_environment 'rake', *ARGV
+end
+
+namespace :bundle do
+  desc "Runs `bundle install` with both Gemfiles"
+  task :install do
+    run_in_each_environment 'bundle', 'install'
   end
 end
 
