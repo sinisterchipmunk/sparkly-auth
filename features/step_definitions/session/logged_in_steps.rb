@@ -12,11 +12,11 @@ Given /^I am logged in as "([^"]*)"$/ do |email|
   end
   
   visit new_user_session_path
-  fill_in :email, :with => email
-  fill_in :password, :with => "Generic12"
+  fill_in 'Email', :with => email
+  fill_in 'Password', :with => "Generic12"
   click_button "Sign in"
-  handle_redirect!
-  response.should contain("Signed in successfully.")
+
+  page.should have_content("Signed in successfully.")
 end
 
 Given /^I am logged in and remembered$/ do
@@ -29,12 +29,12 @@ Given /^I am logged in and remembered as "([^"]*)"$/ do |email|
   end
   
   visit new_user_session_path
-  fill_in :email, :with => email
-  fill_in :password, :with => "Generic12"
+  fill_in 'Email', :with => email
+  fill_in 'Password', :with => "Generic12"
   check "Remember me"
   click_button "Sign in"
-  handle_redirect!
-  response.should contain("Signed in successfully.")
+
+  page.should have_content("Signed in successfully.")
 end
 
 Then /^I should be logged in$/ do

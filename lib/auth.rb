@@ -1,3 +1,5 @@
+require 'sc-core-ext'
+
 module Auth
   class << self
     public :delegate

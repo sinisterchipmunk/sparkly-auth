@@ -13,31 +13,31 @@ Feature: Edit sparkly account
   Scenario: Change email address
     Given I am logged in
       And I am on the edit user page
-    When I fill in "email" with "generic_new@example.com"
+    When I fill in "Email" with "generic_new@example.com"
       And I press "Update Profile"
     Then I should see "Your changes have been saved."
 
   Scenario: Change password
     Given I am logged in
       And I am on the edit user page
-    When I fill in "password" with "Generic13"
-      And I fill in "password confirmation" with "Generic13"
+    When I fill in "Password" with "Generic13"
+      And I fill in "Password confirmation" with "Generic13"
       And I press "Update Profile"
     Then I should see "Your changes have been saved."
     
   Scenario: Change password (already used)
     Given I am logged in
       And I am on the edit user page
-    When I fill in "password" with "Generic12"
-      And I fill in "password confirmation" with "Generic12"
+    When I fill in "Password" with "Generic12"
+      And I fill in "Password confirmation" with "Generic12"
       And I press "Update Profile"
     Then I should see "Password must not be the same as any of your recent passwords"
 
   Scenario: Change password (invalid)
     Given I am logged in
       And I am on the edit user page
-    When I fill in "password" with "Generic13"
-      And I fill in "password confirmation" with "Generic14"
+    When I fill in "Password" with "Generic13"
+      And I fill in "Password confirmation" with "Generic14"
       And I press "Update Profile"
     Then I should not see "Your changes have been saved."
       And I should see "Password doesn't match confirmation"
@@ -46,8 +46,8 @@ Feature: Edit sparkly account
   Scenario: Change email and password
     Given I am logged in
       And I am on the edit user page
-    When I fill in "password" with "Generic13"
-      And I fill in "password confirmation" with "Generic13"
+    When I fill in "Password" with "Generic13"
+      And I fill in "Password confirmation" with "Generic13"
       And I press "Update Profile"
     Then I should see "Your changes have been saved."
     

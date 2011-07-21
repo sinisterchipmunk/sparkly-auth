@@ -19,12 +19,17 @@ if Auth.generate_routes?
                           :controller => model.sessions_controller,
                           :action => 'new',
                           :requirements => { :model => model.name }
-
+          
           model_res.logout "logout",
                           :controller => model.sessions_controller,
                           :action => 'destroy',
                           :requirements => { :model => model.name }
         end
+        
+        map.send("login_#{model.name.underscore}", "#{model.name.underscore}/login", :controller => model.sessions_controller,
+                    :action => 'new', :requirements => { :model => model.name })
+        map.send("logout_#{model.name.underscore}", "#{model.name.underscore}/logout", :controller => model.sessions_controller,
+                    :action => 'destroy', :requirements => { :model => model.name })
       end
     end
   end

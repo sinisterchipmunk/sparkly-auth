@@ -1,0 +1,19 @@
+source "http://rubygems.org"
+
+# Specify your gem's dependencies in sparkly-auth.gemspec
+gemspec :path => File.expand_path("..", File.dirname(__FILE__))
+
+gem 'rails', '~> 3.0.0'
+gem 'sc-core-ext'
+
+gem "rspec-rails"
+gem "database_cleaner"
+gem "cucumber-rails", '1.0.2'
+gem "cucumber"
+# gem "spork"
+gem "launchy"
+
+gem 'genspec', "= 0.2.0.prerails3.2"
+gem 'email_spec', '1.2.1'
+
+gem 'sqlite3-ruby', :require => 'sqlite3'

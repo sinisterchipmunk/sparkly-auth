@@ -7,9 +7,7 @@ rvm:
   - 1.9.2
   
 # Define how to run the tests (defaults to `bundle exec rake` or `rake` depending on whether you have a `Gemfile`)
-script: |
-  BUNDLE_GEMFILE=Gemfile.rails2 bundle install && BUNDLE_GEMFILE=Gemfile.rails2 bundle exec rake && \
-  BUNDLE_GEMFILE=Gemfile.rails3 bundle install && BUNDLE_GEMFILE=Gemfile.rails3 bundle exec rake
+script: rake
 
 # Define tasks to be completed before and after tests run. Will allow folding of content on frontend
 # before_script:

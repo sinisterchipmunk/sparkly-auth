@@ -1,3 +1,5 @@
+$VERBOSE = nil # this is to shut rack up about regexp, since I can't upgrade rack. rspec-rails relies on it.
+
 if defined?(RSpec)
   require File.join(File.dirname(__FILE__), "../../spec_env/rails3/features/support/env")
 

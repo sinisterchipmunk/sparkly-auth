@@ -8,6 +8,11 @@
 </head>
 <body>
 
+<%# for testing account deletion via capybara %>
+<%# if respond_to?(:current_user) && current_user %>
+  <%= link_to "delete account", user_path, :method => :delete %>
+<%# end %>
+
 <%if flash[:notice]%>
   <%=flash[:notice]%>
 <%end%>

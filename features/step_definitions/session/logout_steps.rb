@@ -1,5 +1,4 @@
 When /^I log out$/ do
-  delete user_session_path
-  handle_redirect!
-  response.should contain("You have been signed out.")
+  visit logout_user_path
+  page.should have_content("You have been signed out.")
 end

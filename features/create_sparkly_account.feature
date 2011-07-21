@@ -7,6 +7,6 @@ Feature: Create an account using Sparkly Auth
 
   Scenario: Create account with missing password
     Given I am on the new user page
-    When I fill in "email" with "generic@example.com"
+    When I fill in "Email" with "generic@example.com"
     Then I should not see "account has been created"
     

@@ -9,16 +9,14 @@ There are 2 Gemfiles associated with this project:
 You can switch between them with the BUNDLE_GEMFILE environment
 setting:
 
-  export BUNDLE_GEMFILE=Gemfile.rails2
+  export BUNDLE_GEMFILE=gemfiles/Gemfile.rails2
   
 By default, if BUNDLE_GEMFILE isn't set when `rake` is invoked,
-the Rails 3 gemfile will be used. So you only need to set the
-BUNDLE_GEMFILE when you want to test Rails 2.
+`rake` will invoke itself twice -- once for each Gemfile -- and
+this will result in running all tests for both Rails 2 and Rails 3.
 
-NOTE that `bundle exec rake` only works if the environment variable
+NOTE that `bundle exec rake` only works if BUNDLE_GEMFILE
 is set, otherwise Bundler won't know which Gemfile to load.
-
-Note also that both Rails 2 and 3 will be tested in Travis:CI.
 
 Once you're testing against the proper Rails, just invoke the 
 Rakefile like so:
@@ -26,4 +24,3 @@ Rakefile like so:
   rake          # runs the specs and, if they're green, runs cucumber
   rake spec     # runs the specs only
   rake cucumber # runs cucumber only
-  

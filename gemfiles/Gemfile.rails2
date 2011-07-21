@@ -1,0 +1,21 @@
+source "http://rubygems.org"
+
+# Specify your gem's dependencies in sparkly-auth.gemspec
+gemspec :path => File.expand_path("..", File.dirname(__FILE__))
+
+gem 'rails', '2.3.11'
+gem 'test-unit', '1.2.3'
+gem 'sc-core-ext'
+gem 'sqlite3'
+gem 'rspec', '1.3.2'
+gem 'rspec-rails', '1.3.2'
+# gem 'webrat', '0.7.1'
+gem 'capybara', '0.3.5'
+gem 'genspec', '0.1.1'
+
+gem "database_cleaner"
+gem "cucumber-rails", "0.3.2"
+gem "cucumber"
+gem "spork"
+gem "launchy"
+gem 'email_spec', '0.6.2'
