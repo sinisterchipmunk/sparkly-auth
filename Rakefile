@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/gem_tasks'
 
-
 # If the Gemfile isn't specified (`rake`) or doesn't point to one of the expected
 # gemfiles, then we need to override the gemfile variable and run specs in a subprocess.
 BUNDLED = ENV['BUNDLE_GEMFILE'] && ENV['BUNDLE_GEMFILE'] =~ /\.rails([23])$/ && $1
