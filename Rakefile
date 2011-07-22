@@ -8,7 +8,7 @@ BUNDLED = ENV['BUNDLE_GEMFILE'] && ENV['BUNDLE_GEMFILE'] =~ /\.rails([23])$/ && 
 def run_in_each_environment(*args)
   %w(rails2 rails3).each do |env|
     ENV['BUNDLE_GEMFILE'] = File.expand_path("gemfiles/Gemfile.#{env}", File.dirname(__FILE__))
-    exit $?.to_i unless system(*args)
+    raise "Subprocess failure" unless system(*args)
   end
 end
 
