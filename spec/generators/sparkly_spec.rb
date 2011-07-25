@@ -17,6 +17,15 @@ describe :sparkly do
     end
   end
   
+  context "with :reset_password behavior" do
+    before(:each) { Auth.configure { |c| c.behaviors << :reset_password } }
+    
+    with_args :migrations do
+      it "should generate a reset_password migration" do
+        subject.should generate("db/migrate/00#{Auth.behaviors.length}_add_sparkly_lockout_to_passwords.rb")
+      end
+    end
+  end
   
   with_args :migrations do
     it "should generate db/migrate" do
@@ -49,6 +58,7 @@ describe :sparkly do
       Auth.configuration.authenticate(:user, :accounts_controller => 'users', :sessions_controller => 'user_sessions')
       Auth.kick!
       
+      subject.should generate("app/views/users/_form.html.erb")
       subject.should generate("app/views/users/edit.html.erb")
       subject.should generate("app/views/users/new.html.erb")
       subject.should generate("app/views/users/show.html.erb")

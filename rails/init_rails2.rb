@@ -21,6 +21,10 @@ add_to_load_path File.join(base_path, 'app/controllers'), false
 add_to_load_path File.join(base_path, 'app/models'), false
 add_to_load_path Auth.path, true
 
+require 'rails_generator'
+Rails::Generator::Base.append_sources Rails::Generator::PathSource.new(:auth,
+        File.expand_path("../generators", Auth.path))
+
 ActionController::Base.view_paths << File.join(base_path, 'app/views')
 
 # Routes
@@ -28,7 +32,6 @@ ActionController::Routing::Routes.add_configuration_file(File.join(base_path, "r
 
 Rails.configuration.gem "sc-core-ext", :version => ">= 1.2.1"
 require File.expand_path(File.join(File.dirname(__FILE__), "../lib/auth"))
-
 
 undef add_to_load_path
 

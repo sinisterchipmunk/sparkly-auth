@@ -13,7 +13,7 @@ gem "cucumber"
 # gem "spork"
 gem "launchy"
 
-gem 'genspec', "= 0.2.0.prerails3.2"
+gem 'genspec', "= 0.2.0"
 gem 'email_spec', '1.2.1'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'

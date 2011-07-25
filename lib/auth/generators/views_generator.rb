@@ -15,16 +15,17 @@ class Auth::Generators::ViewsGenerator < Rails::Generator::NamedBase
       resource_directory = File.join("app/views", model.accounts_controller.underscore)
       sessions_directory = File.join("app/views", model.sessions_controller.underscore)
       
-      base = File.join(source_root, "views/sparkly_accounts")
-      Dir[File.join(base, "**/*")].each do |fi|
-        fi.gsub!(/^#{Regexp::escape base}/, '')
-        m.file(File.join("views/sparkly_accounts", fi), File.join(resource_directory, fi))
-      end
-
-      base = File.join(source_root, "views/sparkly_sessions")
-      Dir[File.join(base, "**/*")].each do |fi|
-        fi.gsub!(/^#{Regexp::escape base}/, '')
-        m.file(File.join("views/sparkly_sessions", fi), File.join(sessions_directory, fi))
+      views = File.join(source_root, 'views')
+      Dir[File.join(views, "sparkly_{accounts,sessions}/{rails2,common}/**/*")].each do |fi|
+        next unless File.file?(fi)
+        relative = fi.gsub(/^#{Regexp::escape views}\/sparkly_(accounts|sessions)\/(rails2|common)\/?/, '')
+        dest = case $1
+          when "accounts" then resource_directory
+          when "sessions" then sessions_directory
+          else raise "unexpected value: #{$1}"
+        end
+        m.file fi.sub(/^#{Regexp::escape source_root}\/?/, ''),
+               File.join(dest, relative).sub(/^#{Regexp::escape source_root}\/?/, '')
       end
     end
   end

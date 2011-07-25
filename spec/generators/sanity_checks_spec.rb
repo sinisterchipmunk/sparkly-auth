@@ -7,7 +7,12 @@ describe :sparkly do
   def self.it_should_generate_and_match(to_gen, existing = to_gen)
     it "should generate #{to_gen} which matches #{existing}" do
       existing = File.join(File.dirname(__FILE__), '../../', existing)
-      subject.should generate(to_gen) { |content| File.read(existing).strip.should == content.strip }
+      subject.should generate(to_gen) do |content|
+        if !File.file?(existing)
+          raise "#{existing} is not a file"
+        end
+        File.read(existing).strip.should == content.strip
+      end
     end
   end
   
@@ -34,18 +39,26 @@ describe :sparkly do
       # in the test projects directly.
     end
     
-    with_args 'views', '-q' do
-      base = File.join(Auth.path, "../")
-      Dir[File.join(base, "app/views/**/*")].each do |fi|
-        if File.file?(fi)
-          it_should_generate_and_match(fi.gsub(/^#{Regexp::escape base}/, ''))
-        end
+    if Rails::VERSION::MAJOR >= 3
+      with_args 'views', '-q' do
+        base = File.join(Auth.path, "../")
+        it_should_generate_and_match('app/views/sparkly_accounts/_form.html.erb', 'generators/sparkly/templates/views/sparkly_accounts/rails3/_form.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/edit.html.erb',  'generators/sparkly/templates/views/sparkly_accounts/common/edit.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/new.html.erb',   'generators/sparkly/templates/views/sparkly_accounts/common/new.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/show.html.erb',  'generators/sparkly/templates/views/sparkly_accounts/common/show.html.erb')
+     
+        it_should_generate_and_match('app/views/sparkly_sessions/new.html.erb',   'generators/sparkly/templates/views/sparkly_sessions/rails3/new.html.erb')
       end
-#      it_should_generate_and_match('app/views/sparkly_accounts/edit.html.erb')
-#      it_should_generate_and_match('app/views/sparkly_accounts/new.html.erb')
-#      it_should_generate_and_match('app/views/sparkly_accounts/show.html.erb')
-#      
-#      it_should_generate_and_match('app/views/sparkly_sessions/new.html.erb')
+    else
+      with_args 'views', '-q' do
+        base = File.join(Auth.path, "../")
+        it_should_generate_and_match('app/views/sparkly_accounts/_form.html.erb', 'generators/sparkly/templates/views/sparkly_accounts/rails2/_form.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/edit.html.erb',  'generators/sparkly/templates/views/sparkly_accounts/common/edit.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/new.html.erb',   'generators/sparkly/templates/views/sparkly_accounts/common/new.html.erb')
+        it_should_generate_and_match('app/views/sparkly_accounts/show.html.erb',  'generators/sparkly/templates/views/sparkly_accounts/common/show.html.erb')
+     
+        it_should_generate_and_match('app/views/sparkly_sessions/new.html.erb',   'generators/sparkly/templates/views/sparkly_sessions/rails2/new.html.erb')
+      end
     end
 
     with_args 'controllers', '-q' do
